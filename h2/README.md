@@ -125,7 +125,7 @@ cat books.csv
 
 ## Déclencheurs
 
-H2 supporte les déclencheurs (ie _triggers_). Cependant, ceux-ci doivent être en Java.
+H2 supporte les déclencheurs (ie _triggers_). Cependant, ceux-ci doivent être écrits en Java (contrairement à Oracle) avec `PL/SQL`).
 [Pour en savoir plus](http://h2database.com/html/features.html#triggers).
 
 ## Plus aller plus loin
