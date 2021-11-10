@@ -49,3 +49,11 @@ SELECT * FROM Book ORDER BY ID;
 
 * [Le tutoriel](https://h2database.com/html/tutorial.html)
 * [L'anti sèche](https://h2database.com/html/cheatSheet.html)
+
+
+## Nettoyage
+
+```bash
+ls -l ~/test.*.db
+rm ~/test.*.db
+```
