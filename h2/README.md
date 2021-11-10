@@ -116,11 +116,11 @@ sql> select * from Book
 ## Export d'une table en CSV
 
 ```sql
-CALL CSVWRITE('book.csv', 'SELECT * FROM Book');
+CALL CSVWRITE('books.csv', 'SELECT * FROM Book');
 ```
 
 ```bash
-cat book.csv
+cat books.csv
 ```
 
 ## Déclencheurs
