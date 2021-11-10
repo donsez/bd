@@ -24,7 +24,11 @@ Connectez-vous à la base de test
 
 ```sql
 DROP TABLE IF EXISTS Book;
-CREATE TABLE Book(ID INT PRIMARY KEY, Title VARCHAR(255), Isbn CHAR(13));
+CREATE TABLE Book(
+    ID INT PRIMARY KEY,
+    Title VARCHAR(255),
+    Isbn CHAR(13)
+    );
 
 INSERT INTO Book VALUES(1, 'Transaction Processing', '0080519555');
 INSERT INTO Book VALUES(2, 'Readings in Database Systems', '1558605231');
@@ -32,8 +36,12 @@ INSERT INTO Book VALUES(2, 'Readings in Database Systems', '1558605231');
 
 Il est possible de créer et peupler une table en récupérant les entrées d'un fichier CSV:
 ```sql
-CREATE TABLE Author(ID INT PRIMARY KEY, Firstname VARCHAR(255), Lastname VARCHAR(255))
-    AS SELECT * FROM CSVREAD('authors.csv');
+CREATE TABLE Author(
+    ID INT PRIMARY KEY,
+    Firstname VARCHAR(255),
+    Lastname VARCHAR(255)
+    ) AS SELECT * FROM CSVREAD('authors.csv');
+    
 CREATE TABLE Author_Book(
     ID_Author INT,
     ID_Book INT,
