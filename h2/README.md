@@ -30,11 +30,33 @@ INSERT INTO Book VALUES(1, 'Transaction Processing', '0080519555');
 INSERT INTO Book VALUES(2, 'Readings in Database Systems', '1558605231');
 ```
 
+Il est possible de créer et peupler une table en récupérant les entrées d'un fichier CSV:
+```sql
+CREATE TABLE Author(ID INT PRIMARY KEY, Firstname VARCHAR(255), Lastname VARCHAR(255))
+    AS SELECT * FROM CSVREAD('authors.csv');
+```
+
 ## Interrogation de la base
 
 ```sql
 SELECT * FROM Book ORDER BY ID;
+SELECT * FROM Author ORDER BY ID;
+```
+
+```sql
 SELECT * FROM Book WHERE Title LIKE '%Database%';
+```
+
+## Plans d'exécution
+
+L'instruction [EXPLAIN](https://h2database.com/html/performance.html#explain_plan) donne le plan d'exécution de la requête SQL. L'instruction EXPLAIN ANALYZE permet de comprendre les performances de son exécution.
+
+```sql
+EXPLAIN SELECT * FROM Book ORDER BY ID;
+```
+
+```sql
+EXPLAIN SELECT * FROM Book WHERE Title LIKE '%Database%';
 ```
 
 ## Mise à jour de la table
@@ -45,11 +67,58 @@ DELETE FROM Book WHERE ID=2;
 SELECT * FROM Book ORDER BY ID;
 ```
 
+## Connection via la console en ligne de commande
+
+```bash
+java -cp h2/bin/h2*.jar org.h2.tools.Shell
+```
+
+```
+Welcome to H2 Shell 1.4.200 (2019-10-14)
+Exit with Ctrl+C
+[Enter]   jdbc:h2:~/test
+URL       
+[Enter]   org.h2.Driver
+Driver    
+[Enter]   sa
+User      
+Password  
+Connected
+Commands are case insensitive; SQL statements end with ';'
+help or ?      Display this help
+list           Toggle result list / stack trace mode
+maxwidth       Set maximum column width (default is 100)
+autocommit     Enable or disable autocommit
+history        Show the last 20 statements
+quit or exit   Close the connection and exit
+
+sql> list
+Result list mode is now on
+sql> select * from Book
+```
+
+
+## Export d'une table en CSV
+
+```sql
+CALL CSVWRITE('book.csv', 'SELECT * FROM Book');
+```
+
+```bash
+cat book.csv
+```
+
+## Déclencheurs
+
+H2 supporte les déclencheurs (ie _triggers_). Cependant, ceux doivent être en Java.
+[Pour en savoir plus](http://h2database.com/html/features.html#triggers).
+
 ## Plus aller plus loin
 
 * [Le tutoriel](https://h2database.com/html/tutorial.html)
 * [L'anti sèche](https://h2database.com/html/cheatSheet.html)
 
+Vous trouverez des exemples `SQL` et `JDBC` dans `h2/src/test/org/h2/samples`.
 
 ## Nettoyage
 
