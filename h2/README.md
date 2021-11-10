@@ -34,6 +34,13 @@ Il est possible de créer et peupler une table en récupérant les entrées d'un
 ```sql
 CREATE TABLE Author(ID INT PRIMARY KEY, Firstname VARCHAR(255), Lastname VARCHAR(255))
     AS SELECT * FROM CSVREAD('authors.csv');
+CREATE TABLE Author_Book(
+    ID_Author INT,
+    ID_Book INT,
+    PRIMARY KEY(ID_Author,ID_Book),
+    FOREIGN KEY (ID_Author) REFERENCES Author(ID),
+    FOREIGN KEY (ID_Book) REFERENCES Book(ID)
+    ) AS SELECT * FROM CSVREAD('authors_books.csv');
 ```
 
 ## Interrogation de la base
@@ -41,6 +48,8 @@ CREATE TABLE Author(ID INT PRIMARY KEY, Firstname VARCHAR(255), Lastname VARCHAR
 ```sql
 SELECT * FROM Book ORDER BY ID;
 SELECT * FROM Author ORDER BY ID;
+SELECT * FROM Author AS A ,Author_Book AS AB, Book AS B WHERE A.ID=AB.ID_Author AND AB.ID_Book = B.ID;
+SELECT * FROM Author AS A JOIN Author_Book AS AB ON A.ID=AB.ID_Author JOIN Book AS B ON AB.ID_Book = B.ID;
 ```
 
 ```sql
@@ -57,6 +66,12 @@ EXPLAIN SELECT * FROM Book ORDER BY ID;
 
 ```sql
 EXPLAIN SELECT * FROM Book WHERE Title LIKE '%Database%';
+```
+
+```sql
+EXPLAIN SELECT * FROM Author AS A ,Author_Book AS AB, Book AS B WHERE A.ID=AB.ID_Author AND AB.ID_Book = B.ID;
+EXPLAIN SELECT * FROM Author AS A JOIN Author_Book AS AB ON A.ID=AB.ID_Author JOIN Book AS B ON AB.ID_Book = B.ID;
+
 ```
 
 ## Mise à jour de la table
