@@ -17,8 +17,13 @@ TODO
 ```
 
 
+## A la fin
 
-##
+```bash
+docker-compose stop
+```
+
+## References
 
 Suivre 
 * http://leilahaddou.github.io/neo4j-tutorial/
