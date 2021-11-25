@@ -566,18 +566,18 @@ MATCH (people:Person)-[relatedTo]-(:Movie {title: "Cloud Atlas"}) RETURN people.
 
 Utilisez les requêtes proposés dans "Data Profiling"
 
-Count all nodes
+_Count all nodes_
 ```
 MATCH (n)
 RETURN count(n)
 ```
 
-List relationship types
+_List relationship types_
 ```
 CALL db.relationshipTypes()
 ```
 
-What is related, and how
+_What is related, and how_
 ```
 CALL db.schema.visualization()
 ```
@@ -588,10 +588,10 @@ CALL db.schema.visualization()
 docker-compose stop
 ```
 
-## References
+## Bonus track
 
 Suivre 
 * http://leilahaddou.github.io/neo4j-tutorial/
 * https://github.com/leilahaddou/leilahaddou.github.io 
-
-
+* https://github.com/leilahaddou/leilahaddou.github.io/tree/master/data-journalism-tutorial
+* https://github.com/leilahaddou/leilahaddou.github.io/tree/master/csvkit-tutorial
