@@ -1,0 +1,31 @@
+version: '2'
+
+networks:
+  neo4j-network:
+    driver: bridge
+
+services:
+  neo4j:
+    image: bitnami/neo4j:latest
+    volumes:
+      - './neo4j/data:/bitnami'
+      - './neo4j/conf:/bitnami/neo4j/conf'
+      - './neo4j/plugins:/bitnami/neo4j/plugins'
+    networks:
+      - neo4j-network
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+#    env:
+#       NEO4J_PASSWORD: Password used by Neo4j server. Default: bitnami
+#       NEO4J_HOST: Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP. Default: empty
+#       NEO4J_BOLT_PORT_NUMBER: Port used by Neo4j https. Default: 7687
+#       NEO4J_HTTP_PORT_NUMBER: Port used by Neo4j http. Default: 7474
+#       NEO4J_HTTPS_PORT_NUMBER: Port used by Neo4j https. Default: 7473
+#       NEO4J_BIND_ADDRESS: Bind address. Default: 0.0.0.0
+#       NEO4J_ALLOW_UPGRADE: Allow automatic schema upgrades. Default: true
+#       NEO4J_APOC_IMPORT_FILE_ENABLED: Allow importing files using the apoc library. Default: true
+#       NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG: Port used by Neo4j https. Default: false
+
+
