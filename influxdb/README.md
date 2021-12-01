@@ -47,7 +47,7 @@ docker exec -it influx influx -import -path=/usr/share/NOAA_data.txt -precision=
 
 ## Interroger la base de données
 
-Connectez-vous à la base de données à la CLI 
+Connectez-vous à la base de données via la CLI 
 ```bash
 docker exec -it influx influx -precision rfc3339 -database NOAA_water_database
 ```
@@ -97,7 +97,6 @@ SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND ti
 SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND time >= '2019-08-18T00:00:00Z' AND time <= '2019-08-21T00:00:00Z' GROUP BY time(1m) fill(previous)
 exit
 ```
-
 
 ## Arrêt du serveur de base de données
 ```bash
