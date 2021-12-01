@@ -172,6 +172,14 @@ La solution est [ici](https://grafana.com/grafana/dashboards/1443).
 
 ![Grafana Panel Credit: http://www.vincentblog.cn/](./grafana-telegraf.png)
 
+
+Vous pouvez personnalisez la confuration de Telegraf de la manière suivante
+
+```bash
+docker run --rm telegraf telegraf config > telegraf.conf
+docker run -d -v $PWD/telegraf.conf:/etc/telegraf/telegraf.conf:ro telegraf
+```
+
 ## Arrêt du serveur de base de données
 ```bash
 docker stop influx grafana
