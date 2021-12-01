@@ -8,7 +8,8 @@ InfluxDB est un système de gestion de bases de données temporelles.
 mkdir -p data/influxdb
 mkdir -p data/share
 docker rm -f influx
-docker run -d --name influx  -p 8086:8086 \
+docker network create influx
+docker run -d --name influx --network influx -p 8086:8086 \
       -v $PWD/data/influxdb:/var/lib/influxdb \
       -v $PWD/data/share:/usr/share:ro \
       influxdb:1.8
@@ -98,8 +99,50 @@ SELECT MAX("water_level") FROM "h2o_feet" WHERE "location"='coyote_creek' AND ti
 exit
 ```
 
+
+## Interrogation avec Grafana
+
+```bash
+mkdir -p data/influxdb
+docker run -d --name=grafana --network=influx \
+      -p 3000:3000 \
+      -e "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource" \
+      grafana/grafana
+```
+
+Ouvrez la console de Grafana http://localhost:3000
+
+L'utilisateur et le mot de passe par défaut sont `admin` `admin`
+
+Changez le mot de passe.
+
+Ajoutez une datasource de type InfluxDB
+* Le champ `URL` est : `http://influx:8086`
+* Le champ `Database` est : `NOAA_water_database`
+* Le champ `User` est vide
+* Le champ `Password` est vide
+
+Validez avec le bouton `Save & test`.
+
+Ajoutez un nouveau _Dashboard_.
+
+Ajoutez un nouveau _Panel_ en configurant la requête sur la base de données `NOAA_water_database` de la manière suivante:
+
+![Grafana Panel](./grafana-panel.png)
+
+> Le _time range_ (en hout à droite_) doit entre 2021-08-16 et 2021-08-18.
+
+Inspectez la requête construite avec _Query Inspector_. La requête Influx ressemble à :
+
+```sql
+SELECT last("water_level") FROM "h2o_feet" WHERE time >= 1565985814588ms and time <= 1568755308047ms GROUP BY time(30m), "location" fill(null)
+```
+
+Vous pouvez directement importer le _dashboard_ dans Grafana via le sommaire `+ > Import` et en selectionnant le fichier JSON `dashboard.json`.
+
 ## Arrêt du serveur de base de données
 ```bash
-docker stop influx
-docker rm -f influx
+docker stop influx grafana
+docker rm -f influx grafana
+docker network rm influx
 ```
