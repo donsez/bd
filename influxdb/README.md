@@ -140,6 +140,38 @@ SELECT last("water_level") FROM "h2o_feet" WHERE time >= 1565985814588ms and tim
 
 Vous pouvez directement importer le _dashboard_ dans Grafana via le sommaire `+ > Import` et en selectionnant le fichier JSON `dashboard.json`.
 
+## Ajout de mesure en live avec Telegraf 
+
+Telegraf mesure les performances d'une machine ou de services tournant sur celle-ci (ie haproxy, apache httpd, nginx, postgres ...). Les mesures sont stockées dans des bases de données temporelles (par défaut InfluxDB). Il dispose de [nombreux plugins](https://docs.influxdata.com/telegraf/v1.20/plugins/) pour la collection de mesure et leurs stockages.
+
+Lancez Telegraf au sein du conteneur Influx.
+
+```bash
+docker run -d --net=container:influx telegraf
+```
+
+Connectez-vous à la base de données via la CLI 
+```bash
+docker exec -it influx influx -precision rfc3339 -database NOAA_water_database
+```
+
+```console
+show databases
+use telegraf
+show measurements
+show series
+select count(*) from cpu;
+select count(*) from disk;
+select count(*) from process;
+select count(*) from mem;
+```
+
+Exercice: Utilisez ces séries temporelles pour surveiller votre machine en ajouter une nouvelle source de données `telegraf`et un nouveau tableau de bord à Grafana.
+
+La solution est [ici](https://grafana.com/grafana/dashboards/1443).
+
+![Grafana Panel Credit: http://www.vincentblog.cn/](./grafana-telegraf.png)
+
 ## Arrêt du serveur de base de données
 ```bash
 docker stop influx grafana
