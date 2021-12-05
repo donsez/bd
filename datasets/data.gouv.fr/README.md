@@ -1,4 +1,4 @@
-# Datasets  de France Data
+# Datasets de data.gouv.fr
 
 Les données ouvertes, ou open data sont des données numériques produites par les acteurs publics (ministère, collectivité ou établissement public, etc.), mais aussi par des acteurs privés (entreprise, association, citoyen, etc.). Ces données sont diffusées de manière structurée selon une licence ouverte garantissant leur libre accès et leur réutilisation par tous, sans restriction technique, juridique ou financière. Les données ouvertes portent sur des sujets très divers. Il peut s’agir, par exemple, de données géographiques, financières, de transport, de santé publique ou encore d’environnement.
 
