@@ -116,3 +116,13 @@ except
 select nocage from lesanimaux)
 intersect
 select nocage from lesgardiens;
+
+-- instruction préparée
+PREPARE plusvieuxque (int) AS
+    SELECT nomA, 2022-anNais AS age FROM LesAnimaux WHERE 2022-anNais >= $1;
+EXECUTE plusvieuxque(20);
+EXECUTE plusvieuxque(40);
+
+
+-- desallocation d'une instruction préparée
+DEALLOCATE PREPARE plusvieuxque;
