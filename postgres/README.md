@@ -1,7 +1,4 @@
-# Playing SQL from Notebook
-
-## Setup
-
+# Postgres tutorial
 
 ## Start the DBMS
 
@@ -189,15 +186,6 @@ Browse the DB tree on the left panel.
 
 ![PGAdmin](pgadmin-01.png)
 
-
-## Start Jypiter and open the notebook
-
-```bash
-jupyter notebook
-```
-
-Open the notebook `postgres-01.ipynb`
-
 ## Enjoy
 
 
@@ -220,11 +208,8 @@ rm -fr data/
 
 
 ## Nota Bene
-* Postgres files are stored in the host dir ./data/postgres
+* Postgres files are stored in the host dir `./data/postgres`
 
 
 ## References
 * https://www.postgresqltutorial.com/postgresql-tutorial
-* https://www.compose.com/articles/getting-started-with-compose-postgresql-and-jupyter-notebooks/
-* https://medium.com/analytics-vidhya/postgresql-integration-with-jupyter-notebook-deb97579a38d
-* https://engineering.fb.com/2022/04/26/developer-tools/sql-notebooks/
