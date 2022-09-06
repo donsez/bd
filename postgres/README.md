@@ -57,7 +57,7 @@ CREATE TABLE AUTHOR (
 -- Show schema of table AUTHOR
 \d AUTHOR
 
--- Insert four new rows into table AUTHOR
+-- Insert new rows into table AUTHOR
 INSERT INTO AUTHOR (ID, NAME, BIRTHDATE, LEVEL) VALUES
     (1001, 'Codd', '1923-08-19', 10),
     (1002, 'Turing', '1912-06-12', 10),
@@ -65,13 +65,15 @@ INSERT INTO AUTHOR (ID, NAME, BIRTHDATE, LEVEL) VALUES
     (1004, 'Patterson', DEFAULT, NULL),
     (1005, 'Hennessy', '1952-07-22', NULL),
     (1006, 'Stonebraker', '1943-10-11', NULL);
-    (1009, 'Petri', '1926-07-12', NULL);
 
 -- Show authors
 SELECT * FROM AUTHOR;
 
--- Show authors without level
+-- Show authors with 'undefined' level
 SELECT * FROM AUTHOR WHERE LEVEL IS NOT NULL;
+
+-- Update level of authors with 'undefined' level
+UPDATE AUTHOR SET LEVEL=0 WHERE LEVEL IS NOT NULL;
 
 -- Insert a new row into table AUTHOR
 INSERT INTO AUTHOR (NAME, BIRTHDATE) VALUES
@@ -99,7 +101,8 @@ SELECT NAME, AGE(BIRTHDATE) AS AGE FROM AUTHOR ORDER BY AGE ASC;
 -- Show authors sorted by age (descending)
 SELECT NAME, AGE(BIRTHDATE) AS AGE FROM AUTHOR ORDER BY AGE DESC;
 
--- Import a CSV file into a table using COPY statement
+-- Import a CSV file into a table using COPY statement.
+-- Remark: the CSV file is into a directory mounted by the container
 COPY AUTHOR(ID, NAME, BIRTHDATE, LEVEL)
 FROM '/work/authors.csv'
 DELIMITER ','
@@ -143,9 +146,56 @@ SELECT A.NAME, T.YEAR FROM AUTHOR A, TURING_AWARD T WHERE A.ID=T.ID ORDER BY YEA
 
 -- Show name of authors that are not awarded
 SELECT NAME FROM AUTHOR WHERE ID NOT IN (SELECT ID FROM TURING_AWARD);
+
+-- Insert a new row into table TURING_AWARD (the foreign constraint is violated since author id does not exist)
+INSERT INTO TURING_AWARD (ID, YEAR) VALUES
+    (9999, 2099);
+
+-- Exercice: Increment by one the level of each author
+
+-- Exercice: Alter table in order to rename NAME into LASTNAME and to add FIRSTNAME and MIDDLENAME columns
+
+-- Exercice: List the authors awarded the same year
+
 ```
 
-## Extra statements
+## PGAdmin
+
+Browse the [PGAdmin console](http://localhost:5050).
+
+Set a new password for PGAdmin.
+
+Add a new server.
+* In `General` tab, The `name` is `TEST`.
+* In `Connection` tab, the `hostname` is `postgres_container`, the `username` is `postgres` and the  `password` is `changeme`.
+
+Browse the DB tree on the left panel.
+
+![PGAdmin](pgadmin-01.png)
+
+## Enjoy
+
+
+## Dump the database
+
+```bash
+docker exec -it postgres_container pg_dumpall -c -U postgres > dump.sql
+cat dump.sql
+```
+
+## At the end
+
+Stop and remmove the composition
+```bash
+docker-compose down
+```
+
+Remove the DBMS files
+```bash
+rm -fr data/
+```
+
+## Extra PSQL statements
 
 ### Date and Time
 
@@ -172,44 +222,8 @@ SELECT TO_TIMESTAMP(
 SELECT NOW();
 ```
 
-## PGAdmin
-
-Browse the [PGAdmin console](http://localhost:5050).
-
-Set a new password for PGAdmin.
-
-Add a new server.
-* In `General` tab, The `name` is `TEST`.
-* In `Connection` tab, the `hostname` is `postgres_container`, the `username` is `postgres` and the  `password` is `changeme`.
-
-Browse the DB tree on the left panel.
-
-![PGAdmin](pgadmin-01.png)
-
-## Enjoy
-
-
-## At the end
-
-Dump the database
-```bash
-docker exec -it postgres_container pg_dumpall -c -U postgres > dump.sql
-```
-
-Stop and remmove the composition
-```bash
-docker-compose down
-```
-
-Remove the DBMS files
-```bash
-rm -fr data/
-```
-
-
 ## Nota Bene
 * Postgres files are stored in the host dir `./data/postgres`
-
 
 ## References
 * https://www.postgresqltutorial.com/postgresql-tutorial
