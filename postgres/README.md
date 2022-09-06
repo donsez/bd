@@ -153,6 +153,8 @@ INSERT INTO TURING_AWARD (ID, YEAR) VALUES
 
 -- Exercice: Increment by one the level of each author
 
+-- Exercice: List the numbers of awarded authors per year
+
 -- Exercice: Alter table in order to rename NAME into LASTNAME and to add FIRSTNAME and MIDDLENAME columns
 
 -- Exercice: List the authors awarded the same year
