@@ -1,3 +1,7 @@
+--
+-- Create and populate the ZOO database
+--
+
 -- Drop the existing database if exists
 DROP DATABASE IF EXISTS db_zoo;
 
@@ -103,7 +107,6 @@ CSV HEADER;
 
 -- Show tables
 \d
-
 
 -- Show all
 SELECT * FROM LesEmployes;

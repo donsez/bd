@@ -1,4 +1,6 @@
+--
 -- Queries on the ZOO database
+--
 
 -- Connect to the database
 \connect db_zoo
