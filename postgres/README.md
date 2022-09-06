@@ -24,13 +24,13 @@ docker exec -it postgres_container psql -U postgres -W
 \l
 
 -- Drop the existing database if exists
-DROP DATABASE IF EXISTS db_td1;
+DROP DATABASE IF EXISTS db_turing;
 
 -- Create a new database
-CREATE DATABASE db_td1;
+CREATE DATABASE db_turing;
 
 -- Connect to the database
-\connect db_td1
+\connect db_turing
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -41,11 +41,11 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP TABLE IF EXISTS AUTHOR CASCADE;
+DROP TABLE IF EXISTS PERSON CASCADE;
 DROP TABLE IF EXISTS TURING_AWARD;
 
--- Create the table AUTHOR
-CREATE TABLE AUTHOR (
+-- Create the table PERSON
+CREATE TABLE PERSON (
    ID           SERIAL PRIMARY KEY  NOT NULL,
    NAME         VARCHAR (255) NOT NULL,
    BIRTHDATE    DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -54,11 +54,11 @@ CREATE TABLE AUTHOR (
 
 -- Show tables
 \d
--- Show schema of table AUTHOR
-\d AUTHOR
+-- Show schema of table PERSON
+\d PERSON
 
--- Insert new rows into table AUTHOR
-INSERT INTO AUTHOR (ID, NAME, BIRTHDATE, LEVEL) VALUES
+-- Insert new rows into table PERSON
+INSERT INTO PERSON (ID, NAME, BIRTHDATE, LEVEL) VALUES
     (1001, 'Codd', '1923-08-19', 10),
     (1002, 'Turing', '1912-06-12', 10),
     (1003, 'Ullman', '1942-11-22', NULL),
@@ -66,58 +66,58 @@ INSERT INTO AUTHOR (ID, NAME, BIRTHDATE, LEVEL) VALUES
     (1005, 'Hennessy', '1952-07-22', NULL),
     (1006, 'Stonebraker', '1943-10-11', NULL);
 
--- Show authors
-SELECT * FROM AUTHOR;
+-- Show persons
+SELECT * FROM PERSON;
 
--- Show authors with 'undefined' level
-SELECT * FROM AUTHOR WHERE LEVEL IS NOT NULL;
+-- Show persons with 'undefined' level
+SELECT * FROM PERSON WHERE LEVEL IS NOT NULL;
 
--- Update level of authors with 'undefined' level
-UPDATE AUTHOR SET LEVEL=0 WHERE LEVEL IS NOT NULL;
+-- Update level of persons with 'undefined' level
+UPDATE PERSON SET LEVEL=0 WHERE LEVEL IS NOT NULL;
 
--- Insert a new row into table AUTHOR
-INSERT INTO AUTHOR (NAME, BIRTHDATE) VALUES
+-- Insert a new row into table PERSON
+INSERT INTO PERSON (NAME, BIRTHDATE) VALUES
     ('Gray', DEFAULT);
 
 -- Show tables
 \d
--- Show schema of table AUTHOR
-\d AUTHOR
--- Show schema of AUTHOR_ID_SEQ table used for sequencing the ID column of table AUTHOR
-\d AUTHOR_ID_SEQ
+-- Show schema of table PERSON
+\d PERSON
+-- Show schema of PERSON_ID_SEQ table used for sequencing the ID column of table PERSON
+\d PERSON_ID_SEQ
 
--- Show authors
-SELECT * FROM AUTHOR;
+-- Show persons
+SELECT * FROM PERSON;
 
--- Show the three first authors
-SELECT * FROM AUTHOR LIMIT 3;
+-- Show the three first persons
+SELECT * FROM PERSON LIMIT 3;
 
--- Show authors sorted by birthdate
-SELECT * FROM AUTHOR ORDER BY BIRTHDATE ASC;
+-- Show persons sorted by birthdate
+SELECT * FROM PERSON ORDER BY BIRTHDATE ASC;
 
--- Show authors sorted by age
-SELECT NAME, AGE(BIRTHDATE) AS AGE FROM AUTHOR ORDER BY AGE ASC;
+-- Show persons sorted by age
+SELECT NAME, AGE(BIRTHDATE) AS AGE FROM PERSON ORDER BY AGE ASC;
 
--- Show authors sorted by age (descending)
-SELECT NAME, AGE(BIRTHDATE) AS AGE FROM AUTHOR ORDER BY AGE DESC;
+-- Show persons sorted by age (descending)
+SELECT NAME, AGE(BIRTHDATE) AS AGE FROM PERSON ORDER BY AGE DESC;
 
 -- Import a CSV file into a table using COPY statement.
 -- Remark: the CSV file is into a directory mounted by the container
-COPY AUTHOR(ID, NAME, BIRTHDATE, LEVEL)
-FROM '/work/authors.csv'
+COPY PERSON(ID, NAME, BIRTHDATE, LEVEL)
+FROM '/work/turing/persons.csv'
 DELIMITER ','
 CSV HEADER;
 
--- Show authors
-SELECT * FROM AUTHOR;
+-- Show persons
+SELECT * FROM PERSON;
 
 -- Create the table TURING_AWARD
 CREATE TABLE TURING_AWARD (
    YEAR         INT NOT NULL,
    ID           INT,
-   CONSTRAINT FK_AUTHOR
+   CONSTRAINT FK_PERSON
       FOREIGN KEY(ID) 
-	  REFERENCES AUTHOR(ID)
+	  REFERENCES PERSON(ID)
 );
 
 -- Insert new rows into table TURING_AWARD (See https://en.wikipedia.org/wiki/Turing_Award)
@@ -133,31 +133,31 @@ INSERT INTO TURING_AWARD (ID, YEAR) VALUES
 -- Show turing awards ordered by year
 SELECT * FROM TURING_AWARD ORDER BY YEAR ASC;
 
--- Show name of authors with turing award
-SELECT * FROM AUTHOR A, TURING_AWARD T WHERE A.ID=T.ID;
-SELECT * FROM AUTHOR A NATURAL JOIN TURING_AWARD T;
-SELECT * FROM AUTHOR A INNER JOIN TURING_AWARD T ON A.ID=T.ID;
-SELECT * FROM AUTHOR A LEFT JOIN TURING_AWARD T ON A.ID=T.ID;
-SELECT * FROM AUTHOR A RIGHT JOIN TURING_AWARD T ON A.ID=T.ID;
-SELECT * FROM AUTHOR A FULL JOIN TURING_AWARD T ON A.ID=T.ID;
+-- Show name of persons with turing award
+SELECT * FROM PERSON A, TURING_AWARD T WHERE A.ID=T.ID;
+SELECT * FROM PERSON A NATURAL JOIN TURING_AWARD T;
+SELECT * FROM PERSON A INNER JOIN TURING_AWARD T ON A.ID=T.ID;
+SELECT * FROM PERSON A LEFT JOIN TURING_AWARD T ON A.ID=T.ID;
+SELECT * FROM PERSON A RIGHT JOIN TURING_AWARD T ON A.ID=T.ID;
+SELECT * FROM PERSON A FULL JOIN TURING_AWARD T ON A.ID=T.ID;
 
--- Show name of authors with turing award ordered by year
-SELECT A.NAME, T.YEAR FROM AUTHOR A, TURING_AWARD T WHERE A.ID=T.ID ORDER BY YEAR ASC;
+-- Show name of persons with turing award ordered by year
+SELECT A.NAME, T.YEAR FROM PERSON A, TURING_AWARD T WHERE A.ID=T.ID ORDER BY YEAR ASC;
 
--- Show name of authors that are not awarded
-SELECT NAME FROM AUTHOR WHERE ID NOT IN (SELECT ID FROM TURING_AWARD);
+-- Show name of persons that are not awarded
+SELECT NAME FROM PERSON WHERE ID NOT IN (SELECT ID FROM TURING_AWARD);
 
--- Insert a new row into table TURING_AWARD (the foreign constraint is violated since author id does not exist)
+-- Insert a new row into table TURING_AWARD (the foreign constraint is violated since person id does not exist)
 INSERT INTO TURING_AWARD (ID, YEAR) VALUES
     (9999, 2099);
 
--- Exercice: Increment by one the level of each author
+-- Exercice: Increment by one the level of each person
 
--- Exercice: List the numbers of awarded authors per year
+-- Exercice: List the numbers of awarded persons per year
 
 -- Exercice: Alter table in order to rename NAME into LASTNAME and to add FIRSTNAME and MIDDLENAME columns
 
--- Exercice: List the authors awarded the same year
+-- Exercice: List the persons awarded the same year
 
 ```
 
