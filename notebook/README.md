@@ -33,6 +33,10 @@ docker exec -it postgres_container psql -U postgres -W
 jupyter notebook
 ```
 
+Open the notebook `postgres-01.ipynb`
+
+
+
 ## Enjoy
 
 
