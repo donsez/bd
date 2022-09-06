@@ -54,6 +54,7 @@ CREATE TABLE PERSON (
 
 -- Show tables
 \d
+
 -- Show schema of table PERSON
 \d PERSON
 
@@ -81,8 +82,10 @@ INSERT INTO PERSON (NAME, BIRTHDATE) VALUES
 
 -- Show tables
 \d
+
 -- Show schema of table PERSON
 \d PERSON
+
 -- Show schema of PERSON_ID_SEQ table used for sequencing the ID column of table PERSON
 \d PERSON_ID_SEQ
 
@@ -201,6 +204,8 @@ rm -fr data/
 
 ### Date and Time
 
+https://www.postgresql.org/docs/current/functions-datetime.html
+
 ```sql
 -- Show current date
 SELECT CURRENT_DATE;
@@ -222,7 +227,16 @@ SELECT TO_TIMESTAMP(
 
 -- Show current timestamp
 SELECT NOW();
+
+-- Extract the day of the week (0 - 6; Sunday is 0) (for timestamp values only)
+SELECT EXTRACT(DOW FROM TIMESTAMP '2001-02-16 20:38:40');
+
+-- Extract the century
+SELECT EXTRACT(CENTURY FROM TIMESTAMP '2000-12-16 12:21:13');
+SELECT EXTRACT(CENTURY FROM TIMESTAMP '2001-02-16 20:38:40');
 ```
+
+More in [work/extra/datetime.sql](work/extra/datetime.sql)
 
 ## Nota Bene
 * Postgres files are stored in the host dir `./data/postgres`
