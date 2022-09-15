@@ -1,5 +1,6 @@
 --
--- Create and populate the ZOO database
+-- Create and populate the ZOO PostgreSQL database
+-- (c) Stéphane Desvismes, Didier Donsez, Université Grenoble Alpes
 --
 
 -- Drop the existing database if exists
