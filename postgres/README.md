@@ -243,6 +243,31 @@ SELECT EXTRACT(CENTURY FROM TIMESTAMP '2001-02-16 20:38:40');
 
 More in [work/extra/datetime.sql](work/extra/datetime.sql)
 
+
+### Variables
+
+```sql
+\set overTheAgeOf 100
+
+SELECT *
+FROM PERSON
+WHERE DATE_PART('year', AGE(BIRTHDATE)) > :overTheAgeOf;
+```
+
+
+### Constants
+
+```sql
+WITH myconstants (var1, var2) as (
+   values (5, 'foo')
+)
+SELECT *
+FROM somewhere, myconstants
+WHERE something = var1
+   OR something_else = var2;
+```
+
+
 ## Nota Bene
 * Postgres files are stored in the host dir `./data/postgres`
 
