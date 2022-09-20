@@ -285,7 +285,7 @@ Exercice: add a container to the composition `docker-compose.yml` in order to du
 ```yaml
   postgres-backup-turing:
     image: annixa/docker-pg_dump
-    container_name: postgres-backup-as
+    container_name: postgres-backup-turing
     #links:
     #  - postgresql:db # Maps postgres as "db"
     environment:
