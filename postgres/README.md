@@ -269,7 +269,7 @@ COPY TURING_AWARD TO '/work/turing/turing_award.csv' DELIMITER ',' CSV HEADER;
 ```
 ### JSON export
 
-Export the table TURING_AWARD into a CSV file.
+Export the table TURING_AWARD into a JSON file.
 
 ```sql
 \t
