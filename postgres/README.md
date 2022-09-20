@@ -152,7 +152,7 @@ SELECT * FROM PERSON P FULL OUTER JOIN TURING_AWARD T ON P.ID=T.ID;
 SELECT * FROM PERSON P CROSS JOIN TURING_AWARD T;
 
 -- Show name of persons with turing award ordered by year
-SELECT A.NAME, T.YEAR FROM PERSON P, TURING_AWARD T WHERE P.ID=T.ID ORDER BY YEAR ASC;
+SELECT P.NAME, T.YEAR FROM PERSON P, TURING_AWARD T WHERE P.ID=T.ID ORDER BY YEAR ASC;
 
 -- Show name of persons that are not awarded
 SELECT NAME FROM PERSON WHERE ID NOT IN (SELECT ID FROM TURING_AWARD);
@@ -260,6 +260,11 @@ FROM somewhere, myconstants
 WHERE something = var1
    OR something_else = var2;
 ```
+
+### Triggers
+
+Doc: https://docs.postgresql.fr/10/plpgsql-trigger.html
+
 
 ### CSV export
 
