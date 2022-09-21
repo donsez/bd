@@ -79,13 +79,28 @@ docker start roack3
 
 Check the console 
 
+## Fault-Tolerance & Recovery
+
+https://www.cockroachlabs.com/docs/v22.1/demo-fault-tolerance-and-recovery
+
+Setup the HAProxy load balancer.
+
+> HAProxy can be [deployed with Docker](https://hub.docker.com/_/haproxy)
+
 ## Clean the cluster
 
 ```bash
 docker stop roach1 roach2 roach3
 docker rm roach1 roach2 roach3
 docker volume rm roach1 roach2 roach3
+
+docker stop haproxy
+docker rm haproxy
 ```
+
+## TODO: docker-compose.yml
+
+
 
 
 
