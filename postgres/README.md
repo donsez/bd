@@ -18,6 +18,8 @@ The password is still `changeme`.
 docker exec -it postgres_container psql -U postgres -W
 ```
 
+> Nota Bene: You can stop the container with `docker-compose stop` and destroy the container with `docker-compose down`. However,Postgres DBMS files are still stored in the host directory `./data/postgres`.
+
 ## Execute the PSQL statements
 
 ```sql
@@ -150,7 +152,7 @@ SELECT * FROM PERSON P FULL OUTER JOIN TURING_AWARD T ON P.ID=T.ID;
 SELECT * FROM PERSON P CROSS JOIN TURING_AWARD T;
 
 -- Show name of persons with turing award ordered by year
-SELECT A.NAME, T.YEAR FROM PERSON P, TURING_AWARD T WHERE P.ID=T.ID ORDER BY YEAR ASC;
+SELECT P.NAME, T.YEAR FROM PERSON P, TURING_AWARD T WHERE P.ID=T.ID ORDER BY YEAR ASC;
 
 -- Show name of persons that are not awarded
 SELECT NAME FROM PERSON WHERE ID NOT IN (SELECT ID FROM TURING_AWARD);
@@ -185,14 +187,6 @@ Browse the DB tree on the left panel.
 
 ## Enjoy
 
-
-## Dump the database
-
-```bash
-docker exec -it postgres_container pg_dumpall -c -U postgres > dump.sql
-cat dump.sql
-```
-
 ## At the end
 
 Stop and remmove the composition
@@ -205,7 +199,7 @@ Remove the DBMS files
 rm -fr data/
 ```
 
-## Extra PSQL statements
+## Misc: PSQL statements
 
 ### Date and Time
 
@@ -267,9 +261,57 @@ WHERE something = var1
    OR something_else = var2;
 ```
 
+### Triggers
 
-## Nota Bene
-* Postgres files are stored in the host dir `./data/postgres`
+Doc: https://docs.postgresql.fr/10/plpgsql-trigger.html
+
+
+### CSV export
+
+Export the table TURING_AWARD into a CSV file.
+```sql
+COPY TURING_AWARD TO '/work/turing/turing_award.csv' DELIMITER ',' CSV HEADER;
+```
+### JSON export
+
+Export the table TURING_AWARD into a JSON file.
+
+```sql
+\t
+\a
+\o /work/turing/turing_award.json
+SELECT JSON_AGG(t) FROM (SELECT * FROM TURING_AWARD) T;
+```
+
+### Periodic dump
+
+Exercice: add a container to the composition `docker-compose.yml` in order to dump the database every half hour (for instance, [`annixa/docker-pg_dump`](https://hub.docker.com/r/annixa/docker-pg_dump))
+
+```yaml
+  postgres-backup-turing:
+    image: annixa/docker-pg_dump
+    container_name: postgres-backup-turing
+    #links:
+    #  - postgresql:db # Maps postgres as "db"
+    environment:
+      - PGUSER=postgres
+      - PGPASSWORD=changeme
+      - CRON_SCHEDULE=0,30 * * * * # Every 30 minutes
+      - DELETE_OLDER_THAN=10080 # seven days : Optionally delete files older than $DELETE_OLDER_THAN minutes.
+      - PGDB=turing_db # The name of the database to dump
+      - PREFIX=turing
+    volumes:
+      - ./backups/postgresql:/dump
+    command: dump-cron
+```
+
+### Dump the database
+
+```bash
+TODAY=$(date +"%Y%m%d")
+docker exec -it postgres_container pg_dumpall -c -U postgres > work/turing/dump_turing_db-$TODAY.sql
+cat work/turing/dump_turing_db-$TODAY.sql
+```
 
 ## References
 
