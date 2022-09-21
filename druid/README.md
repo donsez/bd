@@ -38,4 +38,9 @@ https://druid.apache.org/docs/latest/tutorials/tutorial-kafka.html
 
 https://www.npmjs.com/package/druid-query
 
+## CockroachDB + Apache Druid
+
+A single node CRDB instance serving as the metadata store for Apache Druid instead of Postgres or MySQL.
+
+https://github.com/cockroachlabs-field/docker-examples/tree/master/example-apache-druid
 
