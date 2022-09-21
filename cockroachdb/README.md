@@ -87,6 +87,13 @@ Setup the HAProxy load balancer.
 
 > HAProxy can be [deployed with Docker](https://hub.docker.com/_/haproxy): have a look on [this `docker-compose.yml` example](https://github.com/cockroachlabs-field/docker-examples/tree/master/example-haproxy)
 
+
+## Misc
+
+### Running OLTP-Bench Suite
+
+https://github.com/cockroachlabs-field/docker-examples/tree/master/example-oltpbench
+
 ## Clean the cluster
 
 ```bash
