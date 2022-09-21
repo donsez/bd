@@ -85,7 +85,7 @@ https://www.cockroachlabs.com/docs/v22.1/demo-fault-tolerance-and-recovery
 
 Setup the HAProxy load balancer.
 
-> HAProxy can be [deployed with Docker](https://hub.docker.com/_/haproxy)
+> HAProxy can be [deployed with Docker](https://hub.docker.com/_/haproxy): have a look on [this `docker-compose.yml` example](https://github.com/cockroachlabs-field/docker-examples/tree/master/example-haproxy)
 
 ## Clean the cluster
 
