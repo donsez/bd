@@ -94,6 +94,18 @@ Setup the HAProxy load balancer.
 
 https://github.com/cockroachlabs-field/docker-examples/tree/master/example-oltpbench
 
+### Use the spatial features in CockroachDB
+
+https://github.com/cockroachlabs-field/crdb-geo-tourist
+
+### Jaeger Tracing
+
+https://github.com/cockroachlabs-field/docker-examples/tree/master/example-jeager
+
+### CockroachDB + Apache Druid
+
+https://github.com/cockroachlabs-field/docker-examples/tree/master/example-apache-druid
+
 ## Clean the cluster
 
 ```bash
