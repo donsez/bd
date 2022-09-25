@@ -108,6 +108,7 @@ CSV HEADER;
 
 -- Show tables
 \d
+\dt+
 
 -- Show all
 SELECT * FROM LesEmployes;
@@ -116,3 +117,4 @@ SELECT * FROM LesResponsables;
 SELECT * FROM LesAnimaux;
 SELECT * FROM LesGardiens;
 SELECT * FROM LesMaladies;
+

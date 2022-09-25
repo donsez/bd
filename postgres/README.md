@@ -84,6 +84,7 @@ INSERT INTO PERSON (NAME, BIRTHDATE) VALUES
 
 -- Show tables
 \d
+\dt+
 
 -- Show schema of table PERSON
 \d PERSON
