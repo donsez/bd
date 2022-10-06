@@ -121,14 +121,3 @@ select nomP from LesPreferencesAdrian;
 select * from LesPreferences join LesPlats using (nomP);
 select nomA, typeP from LesPreferences join LesPlats using (nomP);
 
--- Explain
-explain select * from LesPreferences;
-explain select * from LesPreferences where nomA = 'Adrian';
-
-select * from LesPreferences join LesPlats using (nomP);
-select nomA, typeP from LesPreferences join LesPlats using (nomP);
-select * from LesPreferences full outer join LesPlats using (nomP);
-
-explain select * from LesPreferences join LesPlats using (nomP);
-explain select nomA, typeP from LesPreferences join LesPlats using (nomP);
-explain select * from LesPreferences full outer join LesPlats using (nomP);
