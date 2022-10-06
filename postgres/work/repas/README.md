@@ -18,3 +18,14 @@ CREATE DATABASE db_repas;
 ```
 
 > Observez la taille de la vue `LesPreferencesAdrian`.
+
+
+## `EXPLAIN`
+
+L'instruction `EXPLAIN` renvoie le plan d'exécution que le planificateur `PostgreSQL` génère pour une requête donnée.
+
+`EXPLAIN` montre comment les tables impliquées dans une requête seront parcourues par un balayage d'index ou un balayage séquentiel, etc., et si plusieurs tables sont utilisées, quel type d'algorithme de jointure sera utilisé.
+
+```sql
+\i /work/repas/explain.sql
+```

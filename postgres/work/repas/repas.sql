@@ -3,11 +3,11 @@
 -- Copyright: UFR IM2AG, Université Grenoble Alpes
 --
 
-drop table LesRepas;
-drop table LeMenu;
-drop view LesPreferencesAdrian;
-drop table LesPreferences;
-drop table LesPlats;
+drop table if exists LesRepas;
+drop table if exists LeMenu;
+drop view if exists LesPreferencesAdrian;
+drop table if exists LesPreferences;
+drop table if exists LesPlats;
 
 create table LesRepas (
     dateR date,
@@ -42,12 +42,10 @@ insert into LesRepas values (to_date ('31/12/2004','DD/MM/YYYY'), 'Patrick');
 insert into LesRepas values (to_date ('31/12/2004','DD/MM/YYYY'), 'Malou');
 insert into LesRepas values (to_date ('31/12/2004','DD/MM/YYYY'), 'Thomas');
 insert into LesRepas values (to_date ('31/12/2004','DD/MM/YYYY'), 'Jacques');
-
 insert into LesRepas values (to_date ('21/10/2003','DD/MM/YYYY'), 'Thomas');
 insert into LesRepas values (to_date ('21/10/2003','DD/MM/YYYY'), 'Marie');
 insert into LesRepas values (to_date ('21/10/2003','DD/MM/YYYY'), 'Adrian');
 insert into LesRepas values (to_date ('21/10/2003','DD/MM/YYYY'), 'Myriam');
-
 insert into LesRepas values (to_date ('6/3/2005','DD/MM/YYYY'), 'Phil');
 insert into LesRepas values (to_date ('6/3/2005','DD/MM/YYYY'), 'Jackie');
 insert into LesRepas values (to_date ('6/3/2005','DD/MM/YYYY'), 'Adrian');
@@ -120,3 +118,17 @@ select * from LesPreferences;
 create view LesPreferencesAdrian as select * from LesPreferences where nomA = 'Adrian';
 select nomP from LesPreferencesAdrian;
 
+select * from LesPreferences join LesPlats using (nomP);
+select nomA, typeP from LesPreferences join LesPlats using (nomP);
+
+-- Explain
+explain select * from LesPreferences;
+explain select * from LesPreferences where nomA = 'Adrian';
+
+select * from LesPreferences join LesPlats using (nomP);
+select nomA, typeP from LesPreferences join LesPlats using (nomP);
+select * from LesPreferences full outer join LesPlats using (nomP);
+
+explain select * from LesPreferences join LesPlats using (nomP);
+explain select nomA, typeP from LesPreferences join LesPlats using (nomP);
+explain select * from LesPreferences full outer join LesPlats using (nomP);
