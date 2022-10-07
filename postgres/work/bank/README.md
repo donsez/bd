@@ -21,13 +21,15 @@ CREATE DATABASE db_bank;
 
 Ajoutez des [contraintes](https://www.postgresql.org/docs/current/ddl-constraints.html) pour que la colonne `balance` ne soit pas négative et que la colonne `amount` soit strictement positive.
 
-Effectuez un transfert d'argent à un montant négatif. Que se passe-t'il ?
+Effectuez un transfert d'argent à un montant négatif (au sien d'une transaction). Que se passe-t'il ?
  
-Effectuez un transfert d'argent depuis un compte insuffisament approvisionné : le montant du transfert depasse le solde du compte. Que se passe-t'il ?
+Effectuez un transfert d'argent depuis un compte insuffisament approvisionné : le montant du transfert depasse le solde du compte (au sien d'une transaction). Que se passe-t'il ?
+
+Que se passerait-il si vous n'aviez pas utilisé de transactions pour exécuter les deux opérations précédentes ?
 
 ## Execution de transactions concurrentes
 
-Ouvrez 2 seesions en parallèle et connectez vous sur la base `db_bank` avec:
+Ouvrez 2 sessions en parallèle et connectez vous sur la base `db_bank` avec:
 ```bash
 docker exec -it postgres_container psql -U postgres -W
 ```
