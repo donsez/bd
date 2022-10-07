@@ -108,7 +108,10 @@ SELECT * FROM BOOKS;
 SELECT * FROM ITEMS;
 SELECT * FROM LOANS;
 
+
+-- Bonus: Exercice : faire évoluer le schéma de la base tout en conservant la compatibilité avec les requêtes existantes.
+
+-- TODO ajouter une table AUTHORS avec les colonnes LASTNAME, FIRSTNAME, BIRTHYEAR en recopiant de BOOKS
 -- TODO ajouter une colonne ISBN à la table BOOKS
 -- TODO ajouter une vue BOOKS en utilisant la table BOOKS et renommer l'ancienne table BOOKS en BOOKS_FULL
--- TODO ajouter une table AUTHORS avec les colonnes LASTNAME, FIRSTNAME, BIRTHYEAR
 -- TODO ajouter une table WRITES avec les colonnes LASTNAME, FIRSTNAME, ISBN
