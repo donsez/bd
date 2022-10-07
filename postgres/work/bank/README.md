@@ -1,0 +1,122 @@
+# Base de données Bank pour PostgreSQL
+
+Lancez le serveur Postgres avec `docker-compose` depuis le répertoire `~/github/donsez/bd/postgres`
+
+Le fichier `bank.sql` contient les ordres pour créer et peupler la base de données `db_bank`.
+
+Lancez les commandes suivantes:
+```sql
+\help
+\l
+\l+
+CREATE DATABASE db_bank;
+\l
+\connect db_bank
+\i /work/bank/bank.sql
+\dt
+\d+
+```
+
+## Ajout de contraintes
+
+Ajoutez des contraintes pour que les colonnes `balance` et `amount` ne soient pas négatifs.
+
+Effectuez un transfert d'argent à un montant négatif. Que se passe-t'il ?
+ 
+Effectuez un transfert d'argent depuis un compte insuffisament approvisionné : le montant du transfert depasse le solde du compte. Que se passe-t'il ?
+
+## Execution de transactions concurrentes
+
+Ouvrez 2 seesions en parallèle et connectez vous sur la base `db_bank` avec:
+```bash
+docker exec -it postgres_container psql -U postgres -W
+```
+
+Démarrez 2 transactions dans les sessions parallèles
+```sql
+\connect db_bank
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE;
+...
+```
+
+Exécutez une séquence d'instruction pour 2 transferts bancaires dans un ordre qui conduit à un interblocage.
+
+Par exemple:
+* pour la session 1, transfert de `100.00` de `bob` à `alice`
+* pour la session 2, transfert de `50.00` de `alice` à `bob`
+
+## Autres niveaux d'isolation
+
+Le niveau d'isolation d'une transaction par défaut est `SERIALIZABLE`.
+
+Retentez d'exécuter la même séquence avec d'autres [niveaux d'isolation](https://www.postgresql.org/docs/current/transaction-iso.html) au moyen de [`SET TRANSACTION`](https://www.postgresql.org/docs/current/sql-set-transaction.html)
+
+
+```sql
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+...
+COMMIT;
+
+BEGIN TRANSACTION ISOLATION LEVEL READ COMMITTED;
+...
+COMMIT;
+
+BEGIN TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+...
+COMMIT;
+```
+
+Tout au long de votre test d'enchevrétement d'executer des instructions des 2 transactions, vous pouvez exécuter le transaction suivante dans une troisième session:
+
+
+```sql
+BEGIN TRANSACTION ISOLATION LEVEL READ UNCOMMITTED READ ONLY;
+SELECT * FROM account;
+SELECT * FROM transfer;
+COMMIT;
+```
+
+## Utilisation du `SAVEPOINT``
+
+Exécutez les instructions suivantes:
+
+```sql
+BEGIN;
+    SELECT * FROM account WHERE name = 'bob'; 
+    SELECT * FROM transfer WHERE account_to = 'bob'; 
+
+    UPDATE account SET balance = balance+500 WHERE name = 'bob';
+    INSERT INTO transfer (account_to, amount) VALUES ('bob', 500);
+
+    SELECT * FROM account WHERE name = 'bob'; 
+    SELECT * FROM transfer WHERE account_to = 'bob'; 
+
+    SAVEPOINT my_savepoint;
+
+    SELECT * FROM account WHERE name = 'bob'; 
+    SELECT * FROM transfer WHERE account_to = 'bob'; 
+
+    UPDATE account SET balance = balance+1000000 WHERE name = 'bob';
+    INSERT INTO transfer (account_to, amount) VALUES ('bob', 1000000);
+
+    SELECT * FROM account WHERE name = 'bob'; 
+    SELECT * FROM transfer WHERE account_to = 'bob'; 
+
+    ROLLBACK TO SAVEPOINT my_savepoint;
+
+    SELECT * FROM account WHERE name = 'bob'; 
+    SELECT * FROM transfer WHERE account_to = 'bob'; 
+
+    UPDATE account SET balance = balance+100 WHERE name = 'bob';
+    INSERT INTO transfer (account_to, amount) VALUES ('bob', 100);
+
+    SELECT * FROM account WHERE name = 'bob'; 
+    SELECT * FROM transfer WHERE account_to = 'bob'; 
+
+COMMIT;
+
+SELECT * FROM account WHERE name = 'bob'; 
+SELECT * FROM transfer WHERE account_to = 'bob'; 
+```
+
+Que c'est il passé pour le virement à 1000000 ?
