@@ -19,7 +19,7 @@ CREATE DATABASE db_bank;
 
 ## Ajout de contraintes
 
-Ajoutez des contraintes pour que les colonnes `balance` et `amount` ne soient pas négatifs.
+Ajoutez des [contraintes](https://www.postgresql.org/docs/current/ddl-constraints.html) pour que la colonne `balance` ne soit pas négative et que la colonne `amount` soit strictement positive.
 
 Effectuez un transfert d'argent à un montant négatif. Que se passe-t'il ?
  
