@@ -122,3 +122,27 @@ SELECT * FROM transfer WHERE account_to = 'bob';
 ```
 
 Que c'est il passé pour le virement à 1000000 ?
+
+## Bonus : Procédure
+
+Ecrivez une [procédure](https://www.postgresql.org/docs/current/sql-createprocedure.html) `transfer` pour exécuter les 3 instructions requise pour un transfert bancaire.
+
+```sql
+CREATE PROCEDURE transfer(...)
+LANGUAGE SQL
+BEGIN ATOMIC
+    ...
+END;
+
+CREATE PROCEDURE show_last_transfer(...)
+LANGUAGE SQL
+BEGIN ATOMIC
+    ...
+END;
+```
+
+
+```sql
+CALL transfer(...);
+CALL show_last_transfer(...);
+```
