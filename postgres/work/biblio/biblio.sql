@@ -1,9 +1,10 @@
 --
 -- Base de données Bibliothèque
--- (c) UFR-IM2AG, Université Grenoble Alpes
+-- (c) UFR-IM2AG & Polytech Grenoble, Université Grenoble Alpes
 --
 
--- From Oracle Server
+-- From PostgreSQL
+
 
 drop table if exists LOANS;
 drop table if exists ITEMS;
