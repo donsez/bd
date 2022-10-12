@@ -1,5 +1,9 @@
 # PostGIS
 
+PostGIS is one of the most awesome extensions for PostgreSQL and can turn a relational database into a really powerful GIS (Geographic Information System).
+
+PostGIS is a Postgres extension for spatial data types like points, lines, and polygons to be stored inside a database. Most commonly you’ll see people using PostGIS with spatial points on a map or globe in longitude and latitude, but there’s some other interesting use cases out there like neuroscience and networking so it can be used for any system with spatial relationships. PostGIS also has a large set of functions that allow you to work with geography and geometry inside sql and indexes to make database tasks efficient.
+
 ## Start the DBMS
 
 ```bash
@@ -12,10 +16,6 @@ docker-compose ps
 docker-compose logs -f
 ```
 
-```bash
-curl https://codeload.github.com/cantzakas/postgis-demo/zip/refs/heads/master -o work/postgis-demo.zip 
-(cd work; unzip postgis-demo.zip)
-```
 
 Interact with the DBMS using the [`psql` command](https://docs.postgresql.fr/10/app-psql.html).
 The password is still `changeme`.
@@ -65,6 +65,8 @@ CREATE EXTENSION pointcloud;
 CREATE EXTENSION pointcloud_postgis;
 ```
 
+## Simple database and queries
+
 ```sql
 CREATE TABLE geometries (name varchar, geom geometry);
 
@@ -104,10 +106,6 @@ ON ST_Intersects(G1.geom, G2.geom);
 
 ```
 
-```sql
-\i /work/postgis-demo-master/load/nyc/nyc_census_sociodata.sql
-```
-
 
 ```sql
 CREATE TABLE cities ( id int4 primary key, name varchar(50), geom geometry(POINT,4326) );
@@ -127,8 +125,62 @@ FROM cities AS p1, cities AS p2 WHERE p1.id > p2.id;
 ```
 
 
+## Advanced 
 
-## Plus
+### Get the dataset
+
+```bash
+curl http://s3.cleverelephant.ca/postgis-workshop-2020.zip -o work/postgis-workshop-2020.zip 
+(cd work; unzip postgis-workshop-2020.zip)
+```
+
+### Load the dataset into PostGIS database
+
+TODO
+
+```sql
+\i /work/postgis-workshop/data/nyc_data.backup
+```
+
+
+## PGAdmin
+
+You will very likely want a GUI interface for working with Postgres and PostGIS. pgAdmin has a nice 👁️ geometry viewer for seeing PostGIS data on map format. The primary use of pgAdmin is working with the data, so you’ll still need a desktop GIS to do lots of layering, labeling, and fancy map work
+
+
+Browse the [PGAdmin console](http://localhost:5050).
+
+Set a new password for PGAdmin.
+
+Add a new server.
+* In `General` tab, The `name` is `postgis_container`.
+* In `Connection` tab, the `hostname` is `postgis_container`, the `username` is `postgres` and the  `password` is `changeme`.
+
+Browse the DB tree on the left panel.
+
+The default query for table `cities` is:
+```sql
+SELECT * FROM public.cities
+ORDER BY id ASC 
+```
+
+Use the geometry viewer tab for showing the cities on a map.
+
+![PGAdmin](pgadmin_postgis-01.png)
+
+
+## QGIS
+
+TODO
+
+You will very likely want a desktop app for working with GIS data, very similar to the GUI interfaces for databases like pgAdmin but with a lot more functions for loading maps, labeling and enhancing them.
+
+
+## More
 * http://postgis.net/workshops/postgis-intro/loading_data.html
 * http://postgis.net/workshops/postgis-intro/geometries_exercises.html
+* https://www.crunchydata.com/blog/postgis-for-newbies
 
+## TODO
+* [ ] add [GeoServer](https://hub.docker.com/r/kartoza/geoserver) as web frontend
+* [ ] add [MapServer](https://hub.docker.com/r/mapserver/mapserver) as web frontend
