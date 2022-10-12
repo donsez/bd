@@ -125,24 +125,6 @@ FROM cities AS p1, cities AS p2 WHERE p1.id > p2.id;
 ```
 
 
-## Advanced 
-
-### Get the dataset
-
-```bash
-curl http://s3.cleverelephant.ca/postgis-workshop-2020.zip -o work/postgis-workshop-2020.zip 
-(cd work; unzip postgis-workshop-2020.zip)
-```
-
-### Load the dataset into PostGIS database
-
-TODO
-
-```sql
-\i /work/postgis-workshop/data/nyc_data.backup
-```
-
-
 ## PGAdmin
 
 You will very likely want a GUI interface for working with Postgres and PostGIS. pgAdmin has a nice 👁️ geometry viewer for seeing PostGIS data on map format. The primary use of pgAdmin is working with the data, so you’ll still need a desktop GIS to do lots of layering, labeling, and fancy map work
@@ -175,6 +157,37 @@ TODO
 
 You will very likely want a desktop app for working with GIS data, very similar to the GUI interfaces for databases like pgAdmin but with a lot more functions for loading maps, labeling and enhancing them.
 
+
+## PostGIS Workshop 
+
+The PostGIS Workshop relies on the NY city dataset.
+
+### Get the dataset
+
+```bash
+curl http://s3.cleverelephant.ca/postgis-workshop-2020.zip -o work/postgis-workshop-2020.zip 
+(cd work; unzip postgis-workshop-2020.zip)
+```
+
+### Load the dataset into PostGIS database with PGAdmin
+
+Open the PGAdmin console
+
+Create a new database `NYC`.
+
+Create the PostGIS extension using the PSQL console.
+```sql
+CREATE EXTENSION postgis;
+```
+
+Restore the backup of the database located into `/work/postgis-workshop/data/nyc_data.backup
+
+View the data (for instance on table `nyc_census_blocks`)
+
+Select the geom viewer into the header of the `geom` column.
+
+![PGAdmin](images/pgadmin_postgis-03.png)
+![PGAdmin](images/pgadmin_postgis-02.png)
 
 ## More
 * http://postgis.net/workshops/postgis-intro/loading_data.html
