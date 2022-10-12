@@ -32,3 +32,12 @@ SELECT EXTRACT(CENTURY FROM TIMESTAMP '2001-02-16 20:38:40');
 
 
 
+-- pg_sleep: delay execution for a given number of seconds.
+SELECT 
+  clock_timestamp(),
+  pg_sleep(2),
+  clock_timestamp(),
+  pg_sleep(1),
+  clock_timestamp(),
+  pg_sleep(0.5),
+  clock_timestamp();
