@@ -1,4 +1,4 @@
-# Base de données Bank pour PostgreSQL
+# Transaction avec PostgreSQL
 
 Lancez le serveur Postgres avec `docker-compose` depuis le répertoire `~/github/donsez/bd/postgres`
 
@@ -47,6 +47,11 @@ Exercice: Exécutez un entrelacement des 2 séquences d'instruction des 2 transf
 * pour la transaction 2, transfert de `50.00` de `alice` à `bob`
 
 Pour cela, ouvrez 2 sessions `psql` en parallèle (dans 2 terminaux).
+
+> Vous pouvez utiliser `\prompt 'enter return to continue' dummy` ou `pg_sleep(1);` pour faire des pauses dans l'exécution de la transaction.
+
+
+
 
 ## Autres niveaux d'isolation
 
