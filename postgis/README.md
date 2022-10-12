@@ -166,7 +166,7 @@ ORDER BY id ASC
 
 Use the geometry viewer tab for showing the cities on a map.
 
-![PGAdmin](pgadmin_postgis-01.png)
+![PGAdmin](images/pgadmin_postgis-01.png)
 
 
 ## QGIS
