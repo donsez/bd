@@ -41,28 +41,33 @@ BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE;
 ...
 ```
 
-Exécutez une séquence d'instruction pour 2 transferts bancaires dans un ordre qui conduit à un interblocage.
+Exercice: Exécutez un entrelacement des 2 séquences d'instruction des 2 transferts bancaires pour conduire à un interblocage.
 
-Par exemple:
-* pour la session 1, transfert de `100.00` de `bob` à `alice`
-* pour la session 2, transfert de `50.00` de `alice` à `bob`
+* pour la transaction 1, transfert de `100.00` de `bob` à `alice`
+* pour la transaction 2, transfert de `50.00` de `alice` à `bob`
+
+Pour cela, ouvrez 2 sessions `psql` en parallèle (dans 2 terminaux).
 
 ## Autres niveaux d'isolation
 
 Le niveau d'isolation d'une transaction par défaut est `SERIALIZABLE`.
 
-Retentez d'exécuter la même séquence avec d'autres [niveaux d'isolation](https://www.postgresql.org/docs/current/transaction-iso.html) au moyen de [`SET TRANSACTION`](https://www.postgresql.org/docs/current/sql-set-transaction.html)
+Exercice : Retentez d'exécuter la même séquence avec d'autres [niveaux d'isolation](https://www.postgresql.org/docs/current/transaction-iso.html) au moyen de [`SET TRANSACTION`](https://www.postgresql.org/docs/current/sql-set-transaction.html) pour observer des lectures sales, des lectures non répétables et des lectures fantomes.
 
 
 ```sql
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 ...
 COMMIT;
+```
 
+```sql
 BEGIN TRANSACTION ISOLATION LEVEL READ COMMITTED;
 ...
 COMMIT;
+```
 
+```sql
 BEGIN TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 ...
 COMMIT;
@@ -125,7 +130,7 @@ Que c'est il passé pour le virement à 1000000 ?
 
 ## Bonus : Procédure
 
-Ecrivez une [procédure](https://www.postgresql.org/docs/current/sql-createprocedure.html) `transfer` pour exécuter les 3 instructions requise pour un transfert bancaire.
+Exercice: Ecrivez une [procédure](https://www.postgresql.org/docs/current/sql-createprocedure.html) `transfer` pour exécuter les 3 instructions requise pour un transfert bancaire.
 
 ```sql
 CREATE PROCEDURE transfer(...)
