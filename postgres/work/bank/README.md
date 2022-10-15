@@ -1,4 +1,6 @@
-# Transaction avec PostgreSQL
+# Contraintes et transactions avec PostgreSQL
+
+## Démarrage
 
 Lancez le serveur Postgres avec `docker-compose` depuis le répertoire `~/github/donsez/bd/postgres`
 
@@ -48,9 +50,7 @@ Exercice: Exécutez un entrelacement des 2 séquences d'instruction des 2 transf
 
 Pour cela, ouvrez 2 sessions `psql` en parallèle (dans 2 terminaux).
 
-> Vous pouvez utiliser `\prompt 'enter return to continue' dummy` ou `pg_sleep(1);` pour faire des pauses dans l'exécution de la transaction.
-
-
+> Vous pouvez utiliser `\prompt 'enter return to continue' dummy` ou `pg_sleep(1);` pour faire des pauses entre les exécutions des instructions des transactions.
 
 
 ## Autres niveaux d'isolation
@@ -131,9 +131,9 @@ SELECT * FROM account WHERE name = 'bob';
 SELECT * FROM transfer WHERE account_to = 'bob'; 
 ```
 
-Que c'est il passé pour le virement à 1000000 ?
+Question : Que c'est il passé pour le virement de 1000000 ?
 
-## Bonus : Procédure
+## Procédure
 
 Exercice: Ecrivez une [procédure](https://www.postgresql.org/docs/current/sql-createprocedure.html) `transfer` pour exécuter les 3 instructions requise pour un transfert bancaire.
 
