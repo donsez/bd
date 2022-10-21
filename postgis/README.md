@@ -193,6 +193,7 @@ Select the geom viewer into the header of the `geom` column.
 * http://postgis.net/workshops/postgis-intro/loading_data.html
 * http://postgis.net/workshops/postgis-intro/geometries_exercises.html
 * https://www.crunchydata.com/blog/postgis-for-newbies
+* https://learnosm.org/fr/advanced/postgis-configuration/
 
 ## TODO
 * [ ] add [GeoServer](https://hub.docker.com/r/kartoza/geoserver) as web frontend
