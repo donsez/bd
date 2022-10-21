@@ -1,4 +1,4 @@
-# Postgres tutorial
+# Postgres Tutorial
 
 ## Start the DBMS
 
@@ -262,6 +262,10 @@ WHERE something = var1
    OR something_else = var2;
 ```
 
+### Constraints and Transactions
+
+[In french](./work/bank)
+
 ### Triggers
 
 Doc: https://docs.postgresql.fr/10/plpgsql-trigger.html
@@ -313,6 +317,10 @@ TODAY=$(date +"%Y%m%d")
 docker exec -it postgres_container pg_dumpall -c -U postgres > work/turing/dump_turing_db-$TODAY.sql
 cat work/turing/dump_turing_db-$TODAY.sql
 ```
+
+### Geometric extension (PostGIS)
+
+[PostGIS](../postgis)
 
 ## References
 

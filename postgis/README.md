@@ -1,6 +1,6 @@
 # PostGIS
 
-PostGIS is one of the most awesome extensions for PostgreSQL and can turn a relational database into a really powerful GIS (Geographic Information System).
+PostGIS is one of the most awesome extensions for PostgreSQL and can turn a relational database into a really powerful GIS ([Geographic Information System](https://en.wikipedia.org/wiki/Geographic_information_system)).
 
 PostGIS is a Postgres extension for spatial data types like points, lines, and polygons to be stored inside a database. Most commonly you’ll see people using PostGIS with spatial points on a map or globe in longitude and latitude, but there’s some other interesting use cases out there like neuroscience and networking so it can be used for any system with spatial relationships. PostGIS also has a large set of functions that allow you to work with geography and geometry inside sql and indexes to make database tasks efficient.
 
@@ -198,3 +198,4 @@ Select the geom viewer into the header of the `geom` column.
 ## TODO
 * [ ] add [GeoServer](https://hub.docker.com/r/kartoza/geoserver) as web frontend
 * [ ] add [MapServer](https://hub.docker.com/r/mapserver/mapserver) as web frontend
+* [ ] add [GDAL - Geospatial Data Abstraction Library container](https://hub.docker.com/r/osgeo/gdal) for converting files (GeoJSON, Shapefile ...)
