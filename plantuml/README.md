@@ -86,3 +86,34 @@ FILES=$(for f in *.plantuml; do echo /var/docs/$f; done)
 docker run -t --rm  -v `pwd`:/var/docs plantuml/plantuml -nbthread 8 -tpng -o /var/docs $FILES
 ```
 
+## Exemples
+
+### Diagrammes de cas d'usage
+
+![Cas d'usage](./usecase.png)
+
+### Diagrammes d'objets
+
+![object01](./object01.png)
+
+### Diagrammes d'activités
+
+![Activité](./activity01.png)
+![Activité](./activity02.png)
+![Activité](./activity03.png)
+
+### Diagrammes d'état
+
+![Etat](./state01.png)
+![Etat](./state02.png)
+![Etat](./state03.png)
+![Etat](./state04.png)
+
+### Diagrammes de composants
+
+![Composant](./component.png)
+
+### Diagrammes de déploiement
+
+![déploiement](./deployment01.png)
+![déploiement](./deployment02.png)
