@@ -1,8 +1,12 @@
 # Exemples des diagrammes UML avec PlantUML
 
-[PLantUML](https://plantuml.com/fr/) est un utilitaire qui permet de créer des diagrammes et des visualisations à l'aide de texte et de code. Il est très indiqué pour documenter un projet logiciel et maintenir sa documentation via un dépôt Git.
+[PLantUML](https://plantuml.com/fr/) est un utilitaire qui permet de créer des diagrammes et des visualisations à l'aide de texte et de code.
 
-## Syntax
+Il est très indiqué pour documenter un projet logiciel et maintenir sa documentation via un dépôt Git.
+
+La transformation vers du PNG ou du SVG peut se faire avec [une ligne de commande avec docker](#génération).
+
+## Syntaxe
 
 `car.plantuml`:
 ```plantuml
