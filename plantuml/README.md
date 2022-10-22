@@ -86,6 +86,10 @@ FILES=$(for f in *.plantuml; do echo /var/docs/$f; done)
 docker run -t --rm  -v `pwd`:/var/docs plantuml/plantuml -nbthread 8 -tpng -o /var/docs $FILES
 ```
 
+## Bonus
+* [plantuml2mysql](https://github.com/grafov/plantuml2mysql)
+* [sql2puml](https://github.com/bmrussell/sql2puml)
+
 ## Exemples
 
 ### Diagrammes de cas d'usage
@@ -117,3 +121,7 @@ docker run -t --rm  -v `pwd`:/var/docs plantuml/plantuml -nbthread 8 -tpng -o /v
 
 ![déploiement](./deployment01.png)
 ![déploiement](./deployment02.png)
+
+### Schéma SQL
+
+![sql](./sql01.png)
