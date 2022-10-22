@@ -1,0 +1,20 @@
+@startuml car
+
+class Car {
+   serialNumber : Integer
+   brand : String
+   model : String
+   manufacturingTime : Date
+}
+
+class Driver {
+   driverLicenseNumber : Integer
+   firstname : String
+   lastname : String
+}
+
+Driver - Car : drives >
+Car *- Wheel : have 4 >
+Car -- Person : < owns
+
+@enduml
