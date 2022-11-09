@@ -25,3 +25,12 @@ vi gradle/wrapper/gradle-wrapper.properties
 ```bash
 ./gradlew test
 ```
+
+## Switch to Oracle
+
+TODO
+
+## Switch to PostgreSQL
+
+TODO
+
