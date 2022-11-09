@@ -1,8 +1,8 @@
 CREATE TABLE employee
 (
- employeeName varchar(100) NOT NULL,
-  employeeId varchar(11) NOT NULL ,
- employeeAddress varchar(100) DEFAULT NULL,
- employeeEmail varchar(100) DEFAULT NULL,
+ employeeName VARCHAR(100) NOT NULL,
+ employeeId VARCHAR(11) NOT NULL ,
+ employeeAddress VARCHAR(100) DEFAULT NULL,
+ employeeEmail VARCHAR(100) DEFAULT NULL,
  PRIMARY KEY (employeeId)
 );
