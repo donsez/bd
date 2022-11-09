@@ -21,7 +21,7 @@ curl -X GET http://localhost:8080/postgressApp/employeeList
 curl -X GET http://localhost:8080/postgressApp/employeeList | jq .
 ```
 
-## Create a employee
+## Create an employee
 
 ```bash
 curl -X POST -H "Content-Type: application/json" \
@@ -34,7 +34,7 @@ curl -X POST -H "Content-Type: application/json" \
 curl -X GET http://localhost:8080/postgressApp/employeeList | jq .
 ```
 
-## Update an Employee
+## Update an employee
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" \
@@ -47,7 +47,7 @@ curl -X PUT -H "Content-Type: application/json" \
 curl -X GET http://localhost:8080/postgressApp/employeeList | jq .
 ```
 
-## Delete an Employee
+## Delete an employee
 
 ```bash
 curl -X DELETE -H "Content-Type: application/json" \
