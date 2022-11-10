@@ -2,10 +2,16 @@
 
 From https://dzone.com/articles/bounty-spring-boot-and-postgresql-database
 
-## Build and test
+## Build (and skip tests)
 
 ```bash
-./mvnw clean package
+./mvnw clean package -DskipTests
+```
+
+## Launch the PostgreSQL server
+
+```bash
+(cd ../postgres; docker compose up -d; ; docker compose ps)
 ```
 
 ## Launch Spring Boot server
@@ -58,4 +64,21 @@ curl -X DELETE -H "Content-Type: application/json" \
 
 ```bash
 curl -X GET http://localhost:8080/postgressApp/employeeList | jq .
+```
+
+## Exercice
+
+Refactor the classes in order to change the type of `employeeId` in `SERIAL`.  [`SERIAL`](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL) is a pseudo-type to define auto-increment `integer` columns in tables.
+
+The [`main/resources/schema.sql`](main/resources/schema.sql) is:
+
+```sql
+CREATE TABLE employee
+(
+ employeeId SERIAL,
+ employeeName VARCHAR(100) NOT NULL,
+ employeeAddress VARCHAR(100) DEFAULT NULL,
+ employeeEmail VARCHAR(100) DEFAULT NULL,
+ PRIMARY KEY (employeeId)
+);
 ```
