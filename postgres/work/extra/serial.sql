@@ -1,13 +1,27 @@
 -- Serial types
 -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL
 
+-- Drop table
+
+DROP TABLE IF EXISTS account;
+
 -- Create a table with a serial column
 
-CREATE TABLE serial_table (
+CREATE TABLE account (
     id SERIAL PRIMARY KEY,
-    name TEXT
+    name TEXT NOT NULL,
+    amount NUMERIC(10,2) DEFAULT 0.00
 );
 
--- Insert a row
+-- Insert rows
 
-INSERT INTO serial_table (name) VALUES ('serial');
+INSERT INTO account (name) VALUES ('alice');
+INSERT INTO account (name) VALUES ('bob');
+
+-- Select rows
+
+SELECT * FROM account;
+
+\d
+\d account
+\d account_id_seq
