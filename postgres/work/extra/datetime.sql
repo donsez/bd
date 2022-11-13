@@ -41,3 +41,18 @@ SELECT
   clock_timestamp(),
   pg_sleep(0.5),
   clock_timestamp();
+
+
+-- pg_sleep_for: delay execution for a given interval.
+SELECT 
+  clock_timestamp(),
+  pg_sleep_for('2 minutes 10 seconds'),
+  clock_timestamp(),
+  pg_sleep_for('1 minute 5 seconds'),
+  clock_timestamp();
+
+-- pg_sleep_until: delay execution until a date.
+SELECT 
+  clock_timestamp(),
+  pg_sleep_until('today 16:25:15.1234'),
+  clock_timestamp();
