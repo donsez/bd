@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--This file tests Postgres DBMS with the SQL ant task -->
+<!-- Author : Didier DONSEZ, 22/10/2002 -->
+
+<!-- https://ant.apache.org/manual/Tasks/sql.html -->
+<!-- See also https://github.com/easel/postgresql-jdbc/blob/master/build.xml -->
+
+<project name   ="Test SQL"
+        	default="test"
+        	basedir=".">
+
+  <property name="driver"		value="org.postgresql.Driver"/>
+  <property name="url_for_create_database"	value="jdbc:postgresql://localhost:5432/air_company"/>
+  <property name="url"			value="jdbc:postgresql://localhost:5432/air_company"/>
+  <property name="userid"		value="postgres"/>
+  <property name="password"		value="changeme"/>
+  
+  <!--This is the CLASSPATH to all library that we need:-->
+  <path id="sqldriver.path">
+    <fileset dir="${lib.dir}">
+        <include name="**/postgresql.jar"/>
+    </fileset>			
+  </path>
+  
+
+  <target name="create.database"
+          depends="init" unless="data.available">
+    <echo>Create Database ...</echo>
+    <sql
+       driver="${driver}"
+       url="${url_for_create_database}"
+       userid="${userid}"
+       password="${password}"
+       print="yes"
+       classpathref="sqldriver.path"
+       src="drop.sql"
+       onerror="continue"/>
+  </target>
+  
+  <target name="test"
+          depends="create.database">
+    <echo>Drop tables ...</echo>
+    <sql
+       driver="${driver}"
+       url="${url}"
+       userid="${userid}"
+       password="${password}"
+       print="yes"
+       classpathref="sqldriver.path"
+       src="drop.sql"
+       onerror="continue"/>
+    <echo>Create and populate tables ...</echo>
+    <sql
+       driver="${driver}"
+       url="${url}"
+       userid="${userid}"
+       password="${password}"
+       print="yes"
+       classpathref="sqldriver.path"
+       src="create.sql"/>
+    <echo>Query tables ...</echo>
+    <sql
+       driver="${driver}"
+       url="${url}"
+       userid="${userid}"
+       password="${password}"
+       print="yes"
+       classpathref="sqldriver.path"
+       src="query.sql"/>
+    <echo>Query tables ...</echo>
+    <sql
+       driver="${driver}"
+       url="${url}"
+       userid="${userid}"
+       password="${password}"
+       print="yes"
+       classpathref="sqldriver.path">
+       		<transaction><![CDATA[
+			SELECT * FROM AirCraft;
+			SELECT * FROM Customer;
+			SELECT * FROM Flight;
+			SELECT * FROM Ticket;
+			]]>
+		</transaction>
+	</sql>
+</target>
+  
+</project>
