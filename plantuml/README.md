@@ -129,3 +129,7 @@ docker run -t --rm  -v `pwd`:/var/docs plantuml/plantuml -nbthread 8 -tpng -o /v
 ### Schéma SQL
 
 ![sql](./sql01.png)
+
+### XEarth
+
+![xearth](./xearth.png)
