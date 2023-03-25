@@ -1,0 +1,96 @@
+@startuml
+
+title Examen INFO4 BD 22-23 : Site d'écoute de musique
+
+
+class Client {
+  NumClient
+  --
+  Email
+  Nom
+  Prenom
+  MotDePasse
+  Coordonnées
+  CoordonnéesBancaire
+  TypeClient
+}
+
+
+class Annonceur {
+  NumAnnonceur
+  --
+  NomSociété
+  Coordonnées
+}
+
+class Categorie {
+  NumCat
+  --
+  NomCat
+}
+
+class Artiste {
+  NumArtiste
+  --
+  NomArtiste
+}
+
+class Album {
+  NumAlbum
+  --
+  NomAlbum
+  TitreAlbum
+}
+
+class Morceau {
+  NumMorceau
+  --
+  TitreMorceau
+  DureeMorceau
+  Langue
+}
+
+class Playlist {
+  NumPlaylist
+  --
+  NomPlaylist
+}
+
+class PlaylistMorceau {
+  OrdrePassage
+  --
+}
+
+class PlaylistMorceauEcoute {
+  Date
+  --
+  DureeEcoute
+  TypeSupportEcoute
+}
+
+class PlaylistPubEcoute {
+  Date
+  --
+  DureeEcoute
+  TypeSupportEcoute
+}
+
+class Publicité {
+  NumPub
+  --
+  TitrePub
+  DuréePub
+}
+
+Album --* Artiste
+Playlist --* Client
+Publicité --* Annonceur
+Morceau --* Album
+Morceau --o Categorie
+PlaylistMorceau --* Morceau
+PlaylistMorceau --* Playlist
+PlaylistMorceauEcoute --* PlaylistMorceau
+PlaylistPubEcoute --* Playlist
+PlaylistPubEcoute --* Publicité
+
+@enduml
