@@ -158,6 +158,27 @@ SELECT n_name, count(*)
   WHERE c_nationkey = n_nationkey GROUP BY n_name;
 ```
 
+Change output format
+```sql
+.mode csv
+SELECT * FROM 'nation.parquet';
+.separator "|"
+SELECT * FROM 'nation.parquet';
+
+.mode json
+SELECT * FROM 'nation.parquet';
+.mode markdown
+SELECT * FROM 'nation.parquet';
+```
+
+Write output into a file
+```sql
+.mode markdown
+.output ../../nation.md
+SELECT * FROM 'nation.parquet';
+```
+
+More with https://duckdb.org/docs/api/cli.html
 
 ## Misc
 * [Building and deploying data apps with DuckDB and Streamlit](https://medium.com/@octavianzarzu/build-and-deploy-apps-with-duckdb-and-streamlit-in-under-one-hour-852cd31cccce)
