@@ -8,6 +8,9 @@
 .help
 .examples
 .features
+
+select current_timestamp;
+select now();
 ```
 
 Simple agregate
@@ -179,6 +182,154 @@ SELECT * FROM 'nation.parquet';
 ```
 
 More with https://duckdb.org/docs/api/cli.html
+
+## Create tables
+
+```sql
+CREATE TABLE weather (
+     city           VARCHAR,
+     temp_lo        INTEGER, -- minimum temperature on a day
+     temp_hi        INTEGER, -- maximum temperature on a day
+     prcp           REAL,
+     date           DATE
+ );
+
+describe weather;
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
+│ column_name │ column_type │  null   │   key   │ default │ extra │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ int32 │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼───────┤
+│ city        │ VARCHAR     │ YES     │         │         │       │
+│ temp_lo     │ INTEGER     │ YES     │         │         │       │
+│ temp_hi     │ INTEGER     │ YES     │         │         │       │
+│ prcp        │ FLOAT       │ YES     │         │         │       │
+│ date        │ DATE        │ YES     │         │         │       │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴───────┘
+CREATE TABLE cities (
+     name            VARCHAR,
+     lat             DECIMAL,
+     lon             DECIMAL
+ );
+describe cities;
+┌─────────────┬───────────────┬─────────┬─────────┬─────────┬───────┐
+│ column_name │  column_type  │  null   │   key   │ default │ extra │
+│   varchar   │    varchar    │ varchar │ varchar │ varchar │ int32 │
+├─────────────┼───────────────┼─────────┼─────────┼─────────┼───────┤
+│ name        │ VARCHAR       │ YES     │         │         │       │
+│ lat         │ DECIMAL(18,3) │ YES     │         │         │       │
+│ lon         │ DECIMAL(18,3) │ YES     │         │         │       │
+└─────────────┴───────────────┴─────────┴─────────┴─────────┴───────┘
+INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
+INSERT INTO cities VALUES ('San Francisco', -194.0, 53.0);
+INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
+     VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
+INSERT INTO weather (date, city, temp_hi, temp_lo)
+     VALUES ('1994-11-29', 'Hayward', 54, 37);
+SELECT * FROM weather;
+┌───────────────┬─────────┬─────────┬───────┬────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
+│    varchar    │  int32  │  int32  │ float │    date    │
+├───────────────┼─────────┼─────────┼───────┼────────────┤
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
+│ Hayward       │      37 │      54 │       │ 1994-11-29 │
+└───────────────┴─────────┴─────────┴───────┴────────────┘
+SELECT city, temp_lo, temp_hi, prcp, date FROM weather;
+┌───────────────┬─────────┬─────────┬───────┬────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
+│    varchar    │  int32  │  int32  │ float │    date    │
+├───────────────┼─────────┼─────────┼───────┼────────────┤
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
+│ Hayward       │      37 │      54 │       │ 1994-11-29 │
+└───────────────┴─────────┴─────────┴───────┴────────────┘
+SELECT city, (temp_hi+temp_lo)/2 AS temp_avg, date FROM weather;
+┌───────────────┬──────────┬────────────┐
+│     city      │ temp_avg │    date    │
+│    varchar    │  double  │    date    │
+├───────────────┼──────────┼────────────┤
+│ San Francisco │     48.0 │ 1994-11-27 │
+│ San Francisco │     50.0 │ 1994-11-29 │
+│ Hayward       │     45.5 │ 1994-11-29 │
+└───────────────┴──────────┴────────────┘
+SELECT * FROM weather
+     WHERE city = 'San Francisco' ANprcp  0.0;
+┌───────────────┬─────────┬─────────┬───────┬────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
+│    varchar    │  int32  │  int32  │ float │    date    │
+├───────────────┼─────────┼─────────┼───────┼────────────┤
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
+└───────────────┴─────────┴─────────┴───────┴────────────┘
+SELECT * FROM weather
+     ORDER BY city;
+┌───────────────┬─────────┬─────────┬───────┬────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
+│    varchar    │  int32  │  int32  │ float │    date    │
+├───────────────┼─────────┼─────────┼───────┼────────────┤
+│ Hayward       │      37 │      54 │       │ 1994-11-29 │
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
+└───────────────┴─────────┴─────────┴───────┴────────────┘
+SELECT * FROM weather
+     ORDER BY city, temp_lo;
+┌───────────────┬─────────┬─────────┬───────┬────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
+│    varchar    │  int32  │  int32  │ float │    date    │
+├───────────────┼─────────┼─────────┼───────┼────────────┤
+│ Hayward       │      37 │      54 │       │ 1994-11-29 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
+└───────────────┴─────────┴─────────┴───────┴────────────┘
+SELECT DISTINCT city
+     FROM weather;
+┌───────────────┐
+│     city      │
+│    varchar    │
+├───────────────┤
+│ San Francisco │
+│ Hayward       │
+└───────────────┘
+SELECT *
+     FROM weather, cities
+     WHERE city = name;
+┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┬───────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │     name      │      lat      │      lon      │
+│    varchar    │  int32  │  int32  │ float │    date    │    varchar    │ decimal(18,3) │ decimal(18,3) │
+├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┼───────────────┤
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │ San Francisco │      -194.000 │        53.000 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │ San Francisco │      -194.000 │        53.000 │
+└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┴───────────────┘
+SELECT city, temp_lo, temp_hi, prcp, date, lon, lat
+   FROM weather, cities
+   WHERE city = name;
+┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │      lon      │      lat      │
+│    varchar    │  int32  │  int32  │ float │    date    │ decimal(18,3) │ decimal(18,3) │
+├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┤
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │        53.000 │      -194.000 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │        53.000 │      -194.000 │
+└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┘
+SELECT weather.city, weather.temp_lo, weather.temp_hi,
+        weather.prcp, weather.date, cities.lon, cities.lat
+     FROM weather, cities
+     WHERE cities.name = weather.city;
+┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │      lon      │      lat      │
+│    varchar    │  int32  │  int32  │ float │    date    │ decimal(18,3) │ decimal(18,3) │
+├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┤
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │        53.000 │      -194.000 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │        53.000 │      -194.000 │
+└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┘
+```
+
+
+## SQL editors
+https://duckdb.org/docs/guides/sql_editors/harlequin
+
+```bash
+pip install harlequin
+harlequin
+```
 
 ## Misc
 * [Building and deploying data apps with DuckDB and Streamlit](https://medium.com/@octavianzarzu/build-and-deploy-apps-with-duckdb-and-streamlit-in-under-one-hour-852cd31cccce)
