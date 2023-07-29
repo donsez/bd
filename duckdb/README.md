@@ -1,8 +1,10 @@
 # DuckDB
 
-[DuckDB](https://duckdb.org/) is an in-process SQL OLAP database management systemi. Data can be efficiently loaded from files in CSV, JSON, Parquet formats.
+[DuckDB](https://duckdb.org/) is an in-process SQL OLAP database management system. Data can be efficiently loaded from files in CSV, JSON, Parquet formats.
 
-## Demo: https://shell.duckdb.org/
+## Demo
+
+https://shell.duckdb.org/
 
 ```sql
 .help
@@ -62,14 +64,24 @@ duckdb> SELECT n_name, count(*)
 Elapsed: 239 ms
 ```
 
-## Import JSON files
-
-https://duckdb.org/docs/data/json/overview.html
-
-## Install
+## Install standalone
 
 ```bash
 brew install duckdb
+```
+
+## Install with Docker
+
+> Default arch is `aarch64` (for Apple Silicon processors). Edit the Makefile for changing `DUCKDB_VERSION` and `DUCKDB_ARCH`.
+
+```bash
+mkdir -p ~/github/donsez
+cd ~/github/donsez
+git clone https://github.com/donsez/ducker
+cd ducker
+make build
+docker images | grep ducker
+make run
 ```
 
 ## Run on host
@@ -183,7 +195,11 @@ SELECT * FROM 'nation.parquet';
 
 More with https://duckdb.org/docs/api/cli.html
 
-## Create tables
+## Create persistent database
+
+```bash
+duckdb weather.duckdb
+```
 
 ```sql
 CREATE TABLE weather (
@@ -225,6 +241,24 @@ INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
      VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
 INSERT INTO weather (date, city, temp_hi, temp_lo)
      VALUES ('1994-11-29', 'Hayward', 54, 37);
+SELECT * FROM weather;
+┌───────────────┬─────────┬─────────┬───────┬────────────┐
+│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
+│    varchar    │  int32  │  int32  │ float │    date    │
+├───────────────┼─────────┼─────────┼───────┼────────────┤
+│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
+│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
+│ Hayward       │      37 │      54 │       │ 1994-11-29 │
+└───────────────┴─────────┴─────────┴───────┴────────────┘
+
+.quit
+```
+
+```bash
+duckdb weather.duckdb
+```
+
+```sql
 SELECT * FROM weather;
 ┌───────────────┬─────────┬─────────┬───────┬────────────┐
 │     city      │ temp_lo │ temp_hi │ prcp  │    date    │
@@ -320,8 +354,13 @@ SELECT weather.city, weather.temp_lo, weather.temp_hi,
 │ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │        53.000 │      -194.000 │
 │ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │        53.000 │      -194.000 │
 └───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┘
+
+.quit
 ```
 
+## Import JSON files
+
+https://duckdb.org/docs/data/json/overview.html
 
 ## SQL editors
 https://duckdb.org/docs/guides/sql_editors/harlequin
