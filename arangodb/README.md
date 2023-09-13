@@ -10,6 +10,8 @@ https://github.com/arangodb/arangodb
 docker run -e ARANGO_ROOT_PASSWORD=test123 -p 8529:8529 -d arangodb
 ```
 
+Open the [Web console](http://localhost:8529)
+
 #### Populate
 
 
