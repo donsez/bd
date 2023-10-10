@@ -1,4 +1,4 @@
-# PostgresSQL With Spring boot
+# PostgresSQL With Spring boot (JDBC)
 
 From https://dzone.com/articles/bounty-spring-boot-and-postgresql-database
 
@@ -66,11 +66,26 @@ curl -X DELETE -H "Content-Type: application/json" \
 curl -X GET http://localhost:8080/postgressApp/employeeList | jq .
 ```
 
+
+## Code review
+
+The main (server) class is [`src/main/java/com/sample/postgress/PostgressApplication.java`](src/main/java/com/sample/postgress/PostgressApplication.java).
+
+The REST controller class is [`src/main/java/com/sample/postgress/controller/ApplicationController.java`](src/main/java/com/sample/postgress/controller/ApplicationController.java).
+
+The Service class and interface are in [`src/main/java/com/sample/postgress/service`](src/main/java/com/sample/postgress/service).
+
+The Entity class is  [`src/main/java/com/sample/postgress/entity/Employee.java`](src/main/java/com/sample/postgress/entity/Employee.java).
+
+The Mapper class is  [`src/main/java/com/sample/postgress/mapper/EmployeeRowMapper.java`](src/main/java/com/sample/postgress/mapper/EmployeeRowMapper.java).
+
+JDBC operations are in the class [`src/main/java/com/sample/postgress/dao/EmployeeDaoImpl.java`](src/main/java/com/sample/postgress/dao/EmployeeDaoImpl.java).
+
 ## Exercice
 
 Refactor the classes in order to change the type of `employeeId` in `SERIAL`.  [`SERIAL`](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL) is a pseudo-type to define auto-increment `integer` columns in tables.
 
-The [`main/resources/schema.sql`](main/resources/schema.sql) is:
+The [`src/main/resources/schema.sql`](src/main/resources/schema.sql) is:
 
 ```sql
 CREATE TABLE employee
