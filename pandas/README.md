@@ -7,7 +7,7 @@ pip install jupyter
 
 Launch Notebook
 ```bash
-jupyter notebook author.ipynb
+jupyter notebook authors.ipynb
 ```
 
 
