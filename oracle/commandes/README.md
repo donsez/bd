@@ -1,4 +1,4 @@
-# Simple base de donn�es commerciale (pour ORACLE Sqlplus)
+# Simple base de données commerciale (pour ORACLE Sqlplus)
 
 Auteur: Didier Donsez
 
