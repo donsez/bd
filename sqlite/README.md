@@ -129,6 +129,9 @@ SELECT id FROM demo_index
 
 * [Python](https://docs.python.org/3/library/sqlite3.html#sqlite3-tutorial)
 * [Jupiter Notebook](https://github.com/jupyter-xeus/xeus-sqlite)
+* [RUST](https://github.com/rusqlite/rusqlite)
+* [JDBC](https://github.com/xerial/sqlite-jdbc)
+* [JavaScript](https://www.npmjs.com/package/sqlite)
 
 ## Extensions SQLite
 
@@ -140,3 +143,4 @@ SELECT id FROM demo_index
 * https://www.sqlite.org
 * https://www.sqlitetutorial.net/
 * https://www.sqlite.org/fileformat2.html
+* [SQLite Studio](https://sqlitestudio.pl/)
