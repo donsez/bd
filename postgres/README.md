@@ -318,10 +318,15 @@ docker exec -it postgres_container pg_dumpall -c -U postgres > work/turing/dump_
 cat work/turing/dump_turing_db-$TODAY.sql
 ```
 
+### Comment le planificateur utilise les statistiques ?
+
+https://docs.postgresql.fr/16/planner-stats-details.html
+
 ### Geometric extension (PostGIS)
 
 [PostGIS](../postgis)
 
 ## References
 
+* https://docs.postgresql.fr
 * https://www.postgresqltutorial.com/postgresql-tutorial
