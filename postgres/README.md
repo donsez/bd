@@ -1,15 +1,20 @@
 # Postgres Tutorial
 
+```bash
+docker --help
+docker --help compose
+```
+
 ## Start the DBMS
 
 ```bash
 mkdir -p data/postgres
-docker-compose up -d
+docker compose up -d
 ```
 
 ```bash
-docker-compose ps
-docker-compose logs -f
+docker compose ps
+docker compose logs -f
 ```
 
 Interact with the DBMS using the [`psql` command](https://docs.postgresql.fr/10/app-psql.html).
@@ -192,7 +197,7 @@ Browse the DB tree on the left panel.
 
 Stop and remmove the composition
 ```bash
-docker-compose down
+docker compose down
 ```
 
 Remove the DBMS files
