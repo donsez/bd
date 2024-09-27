@@ -2,9 +2,18 @@
 
 ## Démarrage
 
-Lancez le serveur Postgres avec `docker-compose` depuis le répertoire `~/github/donsez/bd/postgres`
+Lancez le serveur Postgres avec `docker compose` depuis le répertoire `~/github/donsez/bd/postgres`
 
-Le fichier `bank.sql` contient les ordres pour créer et peupler la base de données `db_bank`.
+```bash
+cd ~/github/donsez/bd/postgres
+rm -fr data
+mkdir -p data/postgres
+docker compose up -d
+docker compose ps
+docker exec -it postgres_container psql -U postgres -W
+```
+
+Le fichier [`bank.sql`](bank.sql) contient les ordres pour créer et peupler la base de données `db_bank`.
 
 Lancez les commandes suivantes:
 ```sql
@@ -23,7 +32,7 @@ CREATE DATABASE db_bank;
 
 Ajoutez des [contraintes](https://www.postgresql.org/docs/current/ddl-constraints.html) pour que la colonne `balance` ne soit pas négative et que la colonne `amount` soit strictement positive.
 
-Effectuez un transfert d'argent à un montant négatif (au sien d'une transaction). Que se passe-t'il ?
+Effectuez un transfert d'argent avec un montant négatif (au sien d'une transaction). Que se passe-t'il ?
  
 Effectuez un transfert d'argent depuis un compte insuffisament approvisionné : le montant du transfert depasse le solde du compte (au sien d'une transaction). Que se passe-t'il ?
 
@@ -31,12 +40,12 @@ Que se passerait-il si vous n'aviez pas utilisé de transactions pour exécuter 
 
 ## Execution de transactions concurrentes
 
-Ouvrez 2 sessions en parallèle et connectez vous sur la base `db_bank` avec:
+Ouvrez deux sessions en parallèle et connectez vous sur la base `db_bank` avec:
 ```bash
 docker exec -it postgres_container psql -U postgres -W
 ```
 
-Démarrez 2 transactions dans les sessions parallèles
+Démarrez 2 transactions dans les deux sessions parallèles
 ```sql
 \connect db_bank
 BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE READ WRITE;
@@ -55,10 +64,19 @@ Pour cela, ouvrez 2 sessions `psql` en parallèle (dans 2 terminaux).
 
 ## Autres niveaux d'isolation
 
+
 Le niveau d'isolation d'une transaction par défaut est `SERIALIZABLE`.
 
 Exercice : Retentez d'exécuter la même séquence avec d'autres [niveaux d'isolation](https://www.postgresql.org/docs/current/transaction-iso.html) au moyen de [`SET TRANSACTION`](https://www.postgresql.org/docs/current/sql-set-transaction.html) pour observer des lectures sales, des lectures non répétables et des lectures fantomes.
 
+| Isolation Level 	|  Dirty Read 	| Nonrepeatable Read 	| Phantom Read 	| Serialization Anomaly |
+| ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | 
+| Read uncommitted 	| Allowed, but not in PG 	| Possible 	| Possible 	| Possible |
+| Read committed 	| Not possible 	| Possible 	| Possible 	| Possible | 
+| Repeatable read 	| Not possible 	| Not possible 	| Allowed, but not in PG 	| Possible |
+| Serializable 	| Not possible 	| Not possible 	| Not possible 	| Not possible | 
+
+> In PostgreSQL, you can request any of the four standard transaction isolation levels, but internally only three distinct isolation levels are implemented, i.e., PostgreSQL's Read Uncommitted mode behaves like Read Committed. This is because it is the only sensible way to map the standard isolation levels to PostgreSQL's multiversion concurrency control architecture.
 
 ```sql
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
