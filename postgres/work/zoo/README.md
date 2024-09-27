@@ -3,6 +3,7 @@
 ```bash
 cd ~/github/donsez/bd/postgres
 rm -fr data
+mkdir -p data/postgres
 docker compose up -d
 docker compose ps
 docker exec -it postgres_container psql -U postgres -W
