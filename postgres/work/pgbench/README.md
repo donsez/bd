@@ -28,6 +28,12 @@ CREATE DATABASE db_bench;
 \d+
 ```
 
+## Show help
+
+```bash
+docker exec -it postgres_container \
+pgbench --help
+```
 
 ## Initialize database
 
@@ -92,6 +98,8 @@ select count(*) as NumTellers from pgbench_tellers;
 ## Inject load
 
 ```bash
+date --utc
+
 docker exec -it postgres_container \
 pgbench --host=localhost -U postgres    \
 --client=100 \
@@ -101,6 +109,8 @@ pgbench --host=localhost -U postgres    \
 --transactions=20 \
 db_bench
 ```
+
+Computer under test: MacBook Pro 13-inch, M1, 2020, 16GB RAM (2024/09/27)
 
 ```
 pgbench (16.4 (Debian 16.4-1.pgdg120+1))
@@ -130,3 +140,5 @@ latency stddev = 1110.821 ms
 average connection time = 49.349 ms
 tps = 72.648287 (including reconnection times)
 ```
+
+Add  the result of the bench into [results.csv](results.csv)
