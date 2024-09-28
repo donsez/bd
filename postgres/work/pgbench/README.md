@@ -35,16 +35,16 @@ docker exec -it postgres_container \
 pgbench --help
 ```
 
-## Initialize database
+## Initialisation de la base de données
 
 ```bash
 docker exec -it postgres_container \
 pgbench --host=localhost -U postgres \
--i -s 10 db_bench
+--initialize --scale=10 db_bench
 ```
 
 
-## Ispect database
+## Inspection de la base de données
 
 Lancez les commandes suivantes depuis la console `psql`
 ```sql
@@ -94,8 +94,9 @@ select count(*) as NumTellers from pgbench_tellers;
 (1 row)
 ```
 
+Question: quel sera l'espace disque occupé par les tables de la base de données si `--scale=10000` ?
 
-## Inject load
+## Injection de la charge (`simple`)
 
 ```bash
 date --utc
@@ -110,7 +111,7 @@ pgbench --host=localhost -U postgres    \
 db_bench
 ```
 
-Computer under test: MacBook Pro 13-inch, M1, 2020, 16GB RAM (2024/09/27)
+Computer under test: [MacBook Pro 13-inch, M1, 2020](https://www.cpubenchmark.net/cpu.php?cpu=Apple+M1+8+Core+3200+MHz&id=4104), 16GB RAM (2024/09/27)
 
 ```
 pgbench (16.4 (Debian 16.4-1.pgdg120+1))
@@ -141,4 +142,30 @@ average connection time = 49.349 ms
 tps = 72.648287 (including reconnection times)
 ```
 
-Add  the result of the bench into [results.csv](results.csv)
+Report the result of the bench into [results.csv](results.csv)
+
+## Injection de la charge (`extended`)
+
+Ajoutez `--protocol=extended` à la ligne de commande de `pgbench`
+
+Report the result of the bench into [results.csv](results.csv)
+
+## Injection de la charge (`prepared`)
+
+Ajoutez `--protocol=prepared` à la ligne de commande de `pgbench`
+
+Report the result of the bench into [results.csv](results.csv)
+
+## Reinitialisation de la base en utilisant le partitionnement
+
+```
+  --partition-method=(range|hash)
+                           partition pgbench_accounts with this method (default: range)
+  --partitions=NUM         partition pgbench_accounts into NUM parts (default: 0)
+```
+
+Avec NUM = 8, 16, 32
+
+Recommencez les injections de charge et reportez les résultats dans `pgbench`.
+
+Analysez et visualisez les résultats au moyen d'un notebook Jupyter.

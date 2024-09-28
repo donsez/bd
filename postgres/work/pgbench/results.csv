@@ -1,2 +1,2 @@
-date,tester,computer,cpu,core,ram,os_version,postgres_version,docker_image_id,arch,scaling_factor,client_mode,clients,threads,trans_per_client,tps,average_connection_time,latency_average,latency_stddev
-2024-09-27:23:00:00,donsez,MacBook Pro 2020,Apple Silicon M1,,16,Mac OS 15.0,16.4 (Debian 16.4-1.pgdg120+1),75282fa229a1,linux/arm64,10,simple,100,4,20,72.648287,49.349,1155.258,1110.821
+date,tester,computer,cpu,core,ram,ssd,hdd,os_version,postgres_version,docker_image_id,arch,scaling_factor,partitions,partition_method,client_mode,clients,threads,trans_per_client,tps,average_connection_time,latency_average,latency_stddev
+2024-09-27:23:00:00,donsez,MacBook Pro 2020,Apple Silicon M1,4 hiperf + 4 lowpower,16,1024,0,Mac OS 15.0,16.4 (Debian 16.4-1.pgdg120+1),75282fa229a1,linux/arm64,10,0,range,simple,100,4,20,72.648287,49.349,1155.258,1110.821
