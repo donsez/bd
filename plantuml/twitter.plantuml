@@ -1,0 +1,42 @@
+@startuml twitter
+
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+table( UserInfo ) {
+  primary_key( userid ): CHARACTER VARYING 
+  column( userName ): CHARACTER VARYING NOT NULL
+  column( status ): CHARACTER VARYING NOT NULL
+  column( otherProfile ): CHARACTER VARYING
+}
+
+table( Tweet ) {
+  primary_key( tweetId ): UUID 
+  foreign_key( userId ): CHARACTER VARYING <<FK>>
+  column( content ): CHARACTER VARYING NOT NULL
+  column( postTime ): TIMESTAMP NOT NULL
+  column( modifyTime ): TIMESTAMP
+}
+
+table( Follower ) {
+  primary_key( userid ): CHARACTER VARYING 
+  primary_key( followerId ): CHARACTER VARYING
+  column( followedTime ): TIMESTAMP NOT NULL
+}
+
+table( Like ) {
+  primary_key( tweetId ): UUID
+  primary_key( userId ): CHARACTER VARYING
+  column( likeTime ): TIMESTAMP NOT NULL
+
+}
+
+Tweet }|--|| UserInfo
+Follower }|--|| UserInfo
+Follower }|--|| UserInfo
+Like }|--|| Tweet
+Like }|--|| UserInfo
+
+@enduml
