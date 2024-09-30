@@ -18,7 +18,9 @@ ORDER BY Taille_totale DESC;
 --  Liste et taille des schémas d'une base de données
 SELECT table_schema, 
 SUM(pg_relation_size(table_schema || '.' || table_name)) As Taille_donnees,
-SUM(pg_total_relation_size(table_schema || '.' || table_name)) As Taille_totale
+SUM(pg_total_relation_size(table_schema || '.' || table_name)) As Taille_totale,
+pg_size_pretty(SUM(pg_total_relation_size(table_schema || '.' || table_name))::bigint) as Taille_totale_pretty
 FROM information_schema.tables
 GROUP BY table_schema
-ORDER BY Taille_totale DESC;
+ORDER BY Taille_totale DESC
+
