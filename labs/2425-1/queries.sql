@@ -26,7 +26,7 @@ SET row_security = off;
 
 SELECT T.tweetId, T.content, TO_CHAR(T.postTime, 'Day, DD  HH24:MI') AS DATE
 FROM TUserInfo U NATURAL JOIN TTweet T
-WHERE U.userName = 'campusiot'
+WHERE LOWER(U.userName) = 'campusiot'
 ORDER BY T.postTime DESC
 ;
 
