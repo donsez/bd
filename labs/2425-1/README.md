@@ -54,7 +54,8 @@ Parmi les 10 questions, vous choissirez des questions qui nécessitent
 * soit une operation ensembliste (union, intersection, difference)
 
 ### Rendu
-Vous devez rendre deux fichiers SQL `populate.sql` et `queries.sql` qui contiennent :
+
+Vous devez rendre deux fichiers SQL [`populate.sql`](populate.sql) et [`queries.sql`](queries.sql) qui contiennent :
 * 1. en en-tête commenté : les noms prénoms composant le binôme
 * 2. la partie création de tables (DROP TABLE, CREATE TABLE, INSERT) ; vous devez ajouter les tuples (ie peupler la base) nécessaire pour afficher les réponses aux requêtes ci-dessus (et compter le nombre de lignes)
 * 3. pour chaque requête, le SQL correspondant et, en commentaire : l’explication de la requête et la sortie de cette requête sur votre base exemple.
