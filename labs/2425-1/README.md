@@ -19,17 +19,17 @@ Un [possible schéma de la base de données](twitter.plantuml) est constituée d
 ![](twitter.svg)
 
 Requêtes: Répondez à 10 questions parmi les questions suivantes au moyen de requêtes SQL (Postgres).
-* [ ] Q1: Donnez la liste des tweets de @CampusIoT
-* [ ] Q2: Donnez la liste des tweets qui contiennent à la fois le hashtag #postgresql et le hashtag #mysql
+* [ ] Q1: Donnez la liste des tweets de [@CampusIoT](https://twitter.com/CampusIoT)
+* [ ] Q2: Donnez la liste des tweets qui [contiennent à la fois le hashtag #postgresql et le hashtag #mysql](https://twitter.com/search?q=%23postgresql%20%23mysql&src=typed_query&f=top)
 * [ ] Q3: Donnez la liste des tweets référencant l'utilisateur @Frigiel
 * [ ] Q4: Donnez la liste des tweets de @Frigiel antérieurs à 2020 supprimés (retirés) ou modifiés.
-* [ ] Q5: Donnez le fil d'accueil de @CampusIoT : ie les tweets des utilisateurs suivis par @CampusIoT ainsi que les tweets des autres utilisateurs contenant @CampusIoT. Il faut exclure les tweets des utilisateurs suspendus.
+* [ ] Q5: Donnez le fil d'accueil de [@CampusIoT](https://twitter.com/CampusIoT) : ie les tweets des utilisateurs suivis par @CampusIoT ainsi que les tweets des autres utilisateurs contenant [@CampusIoT](https://twitter.com/CampusIoT). Remarque: Pensez à exclure les tweets des utilisateurs suspendus.
 * [ ] Q6: Donnez le nombre de tweets postés dans la dernière heure
 * [ ] Q7: Donnez les tweets les plus republiés dans la dernière heure
 * [ ] Q8:  Trouvez les personnes suivies en commun des utilisateurs @realDonaldTrump et @KamalaHarris
 * [ ] Q9: Donnez la liste des 'lurkers' : ie les utilisateurs qui ne redigent ni republient des tweets, qui ne suivent personne, et qui n'aiment aucun tweet.
 * [ ] Q10: Donnez le nombre moyen de tweets contenant des hashtags par utilisateur
-* [ ] Q11: Donnez le nombre moyen de 'likes' des tweets de l'utilisateur @TheFrenchBiff
+* [ ] Q11: Donnez le nombre moyen de 'likes' des tweets de l'utilisateur [@rdicosmo](https://twitter.com/rdicosmo)
 * [ ] Q12: Donnez les utilisateurs qui ont plus de followers que de 'following' 
 * [ ] Q13: Donnez les tweets les plus likés dans les dernières 6 heures (en incluant le score de sentiment moyen).
 * [ ] Q14: Donnez les tweets qui ont l'objet d'un grand nombre des rapports de comportement inappropriés.
@@ -38,12 +38,11 @@ Requêtes: Répondez à 10 questions parmi les questions suivantes au moyen de r
 * [ ] Q17: Donnez les utilisateurs qui ont aimé le plus de tweets d'utilisateurs suspendus.
 * [ ] Q18: Donnez le nombre de utilisateurs connectés en même temps qu'au moins 1 de leurs followers.
 * [ ] Q19: Donnez les utilisateurs dont le nombre de tweets contenant des images est supérieur à 70%.
-* [ ] Q20: Donnez les 10 utilisateurs qui ont fait la blague la plus drôle 😀 (Astuce : U+1F60x https://fr.wikipedia.org/wiki/%C3%89moji)
+* [ ] Q20: Donnez les 10 utilisateurs qui ont fait la blague la plus drôle 😀 (Astuce : le contenu contient un ou plusieurs [Emoji U+1F60x](https://fr.wikipedia.org/wiki/%C3%89moji)).
 * [ ] Q21: Donnez la liste des utilisateurs qui semblent être des trolls ou des bots : ie beaucoup d'abonnés en très peu de temps, des abonnés qui sont eux-même des trolls ou des bots, ...
 * [ ] Q22: Donnez la liste des hashtags les plus populaires (aka tendances) ces dernières 24 heures. 
-* [ ] Q23: Donnez les tweets qui semblent être générés par un transformeur (IA générative).
-* [ ] Q24: Donnez les medias qui semblent être générés par un transformeur  (IA générative).
-* [ ] Q25:
+* [ ] Q23: Donnez les tweets qui semblent être générés par un [transformeur GPT](https://fr.wikipedia.org/wiki/Transformeur) (IA générative).
+* [ ] Q24: Donnez les medias qui semblent être générés par un [transformeur GPT](https://fr.wikipedia.org/wiki/Transformeur) (IA générative).
 
 Parmi les 10 questions, vous choissirez des questions qui nécessitent
 * soit une jointure externe à droite
@@ -57,7 +56,7 @@ Vous devez rendre un fichier SQL — et seulement ce fichier — qui contient :
 * 2. la partie création de tables (DROP TABLE, CREATE TABLE, INSERT) ; vous devez ajouter les tuples (ie peupler la base) nécessaire pour afficher les réponses aux requêtes ci-dessus (et compter le nombre de lignes)
 * 3. pour chaque requête, le SQL correspondant et, en commentaire : l’explication de la requête et la sortie de cette requête sur votre base exemple.
 
-> Astuce pour les requêtes de type TOP10, TOP100, "le plus ...": https://www.postgresql.org/docs/current/queries-limit.html
+> Astuce pour les requêtes de type `TOP10`, `TOP100`, "le plus ...", "hall of fame", "King of the Mountain (KOM)" ... : https://www.postgresql.org/docs/current/queries-limit.html
 
 > Important : ce fichier SQL doit être executable est testable dans le container Docker PostgreSQL utilisé en TP.
 Vous devez rendre ce fichier via Moodle, à l’exclusion de tout autre moyen, par un seul membre du binôme.
