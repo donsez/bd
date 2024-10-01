@@ -4,11 +4,14 @@ Polytech Grenoble :: INFO 4A :: UE Bases de Données
 
 Rédacteur(s): Didier DONSEZ + promo INFO4
 
+> La date et heure limite du rendu du DM est sur Moodle.
+
 ## Partie 1: Interrogation 
 
 Le sujet de cette partie est inspiré de l'article System Design Interview: Design Twitter (X) de Hayk Simonyan sur Medium https://medium.com/javarevisited/how-to-design-twitter-in-a-system-design-interview-98983c649cc0
 
-Les plateformes de réseaux sociaux (comme twitter/X, facebook, instagram, tiktok, linkedin, strava, zwift ...) sont toutes concues selon le scénario suivant. Les utilisateurs (user) authentifiés doivent pouvoir composer et partager des tweets, ce qui constitue la fonction principale de la plateforme. Cela implique la création d’un nouveau tweet, l’ajout facultatif de médias (media) et son partage avec leurs abonnés (follower). Le contenu (content) d'un tweet qui est maintenant limité à 280 signes (10000 signes pour l'offre payante) peut comporter des hashtags (mot préfixé d'un #), des références à d'autres utilisateurs (username précédé d'un @) et des URL qui sont minifiées et suivies. De plus, les utilisateurs doivent pouvoir republier (repost) un tweet. De plus, les utilisateurs doivent pouvoir suivre d’autres utilisateurs afin de voir leurs mises à jour dans leur flux. Cela implique la création d’un nouveau tweet, l’ajout facultatif de médias et son partage avec leurs abonnés. De plus, les utilisateurs doivent pouvoir suivre d’autres utilisateurs afin de voir leurs mises à jour dans leur flux. Cela signifie gérer une liste d’utilisateurs suivis et s’assurer que leurs tweets apparaissent dans la timeline de l’utilisateur. Une autre fonctionnalité essentielle est de permettre aux utilisateurs de “liker” des tweets, indiquant leur appréciation et potentiellement de les enregistrer pour une consultation future. Un utilisateur peut signaler un comportement inapproprié dans un tweet en complétant un rapport à propos de son contenu afin que la plateforme puisse modérer son rédaction voir susprendre son compte (https://help.x.com/fr/safety-and-security/report-abusive-behavior).
+Les plateformes de réseaux sociaux (comme twitter/X, facebook, instagram, tiktok, linkedin, strava, zwift ...) sont toutes concues selon le scénario suivant. Les utilisateurs (User) authentifiés doivent pouvoir composer et partager des tweets, ce qui constitue la fonction principale de la plateforme. Cela implique la création d’un nouveau tweet, l’ajout facultatif de médias (media) et son partage avec leurs abonnés (follower). Le contenu (content) d'un tweet qui est maintenant limité à 280 signes (10000 signes pour l'offre payante) peut comporter des hashtags (mot préfixé d'un `#`), des références à d'autres utilisateurs (username précédé d'un `@`) et des URL qui sont minifiées et suivies. De plus, les utilisateurs doivent pouvoir republier (repost) un tweet. De plus, les utilisateurs doivent pouvoir suivre d’autres utilisateurs afin de voir leurs mises à jour dans leur flux. Cela implique la création d’un nouveau tweet, l’ajout facultatif de médias et son partage avec leurs abonnés. De plus, les utilisateurs doivent pouvoir suivre d’autres utilisateurs afin de voir leurs mises à jour dans leur flux. Cela signifie gérer une liste d’utilisateurs suivis et s’assurer que leurs tweets apparaissent dans la timeline de l’utilisateur. Une autre fonctionnalité essentielle est de permettre aux utilisateurs de “liker” des tweets, indiquant leur appréciation et potentiellement de les enregistrer pour une consultation future. Un utilisateur peut signaler un comportement inapproprié dans un tweet en complétant un rapport à propos de son contenu afin que la plateforme puisse modérer son rédaction voir susprendre son compte (https://help.x.com/fr/safety-and-security/report-abusive-behavior).
+
 Voici les principales exigences fonctionnelles pour référence :
 * Composer et Partager des Tweets : Les utilisateurs doivent pouvoir créer et partager des tweets.
 * Suivre des Utilisateurs : Les utilisateurs doivent pouvoir suivre d’autres utilisateurs et voir leurs mises à jour.
@@ -51,16 +54,12 @@ Parmi les 10 questions, vous choissirez des questions qui nécessitent
 * soit une operation ensembliste (union, intersection, difference)
 
 ### Rendu
-Vous devez rendre un fichier SQL — et seulement ce fichier — qui contient :
-* 1. en en-tête commenté : les noms composant le binôme
+Vous devez rendre deux fichiers SQL `populate.sql` et `queries.sql` qui contiennent :
+* 1. en en-tête commenté : les noms prénoms composant le binôme
 * 2. la partie création de tables (DROP TABLE, CREATE TABLE, INSERT) ; vous devez ajouter les tuples (ie peupler la base) nécessaire pour afficher les réponses aux requêtes ci-dessus (et compter le nombre de lignes)
 * 3. pour chaque requête, le SQL correspondant et, en commentaire : l’explication de la requête et la sortie de cette requête sur votre base exemple.
 
 > Astuce pour les requêtes de type `TOP10`, `TOP100`, "le plus ...", "hall of fame", "King of the Mountain (KOM)" ... : https://www.postgresql.org/docs/current/queries-limit.html
-
-> Important : ce fichier SQL doit être executable est testable dans le container Docker PostgreSQL utilisé en TP.
-Vous devez rendre ce fichier via Moodle, à l’exclusion de tout autre moyen, par un seul membre du binôme.
-La date et heure limite du rendu est le ?? novembre 2024, 18h00.
 
 Pour peupler la base, vous pourrez utiliser des datasets publics de tweets 
 * https://www.kaggle.com/datasets/jp797498e/twitter-entity-sentiment-analysis
@@ -69,6 +68,10 @@ Pour peupler la base, vous pourrez utiliser des datasets publics de tweets
 * ...
 
 > Astuce: Utilisez des tables temporaires pour charger les fichiers CSV et peuplés les 5 tables.
+
+> Important : ce fichier SQL doit être executable est testable dans le container Docker PostgreSQL utilisé en TP.
+ 
+Vous devez rendre ce fichier via Moodle, à l’exclusion de tout autre moyen, par un seul membre du binôme.
 
 ## Partie 2: Estimation de la base d’utilisateurs de Twitter/X
 
