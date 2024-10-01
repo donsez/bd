@@ -36,7 +36,7 @@ ORDER BY T.postTime DESC
 --  Q5: Donnez le fil d'accueil de [@CampusIoT](https://twitter.com/CampusIoT) : ie les tweets des utilisateurs suivis par @CampusIoT ainsi que les tweets des autres utilisateurs contenant [@CampusIoT](https://twitter.com/CampusIoT). Remarque: Pensez à exclure les tweets des utilisateurs suspendus.
 --  Q6: Donnez le nombre de tweets postés dans la dernière heure
 --  Q7: Donnez les tweets les plus republiés dans la dernière heure
---  Q8:  Trouvez les personnes suivies en commun des utilisateurs @realDonaldTrump et @KamalaHarris
+--  Q8: Donnez les utilisateurs qui suivent à la fois les utilisateurs @realDonaldTrump et @KamalaHarris
 --  Q9: Donnez la liste des 'lurkers' : ie les utilisateurs qui ne redigent ni republient des tweets, qui ne suivent personne, et qui n'aiment aucun tweet.
 --  Q10: Donnez le nombre moyen de tweets contenant des hashtags par utilisateur
 --  Q11: Donnez le nombre moyen de 'likes' des tweets de l'utilisateur [@rdicosmo](https://twitter.com/rdicosmo)
