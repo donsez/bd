@@ -1,42 +1,79 @@
 @startuml twitter
-
 !define primary_key(x) <b><color:#b8861b><&key></color> x</b>
 !define foreign_key(x) <color:#aaaaaa><&key></color> x
 !define column(x) <color:#efefef><&media-record></color> x
 !define table(x) entity x << (T, white) >>
 
 table( UserInfo ) {
-  primary_key( userid ): CHARACTER VARYING 
+  primary_key( userid ): SERIAL 
   column( userName ): CHARACTER VARYING NOT NULL
-  column( status ): CHARACTER VARYING NOT NULL
-  column( otherProfile ): CHARACTER VARYING
+  column( realName ): CHARACTER VARYING NOT NULL
+  column( status ): BOOLEAN NOT NULL -- Active or Suspended
+  column( otherProfileStuff ): CHARACTER VARYING
+  column( creationTime ): TIMESTAMP NOT NULL
+  column( suspendedTime ): TIMESTAMP
+  column( deletedTime ): TIMESTAMP 
 }
 
 table( Tweet ) {
   primary_key( tweetId ): UUID 
-  foreign_key( userId ): CHARACTER VARYING <<FK>>
-  column( content ): CHARACTER VARYING NOT NULL
+  foreign_key( userId ): SERIAL <<FK>> NOT NULL
+  foreign_key( repostTweetId ): SERIAL <<FK>>
+  column( content ): TEXT NOT NULL
+  column( sentimentScore ): REAL NOT NULL DEFAULT 0.0
   column( postTime ): TIMESTAMP NOT NULL
   column( modifyTime ): TIMESTAMP
+  column( suspendedTime ): TIMESTAMP
+  column( deletedTime ): TIMESTAMP
+}
+
+table( Media ) {
+  primary_key( mediaId ): UUID 
+  foreign_key( tweetId ): UUID <<FK>> NOT NULL
+  column( mimetype ): CHARACTER VARYING NOT NULL
+  column( size ): INTEGER NOT NULL
+  column( content ): BYTEA NOT NULL
+  column( exif ): BYTEA
+  column( postTime ): TIMESTAMP NOT NULL
+  column( modifyTime ): TIMESTAMP
+  column( deletedTime ): TIMESTAMP NOT NULL
 }
 
 table( Follower ) {
-  primary_key( userid ): CHARACTER VARYING 
-  primary_key( followerId ): CHARACTER VARYING
+  primary_key( userid ): SERIAL 
+  primary_key( followerId ): SERIAL
   column( followedTime ): TIMESTAMP NOT NULL
+  column( unfollowedTime ): TIMESTAMP
 }
 
 table( Like ) {
   primary_key( tweetId ): UUID
-  primary_key( userId ): CHARACTER VARYING
+  primary_key( userId ): SERIAL
   column( likeTime ): TIMESTAMP NOT NULL
+  column( unlikeTime ): TIMESTAMP
+}
 
+table( Report ) {
+  primary_key( tweetId ): UUID
+  primary_key( reporterId ): SERIAL
+  column( reportTime ): TIMESTAMP NOT NULL
+  column( reason ): CHARACTER VARYING NOT NULL
+}
+
+table( URL ) {
+  primary_key( tweetId ): LONG
+  foreign_key( tweetId ): UUID <<FK>> NOT NULL
+  column( url ): CHARACTER VARYING NOT NULL
 }
 
 Tweet }|--|| UserInfo
+Tweet }|--|| Tweet
+Media }|--|| Tweet
 Follower }|--|| UserInfo
 Follower }|--|| UserInfo
 Like }|--|| Tweet
 Like }|--|| UserInfo
-
+Report }|--|| Tweet
+Report }|--|| UserInfo
+URL }|--|| Tweet
 @enduml
