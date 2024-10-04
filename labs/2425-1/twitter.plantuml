@@ -40,15 +40,15 @@ table( Media ) {
 }
 
 table( Follower ) {
-  primary_key( userid ): SERIAL 
-  primary_key( followerId ): SERIAL
+  primary_key( userid ): SERIAL <<FK>> NOT NULL
+  primary_key( followerId ): SERIAL <<FK>> NOT NULL
   column( followedTime ): TIMESTAMP NOT NULL
   column( unfollowedTime ): TIMESTAMP
 }
 
 table( Like ) {
-  primary_key( tweetId ): UUID
-  primary_key( userId ): SERIAL
+  primary_key( tweetId ): UUID <<FK>> NOT NULL
+  primary_key( userId ): SERIAL <<FK>> NOT NULL
   column( likeTime ): TIMESTAMP NOT NULL
   column( unlikeTime ): TIMESTAMP
 }
@@ -61,7 +61,7 @@ table( Report ) {
 }
 
 table( URL ) {
-  primary_key( tweetId ): LONG
+  primary_key( urlId ): LONG
   foreign_key( tweetId ): UUID <<FK>> NOT NULL
   column( url ): CHARACTER VARYING NOT NULL
 }
