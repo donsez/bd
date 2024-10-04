@@ -39,6 +39,7 @@ docker exec -it postgres_container psql -U postgres -W
 ## Execute the PSQL statements
 
 ```sql
+-- List databases
 \l
 
 -- Drop the existing database if exists
@@ -46,6 +47,9 @@ DROP DATABASE IF EXISTS db_turing;
 
 -- Create a new database
 CREATE DATABASE db_turing;
+
+-- List databases
+\l
 
 -- Connect to the database
 \connect db_turing
@@ -58,6 +62,8 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
+
+-- Drop existing tables for cleaning
 
 DROP TABLE IF EXISTS PERSON CASCADE;
 DROP TABLE IF EXISTS TURING_AWARD;
@@ -88,11 +94,11 @@ INSERT INTO PERSON (ID, NAME, BIRTHDATE, LEVEL) VALUES
 -- Show persons
 SELECT * FROM PERSON;
 
--- Show persons with 'undefined' level
+-- Show persons with 'undefined' (aka 'unknown') level
 SELECT * FROM PERSON WHERE LEVEL IS NOT NULL;
 
--- Update level of persons with 'undefined' level
-UPDATE PERSON SET LEVEL=0 WHERE LEVEL IS NOT NULL;
+-- Update level of persons with 'undefined' (aka 'unknown') level
+UPDATE PERSON SET LEVEL=0 WHERE LEVEL IS NULL;
 
 -- Insert a new row into table PERSON
 INSERT INTO PERSON (NAME, BIRTHDATE) VALUES
@@ -162,10 +168,11 @@ SELECT * FROM PERSON P INNER JOIN TURING_AWARD T ON P.ID=T.ID;
 
 SELECT * FROM PERSON P LEFT JOIN TURING_AWARD T ON P.ID=T.ID;
 SELECT * FROM PERSON P RIGHT JOIN TURING_AWARD T ON P.ID=T.ID;
+
 -- The full outer join combines the results of both left join and right join.
 SELECT * FROM PERSON P FULL OUTER JOIN TURING_AWARD T ON P.ID=T.ID;
 
-
+-- The cross join
 SELECT * FROM PERSON P CROSS JOIN TURING_AWARD T;
 
 -- Show name of persons with turing award ordered by year
