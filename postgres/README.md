@@ -23,15 +23,21 @@ mkdir -p data/postgres
 docker compose up -d
 ```
 
+List the services
 ```bash
 docker compose ps
+```
+
+Check the services logs (`^C` to stop checking the logs)
+```bash
 docker compose logs -f
 ```
 
 Interact with the DBMS using the [`psql` command](https://docs.postgresql.fr/17/app-psql.html).
 The password is still `changeme`.
+
 ```bash
-docker exec -it postgres_container psql -U postgres -W
+docker compose exec -it postgres psql -U postgres -W
 ```
 
 > Nota Bene: You can stop the container with `docker compose stop` and destroy the container with `docker compose down`. However,Postgres DBMS files are still stored in the host directory `./data/postgres`.
