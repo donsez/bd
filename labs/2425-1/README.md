@@ -66,6 +66,7 @@ Pour peupler la base, vous pourrez utiliser des datasets publics de tweets
 * https://www.kaggle.com/datasets/jp797498e/twitter-entity-sentiment-analysis
 * https://www.kaggle.com/datasets/hbaflast/french-twitter-sentiment-analysis
 * https://www.kaggle.com/code/erikbruin/text-mining-the-clinton-and-trump-election-tweets
+* https://www.usna.edu/Users/cs/nchamber/data/twitternames/
 * ...
 
 > Astuce: Utilisez des tables temporaires pour charger les fichiers CSV et peuplés les 5 tables.
