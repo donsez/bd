@@ -1,8 +1,19 @@
 # Postgres Tutorial
 
+## Install [Docker Engine](https://docs.docker.com/engine/install/) or [Docker Desktop](https://docs.docker.com/desktop/) on your host
+
 ```bash
 docker --help
 docker --help compose
+```
+
+## Clone (or fork) the project
+
+```bash
+mkdir -p ~/github/donsez/
+cd ~/github/donsez/
+git clone https://github.com/donsez/bd.git
+cd ~/github/donsez/bd/postgres
 ```
 
 ## Start the DBMS
@@ -17,13 +28,13 @@ docker compose ps
 docker compose logs -f
 ```
 
-Interact with the DBMS using the [`psql` command](https://docs.postgresql.fr/10/app-psql.html).
+Interact with the DBMS using the [`psql` command](https://docs.postgresql.fr/17/app-psql.html).
 The password is still `changeme`.
 ```bash
 docker exec -it postgres_container psql -U postgres -W
 ```
 
-> Nota Bene: You can stop the container with `docker-compose stop` and destroy the container with `docker-compose down`. However,Postgres DBMS files are still stored in the host directory `./data/postgres`.
+> Nota Bene: You can stop the container with `docker compose stop` and destroy the container with `docker compose down`. However,Postgres DBMS files are still stored in the host directory `./data/postgres`.
 
 ## Execute the PSQL statements
 
