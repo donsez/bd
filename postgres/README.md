@@ -101,10 +101,12 @@ INSERT INTO PERSON (ID, NAME, BIRTHDATE, LEVEL) VALUES
 SELECT * FROM PERSON;
 
 -- Show persons with 'undefined' (aka 'unknown') level
-SELECT * FROM PERSON WHERE LEVEL IS NOT NULL;
+SELECT * FROM PERSON WHERE LEVEL IS NULL;
 
 -- Update level of persons with 'undefined' (aka 'unknown') level
 UPDATE PERSON SET LEVEL=0 WHERE LEVEL IS NULL;
+
+SELECT * FROM PERSON;
 
 -- Insert a new row into table PERSON
 INSERT INTO PERSON (NAME, BIRTHDATE) VALUES
