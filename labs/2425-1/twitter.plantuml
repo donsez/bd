@@ -18,7 +18,7 @@ table( UserInfo ) {
 table( Tweet ) {
   primary_key( tweetId ): UUID 
   foreign_key( userId ): SERIAL <<FK>> NOT NULL
-  foreign_key( repostTweetId ): SERIAL <<FK>>
+  foreign_key( repostTweetId ): UUID <<FK>>
   column( content ): TEXT NOT NULL
   column( sentimentScore ): REAL NOT NULL DEFAULT 0.0
   column( postTime ): TIMESTAMP NOT NULL
