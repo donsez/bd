@@ -12,9 +12,9 @@ Donnez les requêtes SQL (Postgres) de création des tables de la base de donné
 
 ## Exercice 3:
 Donnez les requètes SQL pour:
-- Q1: Donner le solde global de l'utilisateur Onizuka.
+- Q1: Donner le solde global de l'utilisateur Saitama.
 - Q2: Donner la liste des événements pour lesquels  l'utilisateur Onizuka doit de l'argent
-- Q3: Donner la liste des événements pour lesquels des utilisateurs doivent de l'argent à l'utilisateur Onizuka.
+- Q3: Donner la liste des événements pour lesquels des utilisateurs doivent de l'argent à l'utilisateur Kaneda.
 - Q4: Stats par étiquette par utilisateur
 - Q5: Stats par année, par mois et par semaine et par jour pour un événement (colocation, vacances ...)
 
