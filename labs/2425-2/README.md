@@ -18,8 +18,13 @@ Donnez les requètes SQL pour:
 - Q4: Stats par étiquette par utilisateur
 - Q5: Stats par année, par mois et par semaine et par jour pour un événement (colocation, vacances ...)
 
-
 ## Exercice 4:
 Donnez la réquête cloturant un événement.
 Donnez le déclencheur SQL (Postgres) qui vérifie les conditions lors de la cloture d'un compte.
 
+## Rendu
+`dm2-2425-nombinome1-nombinome2.tgz` regroupant
+* 1 fichier plantuml + 1 fichier SVG
+* 1 fichier `create.sql` + 1 fichier `populate.sql`
+* 1 fichier `query.sql`
+* 1 fichier `trigger.sql`
