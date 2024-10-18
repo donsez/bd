@@ -1,6 +1,6 @@
 #  Sujet de DM1 2024-2025
 
-Polytech Grenoble :: INFO 4A :: UE Bases de Données
+Polytech Grenoble :: [INFO](https://polytech.grenoble-inp.fr/fr/formations/informatique-1#page-presentation) 4A :: UE Bases de Données
 
 Rédacteur(s): Didier DONSEZ + promo INFO4
 
