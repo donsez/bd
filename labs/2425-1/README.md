@@ -17,7 +17,7 @@ Voici les principales exigences fonctionnelles pour référence :
 * Suivre des Utilisateurs : Les utilisateurs doivent pouvoir suivre d’autres utilisateurs et voir leurs mises à jour.
 * Aimer des Tweets : Les utilisateurs doivent pouvoir liker des tweets pour montrer leur appréciation.
 
-Un [possible schéma de la base de données](twitter.plantuml) est constituée de 5 tables : User, Follower, Tweet, Media, Like, Report, URL
+Un [possible schéma de la base de données](twitter.plantuml) est constituée de 7 tables : User, Follower, Tweet, Media, Like, Report, URL
 
 ![](twitter.svg)
 
