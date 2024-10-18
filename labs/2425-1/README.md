@@ -106,3 +106,6 @@ Suivez les instructions de tutoriel https://github.com/donsez/bd/tree/main/postg
 
 Produisez au moins quatre rapports du banc d'essai `pgbench` et ajoutez ces rapports au fichier results.csv
 
+## Annexes
+
+* [Sequences et SERIAL](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-serial/)
