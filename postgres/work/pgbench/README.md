@@ -142,19 +142,19 @@ average connection time = 49.349 ms
 tps = 72.648287 (including reconnection times)
 ```
 
-Report the result of the bench into [results.csv](results.csv)
+Report the result of the bench into [`results.csv`](results.csv)
 
 ## Injection de la charge (`extended`)
 
 Ajoutez `--protocol=extended` à la ligne de commande de `pgbench`
 
-Report the result of the bench into [results.csv](results.csv)
+Report the result of the bench into [`results.csv`](results.csv)
 
 ## Injection de la charge (`prepared`)
 
 Ajoutez `--protocol=prepared` à la ligne de commande de `pgbench`
 
-Report the result of the bench into [results.csv](results.csv)
+Report the result of the bench into [`results.csv`](results.csv)
 
 ## Reinitialisation de la base en utilisant le partitionnement
 
@@ -164,8 +164,29 @@ Report the result of the bench into [results.csv](results.csv)
   --partitions=NUM         partition pgbench_accounts into NUM parts (default: 0)
 ```
 
-Avec NUM = 8, 16, 32
+Avec `NUM` = `8`, `16`, `32`
 
 Recommencez les injections de charge et reportez les résultats dans `pgbench`.
 
 Analysez et visualisez les résultats au moyen d'un notebook Jupyter.
+
+## Bancs d'essai avec un système de fichiers en RAM (bonus)
+
+```bash
+rm -fr data
+```
+
+Refaites les bancs d'essai avec des données stockées en mémoire vive avec `ramfs`.
+
+```bash
+sudo unmount $PWD/data
+sudo mount ramfs -t ramfs $PWD/data
+```
+
+Refaites les bancs d'essai avec des données stockées en mémoire vive avec `tmpfs`.
+
+```bash
+sudo unmount $PWD/data
+sudo mount tmpfs -t tmpfs -o size=100k $PWD/data
+```
+
