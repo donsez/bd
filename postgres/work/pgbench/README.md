@@ -24,7 +24,7 @@ du -sh data/postgres/
 Créez la base de données `db_bench`:
 
 ```bash
-docker exec -it postgres_container createdb -U postgres -W pgbench
+docker exec -it postgres_container createdb -U postgres -W db_bench
 ```
 
 Lancez les commandes SQL suivantes:
