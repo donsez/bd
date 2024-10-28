@@ -5,6 +5,8 @@ pgbench est un programme pour réaliser simplement des tests de performance (ben
 * https://docs.postgresql.fr/17/pgbench.html
 * http://jimgray.azurewebsites.net/benchmarkhandbook/tpcb.pdf
 
+> NB : https://docs.docker.com/engine/containers/resource_constraints/
+
 ## Démarrage
 
 Lancez le serveur Postgres avec `docker compose` depuis le répertoire `~/github/donsez/bd/postgres`
@@ -15,21 +17,30 @@ rm -fr data
 mkdir -p data/postgres
 docker compose up -d
 docker compose ps
+sleep 1
 du -sh data/postgres/
+```
+
+Créez la base de données `db_bench`:
+
+```bash
+docker exec -it postgres_container createdb -U postgres -W pgbench
+```
+
+Lancez les commandes SQL suivantes:
+
+```bash
 docker exec -it postgres_container psql -U postgres -W
 ```
 
-
-Lancez les commandes suivantes:
 ```sql
-CREATE DATABASE db_bench;
 \l
 \connect db_bench
 \dt
 \d+
 ```
 
-Inspectez l'occupation disque des bases de données gérées par le conteneur.
+Inspectez l'occupation disque des bases de données `db_bench` gérées par le conteneur:
 
 ```bash
 du -sh data/postgres/
@@ -44,7 +55,7 @@ pgbench --help
 
 > Nota Bene: branchez votre machine sur le secteur quand vous lancez vos `run`s de bancs d'essai.
 
-## Initialisation de la base de données
+## Initialisation de la base de données `db_bench`
 
 ```bash
 date --utc
@@ -315,3 +326,7 @@ du -sh data/postgres/
 df -h | grep pg_ram_disk
 diskutil eject "pg_ram_disk"
 ```
+
+## Lectures
+
+* https://github.com/Vonng/pgtpc
