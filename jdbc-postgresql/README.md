@@ -100,8 +100,30 @@ or
 java -cp $APP_CLASSPATH $MAIN_CLASS
 ```
 
+## Exercice: pass SELECT query as program argument 
 
+Duplicate `src/main/java/com/mkyong/jdbc/JDBCExample2.java` in `src/main/java/com/mkyong/jdbc/GenericQuery.java`
 
+Pass the `SQL_SELECT` string as program argument.
+
+Use `[getObject(int)](https://docs.oracle.com/javase/6/docs/api/java/sql/ResultSet.html#getObject(int))` for printing the column values
+
+Then use `ResultSetMetaData` for printing the column names.
+```java
+ResultSetMetaData metaData = rs.getMetaData();
+Integer columnCount = metaData.getColumnCount();
+String tableName = getTableName(columnNumber); // 
+String columnName = getColumnName(columnNumber); //  to get the name of  the column
+String columnLabel = getColumnLabel(int columnNumber); //  to get the name of  the column
+String tableName = getColumnLabel(int columnNumber); //  to access the label of the column, which is specified after AS in the SQL query
+```
+
+## Exercice: SQL injection
+
+Write a program exposed to [SQL injection](https://fr.wikipedia.org/wiki/Injection_SQL).
+
+![](1705992627213.jpg)
+(Source Gizmodo)
 
 ## Extra: JDBC URL
 
@@ -132,3 +154,6 @@ git diff pom.xml
  
 ## References
 * https://jdbc.postgresql.org/documentation/use/
+
+
+
