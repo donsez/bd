@@ -23,7 +23,7 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP TABLE IF EXISTS LesEmployes CASCADE;
+DROP TABLE IF EXISTS EMPLOYEE CASCADE;
 
 -- Create the table LesEmployes and import a CSV file into the table
 CREATE TABLE EMPLOYEE
@@ -31,8 +31,8 @@ CREATE TABLE EMPLOYEE
     ID serial,
     NAME varchar(100) NOT NULL,
     SALARY numeric(15, 2) NOT NULL,
-    CREATED_DATE timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
-    PRIMARY KEY (ID)
+    CREATED_DATE timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(ID)
 );
 
 COPY EMPLOYEE(ID,NAME,SALARY)
