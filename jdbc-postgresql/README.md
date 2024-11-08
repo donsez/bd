@@ -73,7 +73,7 @@ java -cp $APP_CLASSPATH $MAIN_CLASS
 
 Change the password (the value is defined into [docker-compose.yml](../postgres/docker-compose.yml)) into the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java`.
 
-Recompile the program with `mvn campile`.
+Recompile the program with `mvn compile`.
 
 Re-Run the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java` with
 ```bash
