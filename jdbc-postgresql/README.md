@@ -236,7 +236,7 @@ docker run --rm --network host jdbc-postgresql:0.1.0-SNAPSHOT
 
 For publishing the image on https://hub.docker.com
 
-> You should have an account on https://hub.docker.com
+> You should have an account `$DOCKERHUB_USER` on https://hub.docker.com
 
 ```bash
 export DOCKERHUB_USER=$USER
