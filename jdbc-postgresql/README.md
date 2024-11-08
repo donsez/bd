@@ -22,36 +22,62 @@ export PATH=$PATH:~/devtools/apache/apache-maven-3.9.9/bin
 mvn -v
 ```
 
-Install JDBC example
+Start the PostgreSQL server using the instructions [here](../postgres/README.md).
+
+Create and populate the `test` database using the [following example](../postgres/work/employee/employee.sql). Password is `changeme` .
+
+
+Install the JDBC example from https://github.com/mkyong/java-jdbc/
+
 ```bash
 mkdir -p ~/github/mkyong/
 cd ~/github/mkyong/
 git clone https://github.com/mkyong/java-jdbc/
 ```
 
-Build the Jarfile of the program
+Build the classes of the program
+
 ```bash
 cd ~/github/mkyong/
 cd java-jdbc/postgresql
-mvn install
+mvn compile
+tree target/classes
+ls -al target/*.jar
 ```
 
+> You can pachage the program as a Jarfile with `mvn compile`.
 
-Check the classpath of the program
+> You can install the program as a Jarfile with `mvn install` into your local Maven repository `~/.m2/repository`.
+
+
+
+Run the program `src/main/java/com/mkyong/jdbc/JDBCExample.java`
+```bash
+MAIN_CLASS=com.mkyong.jdbc.JDBCExample
+APP_CLASSPATH=./target/classes
+java -cp $APP_CLASSPATH $MAIN_CLASS
+```
+
+> Question : What's happens ? Why ?
+
+
+Set the classpath of the program
 ```bash
 APP_CLASSPATH=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args="%classpath")
 echo $APP_CLASSPATH
 ```
 
-Run the program `src/main/java/com/mkyong/jdbc/JDBCExample.java`
+Re-Run the program `src/main/java/com/mkyong/jdbc/JDBCExample.java`
+```bash
+java -cp $APP_CLASSPATH $MAIN_CLASS
+```
+
+Re-Run the program `src/main/java/com/mkyong/jdbc/JDBCExample.java` with
 ```bash
 MAIN_CLASS=com.mkyong.jdbc.JDBCExample
 mvn -q exec:java -Dexec.mainClass=$MAIN_CLASS
 ```
-or
-```bash
-java -cp $APP_CLASSPATH $MAIN_CLASS
-```
+
 
 
 Run the program `src/main/java/com/mkyong/jdbc/JDBCExample2.java`
@@ -73,6 +99,9 @@ or
 ```bash
 java -cp $APP_CLASSPATH $MAIN_CLASS
 ```
+
+
+
 
 ## Extra: JDBC URL
 
