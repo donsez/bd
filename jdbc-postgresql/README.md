@@ -114,12 +114,12 @@ Duplicate `src/main/java/com/mkyong/jdbc/ListEmployeeExample.java` in `src/main/
 
 Pass the `SQL_SELECT` string as program argument.
 
-First, use `[getObject(int)](https://docs.oracle.com/en/java/javase/23/docs/api/java.sql/java/sql/ResultSet.html)` for printing the column values.
+First, use [`getObject(int)`](https://docs.oracle.com/en/java/javase/23/docs/api/java.sql/java/sql/ResultSet.html) for printing the column values.
 
 > NB: `boolean wasNull()` - Reports whether the last column read had a value of SQL NULL.
 
 
-Second, use `[ResultSetMetaData](https://docs.oracle.com/en/java/javase/23/docs/api/java.sql/java/sql/ResultSetMetaData.html)` for printing the column names in order to beautiful the output.
+Second, use [`ResultSetMetaData`](https://docs.oracle.com/en/java/javase/23/docs/api/java.sql/java/sql/ResultSetMetaData.html) for printing the column names in order to beautiful the output.
 
 ```java
 ResultSetMetaData metaData = rs.getMetaData();
@@ -193,6 +193,7 @@ Class theClass = cl.loadClass("org.postgresql.Driver");
 ```
 
 ## Extra : Vérification des vulnérabilités
+
 [Vérification des vulnérabilités](https://mvnrepository.com/artifact/org.owasp/dependency-check-maven) dans le programme Java : https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
 
 
@@ -211,8 +212,31 @@ mvn versions:update-properties
 git diff pom.xml
 ```
  
+## Extra : Dockerize the program with [`jib` plugin](https://github.com/GoogleContainerTools/jib/blob/master/jib-maven-plugin/README.md)
+
+https://www.baeldung.com/jib-dockerizing
+
+> You should have an account on https://hub.docker.com
+
+```bash
+export DOCKERHUB_USER=$USER
+export IMAGE_PATH=registry.hub.docker.com/$DOCKERHUB_USER/jdbc-jib-app
+docker login
+mvn compile com.google.cloud.tools:jib-maven-plugin:build -Dimage=$IMAGE_PATH
+docker pull $DOCKERHUB_USER/jdbc-jib-app
+```
+
+Run the container containing the application 
+```bash
+docker run --rm $DOCKERHUB_USER/jdbc-jib-app
+```
+
+What's happen ? Why ?
+
+Re-Run the container containing the application 
+```bash
+docker run --rm --network host $DOCKERHUB_USER/jdbc-jib-app
+```
+
 ## References
 * https://jdbc.postgresql.org/documentation/use/
-
-
-

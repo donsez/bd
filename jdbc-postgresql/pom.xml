@@ -39,6 +39,26 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <container>
+                        <mainClass>com.mkyong.jdbc.ListEmployeeExample</mainClass>
+                        <!--
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                        -->
+                        <environment>
+                            <application.title>${project.name}</application.title>
+                            <application.version>${project.version}</application.version>
+                        </environment>
+                    </container>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 </project>
