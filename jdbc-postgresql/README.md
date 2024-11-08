@@ -1,14 +1,14 @@
 # Manipulation d'une base PostgreSQL via JBDC 
 
-Read https://mkyong.com/jdbc/how-do-connect-to-postgresql-with-jdbc-driver-java/
+This tutorial is based on https://mkyong.com/jdbc/how-do-connect-to-postgresql-with-jdbc-driver-java/
 
-Check Java version
+Check your Java version
 ```bash
 java --version
 javac --version
 ```
 
-Install [Maven](https://maven.apache.org/install.html)
+Install [Maven](https://maven.apache.org/install.html) for compiling the classes
 ```bash
 mkdir -p ~/devtools/apache
 cd ~/devtools/apache
@@ -16,7 +16,7 @@ wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bi
 tar xvf apache-maven-3.9.9-bin.tar.gz
 ```
 
-Set $PATH
+Set `mvn` into your `$PATH` 
 ```bash
 export PATH=$PATH:~/devtools/apache/apache-maven-3.9.9/bin
 mvn -v
@@ -24,36 +24,33 @@ mvn -v
 
 Start the PostgreSQL server using the instructions [here](../postgres/README.md).
 
-Create and populate the `test` database using the [following example](../postgres/work/employee/employee.sql). Password is `changeme` .
+Create and populate the `test` database using the [following example](../postgres/work/employee/employee.sql). Remenber : the password is `changeme` .
 
-
-Install the JDBC example from https://github.com/mkyong/java-jdbc/
-
-```bash
-mkdir -p ~/github/mkyong/
-cd ~/github/mkyong/
-git clone https://github.com/mkyong/java-jdbc/
-```
 
 Build the classes of the program
 
 ```bash
-cd ~/github/mkyong/
-cd java-jdbc/postgresql
+cd ~/github/donsez/bd/jdbc-postgresql
 mvn compile
 tree target/classes
+```
+
+> You can package the program as a Jarfile with `mvn compile`.
+
+```bash
 ls -al target/*.jar
 ```
 
-> You can pachage the program as a Jarfile with `mvn compile`.
-
 > You can install the program as a Jarfile with `mvn install` into your local Maven repository `~/.m2/repository`.
 
-
-
-Run the program `src/main/java/com/mkyong/jdbc/JDBCExample.java`
 ```bash
-MAIN_CLASS=com.mkyong.jdbc.JDBCExample
+ls -al ~/.m2/repository/github/donsez/bd/jdbc-postgresql/0.1.0-SNAPSHOT/
+```
+
+
+Run the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java`
+```bash
+MAIN_CLASS=com.mkyong.jdbc.ConnectOnlyExample
 APP_CLASSPATH=./target/classes
 java -cp $APP_CLASSPATH $MAIN_CLASS
 ```
@@ -67,48 +64,63 @@ APP_CLASSPATH=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args="%classpath"
 echo $APP_CLASSPATH
 ```
 
-Re-Run the program `src/main/java/com/mkyong/jdbc/JDBCExample.java`
+Re-Run the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java`
 ```bash
 java -cp $APP_CLASSPATH $MAIN_CLASS
 ```
 
-Re-Run the program `src/main/java/com/mkyong/jdbc/JDBCExample.java` with
+> Question : What's happens ? Why ?
+
+Change the password (the value is defined into [docker-compose.yml](../postgres/docker-compose.yml)) into the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java`.
+
+Recompile the program with `mvn campile`.
+
+Re-Run the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java` with
 ```bash
-MAIN_CLASS=com.mkyong.jdbc.JDBCExample
+MAIN_CLASS=com.mkyong.jdbc.ConnectOnlyExample
 mvn -q exec:java -Dexec.mainClass=$MAIN_CLASS
 ```
 
-
-
-Run the program `src/main/java/com/mkyong/jdbc/JDBCExample2.java`
+Run the program `src/main/java/com/mkyong/jdbc/ListEmployeeExample.java`
 ```bash
-MAIN_CLASS=com.mkyong.jdbc.JDBCExample2
-mvn -q exec:java -Dexec.mainClass=$MAIN_CLASS 
-```
-or
-```bash
-java -cp $APP_CLASSPATH $MAIN_CLASS
+MAIN_CLASS=com.mkyong.jdbc.ListEmployeeExample
+mvn -q exec:java -Dexec.mainClass=$MAIN_CLASS
 ```
 
 Run the program `src/main/java/com/mkyong/jdbc/TransactionExample.java`
 ```bash
 MAIN_CLASS=com.mkyong.jdbc.TransactionExample
-mvn -q exec:java -Dexec.mainClass=$MAIN_CLASS 
+mvn -q exec:java -Dexec.mainClass=$MAIN_CLASS
 ```
-or
+
+Run the program `src/main/java/com/mkyong/jdbc/ListEmployeeExample.java`
 ```bash
+MAIN_CLASS=com.mkyong.jdbc.ListEmployeeExample
+mvn -q exec:java -Dexec.mainClass=$MAIN_CLASS
+```
+
+> You can replace `./target/classes` by `./target/jdbc-postgresql-0.1.0-SNAPSHOT.jar` into the classpath
+
+```bash
+echo $APP_CLASSPATH
+MAIN_CLASS=com.mkyong.jdbc.ListEmployeeExample
 java -cp $APP_CLASSPATH $MAIN_CLASS
 ```
 
+
 ## Exercice: pass SELECT query as program argument 
 
-Duplicate `src/main/java/com/mkyong/jdbc/JDBCExample2.java` in `src/main/java/com/mkyong/jdbc/GenericQuery.java`
+Duplicate `src/main/java/com/mkyong/jdbc/ListEmployeeExample.java` in `src/main/java/com/mkyong/jdbc/GenericQuery.java`
 
 Pass the `SQL_SELECT` string as program argument.
 
-Use `[getObject(int)](https://docs.oracle.com/javase/6/docs/api/java/sql/ResultSet.html#getObject(int))` for printing the column values
+First, use `[getObject(int)](https://docs.oracle.com/en/java/javase/23/docs/api/java.sql/java/sql/ResultSet.html)` for printing the column values.
 
-Then use `ResultSetMetaData` for printing the column names.
+> NB: `boolean wasNull()` - Reports whether the last column read had a value of SQL NULL.
+
+
+Second, use `[ResultSetMetaData](https://docs.oracle.com/en/java/javase/23/docs/api/java.sql/java/sql/ResultSetMetaData.html)` for printing the column names in order to beautiful the output.
+
 ```java
 ResultSetMetaData metaData = rs.getMetaData();
 Integer columnCount = metaData.getColumnCount();
@@ -116,23 +128,73 @@ String tableName = getTableName(columnNumber); //
 String columnName = getColumnName(columnNumber); //  to get the name of  the column
 String columnLabel = getColumnLabel(int columnNumber); //  to get the name of  the column
 String tableName = getColumnLabel(int columnNumber); //  to access the label of the column, which is specified after AS in the SQL query
+
+...
+
+System.out.println("("+rs.getRow()+" rows)");
+```
+
+The output should be similar to:
+
+```console
+  id  |    name     |  salary   |         created_date          
+------+-------------+-----------+-------------------------------
+ 1007 | Lamport     |  10000.00 | 2024-11-08 08:25:22.252877+00
+ 1008 | Knuth       |  15000.99 | 2024-11-08 08:25:22.252877+00
+ 1009 | Petri       |  20000.77 | 2024-11-08 08:25:22.252877+00
+ 1010 | Gray        |  30000.11 | 2024-11-08 08:25:22.252877+00
+ 1011 | Codd        |  10000.88 | 2024-11-08 08:25:22.252877+00
+ 1012 | Stonebraker | 100000.00 | 2024-11-08 11:51:21.668123+00
+(6 rows)
+```
+
+## Exercice: Properties file
+
+Use a properties file in [./src/main/resources](./src/main/resources/app.properties) for improving configurability
+
+```java
+import java.lang.System;
+import java.lang.Thread;
+import java.io.FileInputStream;
+
+...
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String appConfigPath = rootPath + "app.properties";
+
+        Properties appProps = new Properties();
+        try {
+            appProps.load(new FileInputStream(appConfigPath));            
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        
+        String jdbcDriver = appProps.getProperty("jdbc_driver");
+        System.out.println("driver :"+jdbcDriver);
 ```
 
 ## Exercice: SQL injection
 
-Write a program exposed to [SQL injection](https://fr.wikipedia.org/wiki/Injection_SQL).
+Write a JDBC program exposed to [SQL injection (SQLi)](https://fr.wikipedia.org/wiki/Injection_SQL) attack.
 
 ![](1705992627213.jpg)
 (Source Gizmodo)
 
-## Extra: JDBC URL
+## Extra: local ClassLoader
 
-Modify the URL `"jdbc:postgresql://127.0.0.1:5432/test"` into the Java classes
+Change
+```java
+Class.forName("org.postgresql.Driver");
+```
+by
+```java
+final ClassLoader cl = this.getClass().getClassLoader ();
+Class theClass = cl.loadClass("org.postgresql.Driver");
+```
 
-```
-tree src/main/java/com/mkyong/jdbc/
-grep -r -n "jdbc:postgresql://127.0.0.1:5432/test" src/main/java/com/mkyong/jdbc/
-```
+## Extra : Vérification des vulnérabilités
+[Vérification des vulnérabilités](https://mvnrepository.com/artifact/org.owasp/dependency-check-maven) dans le programme Java : https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
+
 
 ## Extra: Mise à jour des dépendances du projet
 
@@ -148,9 +210,6 @@ mvn versions:use-latest-releases
 mvn versions:update-properties
 git diff pom.xml
 ```
-
-## Extra : Vérification des vulnérabilités
-[Vérification des vulnérabilités](https://mvnrepository.com/artifact/org.owasp/dependency-check-maven) dans le programme Java : https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
  
 ## References
 * https://jdbc.postgresql.org/documentation/use/
