@@ -219,6 +219,7 @@ https://www.baeldung.com/jib-dockerizing
 
 ```bash
 mvn compile com.google.cloud.tools:jib-maven-plugin:dockerBuild
+docker images | grep jdbc-postgresql
 ```
 
 Run the container containing the application 
