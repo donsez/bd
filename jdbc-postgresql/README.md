@@ -216,27 +216,40 @@ git diff pom.xml
 
 https://www.baeldung.com/jib-dockerizing
 
-> You should have an account on https://hub.docker.com
 
 ```bash
-export DOCKERHUB_USER=$USER
-export IMAGE_PATH=registry.hub.docker.com/$DOCKERHUB_USER/jdbc-jib-app
-docker login
-mvn compile com.google.cloud.tools:jib-maven-plugin:build -Dimage=$IMAGE_PATH
-docker pull $DOCKERHUB_USER/jdbc-jib-app
+mvn compile com.google.cloud.tools:jib-maven-plugin:dockerBuild
 ```
 
 Run the container containing the application 
 ```bash
-docker run --rm $DOCKERHUB_USER/jdbc-jib-app
+docker run --rm jdbc-postgresql:0.1.0-SNAPSHOT
 ```
 
 What's happen ? Why ?
 
+Run the container containing the application 
+```bash
+docker run --rm --network host jdbc-postgresql:0.1.0-SNAPSHOT
+```
+
+For publishing the image on https://hub.docker.com
+
+> You should have an account on https://hub.docker.com
+
+```bash
+export DOCKERHUB_USER=$USER
+export IMAGE_PATH=registry.hub.docker.com/$DOCKERHUB_USER/jdbc-postgresql
+docker login
+mvn compile com.google.cloud.tools:jib-maven-plugin:build -Dimage=$IMAGE_PATH
+docker pull $DOCKERHUB_USER/jdbc-postgresql
+```
+
 Re-Run the container containing the application 
 ```bash
-docker run --rm --network host $DOCKERHUB_USER/jdbc-jib-app
+docker run --rm --network host $DOCKERHUB_USER/jdbc-postgresql
 ```
+
 
 ## References
 * https://jdbc.postgresql.org/documentation/use/
