@@ -73,7 +73,7 @@ java -cp $APP_CLASSPATH $MAIN_CLASS
 
 Change the password (the value is defined into [docker-compose.yml](../postgres/docker-compose.yml)) into the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java`.
 
-Recompile the program with `mvn campile`.
+Recompile the program with `mvn compile`.
 
 Re-Run the program `src/main/java/com/mkyong/jdbc/ConnectOnlyExample.java` with
 ```bash
@@ -126,8 +126,7 @@ ResultSetMetaData metaData = rs.getMetaData();
 Integer columnCount = metaData.getColumnCount();
 String tableName = getTableName(columnNumber); // 
 String columnName = getColumnName(columnNumber); //  to get the name of  the column
-String columnLabel = getColumnLabel(int columnNumber); //  to get the name of  the column
-String tableName = getColumnLabel(int columnNumber); //  to access the label of the column, which is specified after AS in the SQL query
+String columnLabel = getColumnLabel(int columnNumber); //  to access the label of the column, which is specified after AS in the SQL query
 
 ...
 
