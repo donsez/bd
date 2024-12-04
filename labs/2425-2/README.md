@@ -19,7 +19,7 @@ Donnez les requètes SQL pour:
 - Q2: Donner la liste des événements pour lesquels l'utilisateur Onizuka (オニヅカ) doit de l'argent
 - Q3: Donner la liste des événements pour lesquels des utilisateurs doivent de l'argent à l'utilisateur Kaneda (嘉手納).
 - Q4: Stats par étiquette par utilisateur
-- Q5: Stats par année, par mois et par semaine et par jour pour un événement (colocation, vacances ...)
+- Q5: Stats par année, par mois, par semaine, par jour et par type d'évenement (colocation, vacances ...) pour l'utilisateur Kaneda (嘉手納)
 
 ## Exercice 4:
 
