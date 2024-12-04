@@ -145,6 +145,9 @@ What's happen into the browsers ?
 
 When developing your application, Meteor starts a local MongoDB instance and automatically connects to it. In production, you must specify a MONGO_URL environment variable pointing at your database https://docs.meteor.com/api/collections.html#mongo_url
 
+* https://github.com/disney/meteor-base/tree/main/example
+* https://hub.docker.com/r/geoffreybooth/meteor-base
+
 ## More examples
 
 * https://github.com/meteor/examples
