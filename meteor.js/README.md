@@ -98,6 +98,9 @@ What's happens into the two clients ?
 
 ## Inspect the MongoDB collections
 
+https://www.mongodb.com/docs/manual/crud/
+
+
 ```bash
 ./mongosh mongodb://127.0.0.1:3001/meteor
 ```
@@ -120,22 +123,29 @@ db.runCommand(
 )
 
 db.tasks.find()
-
 db.users.find()
-
 ```
 
-Add a new `task` document  into the `tasks` collection.
-
+Insert two new `task` documents into the `tasks` collection.
 ```
 db.tasks.insertOne(
   {
     text: 'Tenth Task',
     userId: 'KRsaNNmogqm7Jfw7Y',
-    createdAt: ISODate('2024-12-10T04:37:03.710Z')
+    createdAt: ISODate('2024-12-10T00:00:00.000Z')
+  }
+db.tasks.insertOne(
+  {
+    text: 'Tenth Task',
+    userId: 'KRsaNNmogqm7Jfw7Y',
+    createdAt: ISODate('2024-12-20T00:00:00.000Z')
   }
 )
+```
+What's happen into the browsers ?
 
+Query the collection
+```mongodb
 // SELECT * FROM tasks
 db.tasks.find()
 
@@ -158,7 +168,36 @@ db.tasks.find({'text': {'$regex': '.*task.*', '$options' : 'i'}})
 db.users.find({username: /mete/})
 ```
 
-What's happen into the browsers ?
+Aggregation
+```mongodb
+db.tasks.countDocuments({'text': {'$regex': '.*task.*', '$options' : 'i'}})
+db.tasks.estimatedDocumentCount({'text': {'$regex': '.*task.*', '$options' : 'i'}})
+```
+
+Update / Upsert
+```mongodb
+db.tasks.updateOne(
+   { text: "Tenth Task" },
+   { $inc: { priority: 1 } },
+   { upsert: true }
+)
+db.tasks.find( { "text": "Tenth Task" } )
+db.tasks.updateMany(
+   { text: "Tenth Task" },
+   { $inc: { priority: 1 } },
+   { upsert: true }
+)
+db.tasks.find( { "text": "Tenth Task" } )
+db.tasks.updateMany(
+   { text: /ask/ },
+   { $inc: { priority: 1 } },
+   { upsert: true }
+)
+db.tasks.find()
+
+// TODO db.collection.replaceOne(filter, replacement, options)
+// https://www.mongodb.com/docs/manual/reference/method/db.collection.replaceOne/#mongodb-method-db.collection.replaceOnes
+```
 
 ## Deploy with Docker Compose
 
