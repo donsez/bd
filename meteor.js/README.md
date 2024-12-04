@@ -199,6 +199,12 @@ db.tasks.find()
 // https://www.mongodb.com/docs/manual/reference/method/db.collection.replaceOne/#mongodb-method-db.collection.replaceOnes
 ```
 
+## CAP theorem ([Brewer](https://en.wikipedia.org/wiki/Eric_Brewer_(scientist))) and Mongo
+
+https://dev.to/muhammetyasinarli/-the-cap-theorem-brewers-theorem-in-nosql-databases-2lbj
+
+MongoDB tprovides availability and partition tolerance but at the expense of consistency in some scenarios.
+
 ## Deploy with Docker Compose
 
 When developing your application, Meteor starts a local MongoDB instance and automatically connects to it. In production, you must specify a MONGO_URL environment variable pointing at your database https://docs.meteor.com/api/collections.html#mongo_url
