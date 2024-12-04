@@ -144,6 +144,14 @@ db.tasks.insertOne(
 ```
 What's happen into the browsers ?
 
+Add more `tasks` documents with `insertMany()`:
+* [x] `Homework DB #1`
+* [ ] `Homework DB #2`
+* [ ] `Find good book on ACID transactions`
+* [ ] `Revise CAP theorem for the final exam`
+* [ ] `Revise snowflake model into OLAP databases for the final exam`
+* [ ] ...
+
 Query the collection
 ```mongodb
 // SELECT * FROM tasks
