@@ -136,7 +136,26 @@ db.tasks.insertOne(
   }
 )
 
+// SELECT * FROM tasks
 db.tasks.find()
+
+db.tasks.find( { "text": "Tenth" } )
+
+db.tasks.find( { "text": "Tenth task" } )
+
+// SELECT * FROM tasks  WHERE text = 'Tenth Task'
+db.tasks.find( { "text": "Tenth Task" } )
+
+// SELECT * FROM tasks  WHERE text LIKE '%ask%'
+db.tasks.find( { "text": /.*ask.*/ } )
+db.tasks.find( { "text": /ask/ } )
+
+// Case insensitive and case insensitive
+db.tasks.find({'text': {'$regex': '.*task.*'}})
+db.tasks.find({'text': {'$regex': '.*task.*', '$options' : 'i'}})
+
+// SELECT * FROM users WHERE username LIKE '%mete%'
+db.users.find({username: /mete/})
 ```
 
 What's happen into the browsers ?
