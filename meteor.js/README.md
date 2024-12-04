@@ -199,11 +199,13 @@ db.tasks.find()
 // https://www.mongodb.com/docs/manual/reference/method/db.collection.replaceOne/#mongodb-method-db.collection.replaceOnes
 ```
 
-## CAP theorem ([Brewer](https://en.wikipedia.org/wiki/Eric_Brewer_(scientist))) and Mongo
+## [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem) ([Brewer](https://en.wikipedia.org/wiki/Eric_Brewer_(scientist))) and Mongo
 
 https://dev.to/muhammetyasinarli/-the-cap-theorem-brewers-theorem-in-nosql-databases-2lbj
 
-MongoDB tprovides availability and partition tolerance but at the expense of consistency in some scenarios.
+MongoDB provides availability and partition tolerance but at the expense of consistency in some scenarios.
+
+See also [PACELC theorem](https://en.wikipedia.org/wiki/PACELC_theorem)
 
 ## Deploy with Docker Compose
 
