@@ -9,6 +9,23 @@ pgbench est un programme pour réaliser simplement des tests de performance (ben
 
 ## Démarrage
 
+
+```yaml
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 128M
+    environment:
+...
+```
+
+
 Lancez le serveur Postgres avec `docker compose` depuis le répertoire `~/github/donsez/bd/postgres`
 
 ```bash
