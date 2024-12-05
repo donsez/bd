@@ -46,3 +46,16 @@ CSV HEADER;
 
 -- Show all
 SELECT * FROM EMPLOYEE;
+
+-- Insert a new employee
+INSERT INTO EMPLOYEE(ID,NAME,SALARY) VALUES(1011,'Stonebraker',100000.00);
+
+-- Show all
+SELECT * FROM EMPLOYEE;
+
+-- Insert a new employee
+INSERT INTO EMPLOYEE(ID,NAME,SALARY) VALUES(1012,'Stonebraker',100000.00);
+
+-- Show all
+SELECT * FROM EMPLOYEE;
+
