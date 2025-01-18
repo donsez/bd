@@ -199,3 +199,26 @@ Select the geom viewer into the header of the `geom` column.
 * [ ] add [GeoServer](https://hub.docker.com/r/kartoza/geoserver) as web frontend
 * [ ] add [MapServer](https://hub.docker.com/r/mapserver/mapserver) as web frontend
 * [ ] add [GDAL - Geospatial Data Abstraction Library container](https://hub.docker.com/r/osgeo/gdal) for converting files (GeoJSON, Shapefile ...)
+* [ ] add [HexagonGrid](https://postgis.net/docs/ST_HexagonGrid.html)
+
+## Annex
+
+### HexagonGrid
+
+![](https://postgis.net/images/st_hexagongrid03.png)
+
+```sql
+SELECT admin1.gid, hex.geom
+FROM
+    admin1
+    CROSS JOIN
+    ST_HexagonGrid(100000, admin1.geom) AS hex
+WHERE
+    adm0_a3 = 'USA'
+    AND
+    ST_Intersects(admin1.geom, hex.geom)
+```
+
+
+
+
