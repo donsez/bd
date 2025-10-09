@@ -84,6 +84,14 @@ select nocage from LesCages
 except 
 select nocage from LesAnimaux;
 
+select nocage, fonction from LesCages
+except
+select nocage, fonction from LesAnimaux natural join LesCages;
+
+select nocage, fonction
+from LesCages
+where nocage not in (select nocage from LesAnimaux);
+
 -- Req 15
 select noma, nomm
 from LesAnimaux natural join LesMaladies
