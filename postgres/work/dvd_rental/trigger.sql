@@ -1,0 +1,2 @@
+-- TRIGGER
+-- https://neon.com/postgresql/postgresql-triggers
