@@ -90,7 +90,7 @@ select nocage, fonction from LesAnimaux natural join LesCages;
 
 select nocage, fonction
 from LesCages
-where nocage not in (select nocage from LesAnimaux);
+where nocage not in (select distinct nocage from LesAnimaux);
 
 -- Req 15
 select noma, nomm
