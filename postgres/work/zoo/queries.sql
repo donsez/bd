@@ -92,10 +92,32 @@ select nocage, fonction
 from LesCages
 where nocage not in (select distinct nocage from LesAnimaux);
 
--- Req 15
+-- Req 15 : Donner pour chaque animal mâle l’ensemble des maladies qu’il a contractées (ensemble des couples nom d’animal, nom de maladie).
 select noma, nomm
 from LesAnimaux natural join LesMaladies
 where sexe='mâle';
+
+
+-- Req 15 bis : Donner pour chaque animal mâle l’ensemble des maladies qu’il a contractées (ensemble des couples nom d’animal, nom de maladie).
+--              y compris ceux qui n'ont jamais été malades
+select noma, nomm
+from LesAnimaux left outer join LesMaladies using (noma)
+where sexe='mâle';
+
+-- Req 15 ter : Donner le nombre de maladies distinctes contractées par (tous) les animaux du Zoo
+
+select noma, count(distinct nomm) as nbMaladies
+from LesAnimaux  join LesMaladies using (noma)
+where sexe='mâle'
+group by noma
+order by nbMaladies;
+
+select noma, count(distinct nomm) as nbMaladies
+from LesAnimaux left outer join LesMaladies using (noma)
+where sexe='mâle'
+group by noma
+order by nbMaladies;
+
 
 -- Req 16 
 select distinct nocage, fonction
