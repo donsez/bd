@@ -150,6 +150,11 @@ select noma, type, pays
 from LesAnimaux 
 where noma<>'Charly' and nocage=(select nocage from LesAnimaux where noma='Charly');
 
+-- Req 20 bis : Le nom, le type et le pays d’origine des animaux qui partagent la cage de Charly.
+select noma, type, pays
+from LesAnimaux a1 join LesAnimaux a2 on nocage
+where a1.noma<>a2.noma and a2.noma='Charly';
+
 -- Req 21
 select nome, adresse
 from LesCages natural join LesGardiens natural join  LesEmployes natural join LesAnimaux 
