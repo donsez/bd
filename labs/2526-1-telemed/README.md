@@ -56,7 +56,7 @@ Déterminez premièrement les clés primaires et les clés étrangères de ces t
 
 Requêtes: Répondez à 10 questions parmi les questions suivantes au moyen de requêtes SQL (Postgres).
 * [ ] Q1: Donnez la liste des bornes les plus utilisées (en nombre de consultation)
-* [ ] Q2: Donnez la liste des médecins qui exercent plus de 10 heures (20%) sur la plateforme
+* [ ] Q2: Donnez la liste des médecins qui exercent plus de 10 heures par semaine (20%) sur la plateforme
 * [ ] Q3: Donnez la liste des médecins généralistes de secteur 1 actuellement disponibles
 * [ ] Q4: Donnez la liste des médecins généralistes de secteur 1 prochainement disponibles (ie triés par durée restante estimés de consultation). Remarque : La consultation ne doit pas dépasser de la fin de leurs plages de consultation.
 * [ ] Q5: Donnez la liste des médecins ayant un DU « médecine du sport » de secteur 1 prochainement disponibles et triée par durée restante de consultation
@@ -74,6 +74,8 @@ Vous devez rendre deux fichiers SQL [`populate.sql`](populate.sql) et [`queries.
 * 3. pour chaque requête, le SQL correspondant et, en commentaire, l’explication de la requête et la sortie de cette requête sur votre base exemple.
 
 > Astuce pour les requêtes de type `TOP10`, `TOP100`, "les plus ...", "hall of fame", "King of the Mountain (KOM)" ... : https://www.postgresql.org/docs/current/queries-limit.html
+
+> Astuce : vous pouvez également utiliser les instructions [`CUBE`](https://neon.com/postgresql/postgresql-tutorial/postgresql-cube) et [ROLLUP](https://neon.com/postgresql/postgresql-tutorial/postgresql-rollup)
 
 > Astuce: Utilisez des tables temporaires pour charger les fichiers CSV et peuplés les tables.
 
