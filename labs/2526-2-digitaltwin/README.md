@@ -14,7 +14,7 @@ Les informations de CampusTwin seront gérées par deux SGBDs : [PostGIS](../../
 
 Vous peuplerez les deux bases de données avec le jeu de données concernant un bâtiment fictif StartupStudio du campus qui est donné [ici](https://github.com/CampusIoT/datasets/tree/main/BuildPred). L'angle sud-est du bâtiment est situé à la position [45.194921,5.769378](https://www.openstreetmap.org/search?query=Campus+Grenoble&zoom=16&minlon=-88.3198642730713&minlat=41.02027043253553&maxlon=-88.29647541046144&maxlat=41.030841216135926#map=19/45.194921/5.769378). L'empreinte au sol du batîment est de 51 x 36 mêtres. Vous ne considérez pas la zone 6.
 
-Vous pourrez ajouter également des informations concernant quelques bâtiments du Campus tel que DSLT, IMAG, IM2AG F, ENSIMAG E, ENSIMAG H, MUSE (avec le fablab FabMSTIC), MACI, Polytech, Bibliothéque des Sciences, Amphi Weil, EVE ...
+Vous pourrez ajouter également des informations concernant quelques bâtiments du Campus tel que [Greener](https://mhi-srv.g2elab.grenoble-inp.fr/django/API/), DSLT, IMAG, IM2AG F, ENSIMAG E, ENSIMAG H, MUSE (avec le fablab FabMSTIC), MACI, Polytech, Bibliothéque des Sciences, Amphi Weil, EVE ...
 
 > Vous pourrez utiliser [GeoJSON.io](https://geojson.io/#new&map=18/45.184622/5.752789) pour récupérer l'empreinte des bâtiments. Par exemple, le polygone du bâtiment Polytech Grenoble.
 
