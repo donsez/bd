@@ -1,8 +1,8 @@
 # Sujet DM2 2025-2026 :: Jumeau numérique d'un campus intelligent
 
-Un jumeau numérique (digital twin en anglais) est une réplique numérique d’un objet, d’un système ou d’un processus réel, qui permet de simuler, surveiller, analyser et optimiser son fonctionnement en temps réel ou différé. Il permet donc permet de mimer le comportement réel et d’anticiper son évolution.
+Un [jumeau numérique (digital twin en anglais)](https://fr.wikipedia.org/wiki/Jumeau_num%C3%A9rique) est une réplique numérique d’un objet, d’un système ou d’un processus réel, qui permet de simuler, surveiller, analyser et optimiser son fonctionnement en temps réel ou différé. Il permet donc permet de mimer le comportement réel et d’anticiper son évolution.
 
-Dans le contexte d’un campus universitaire, un jumeau numérique (digital twin of campus) est une réplique virtuelle dynamique du campus physique — intégrant bâtiments, infrastructures, équipements (sportifs), activités et usagers.
+Dans le contexte d’un campus universitaire, un jumeau numérique est une réplique virtuelle dynamique du campus physique intégrant bâtiments, infrastructures (voirie, transports en commun, parking ...), équipements (sportifs), activités et usagers.
 
 Dans ce DM, vous vous intéresserez uniquement au jumeau numérique simple des campus universitaires de l'Université Grenoble Alpes, CampusTwin, qui se focalise à la GTC simple des batiments. C'est à la mesure de la temperature, l'humidité, la qualité de l'air dans les salles. Des sources externes de données comme la météo peuvent être ajoutées dans le système d'information.
 
@@ -11,6 +11,8 @@ On supposera que les batiments sont construits sur plusieurs niveaux. Le dernier
 Les informations de CampusTwin seront gérées par deux SGBDs : PostGIS pour la structures du jumeau et InfluxDB pour les series temporelles des mesures de capteurs IoT et de données et prévision météo récupérés auprès de l'[API](https://openweathermap.org/api) du service [Open Weather](https://openweathermap.org/).
 
 Vous peuplerez les deux bases de données avec le jeu de données concernant un batiment fictif StartupStudio du campus qui est donné [ici](https://github.com/CampusIoT/datasets/tree/main/BuildPred). L'angle sud-est du batiment est situé à la position [45.194921,5.769378](https://www.openstreetmap.org/search?query=Campus+Grenoble&zoom=16&minlon=-88.3198642730713&minlat=41.02027043253553&maxlon=-88.29647541046144&maxlat=41.030841216135926#map=19/45.194921/5.769378). L'empreinte au sol du batîment est de 51 x 36 mêtres.
+
+Vous pourrez ajouter également des informations concernant les batiments du DSLT, IMAG, IM2AG F, ENSIMAG E et H, MUSE, MACI, Polytech
 
 Le plan de masse du premier niveau de ce batiment sur trois niveaux (dont le toit) est donné ci dessous :
 
