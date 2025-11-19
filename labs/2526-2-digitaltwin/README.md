@@ -54,6 +54,8 @@ Vous pouvez contruire des tableaux de bord pour les capteurs et pour les salles 
 
 ![Grafana](https://raw.githubusercontent.com/CampusIoT/datasets/refs/heads/main/TourPerret/media/elsys-ems-perret-grafana-02.jpg)
 
+Vous pouvez aussi construire des tableaux de bord au moyen d'un [conteneur Thingsboard](https://hub.docker.com/r/thingsboard/tb/).
+
 ## Rendu
 `dm2-2526-nombinome1-nombinome2.zip` regroupant
 * 1 fichier README.md (avec les noms et les prénoms des binomes)
