@@ -4,7 +4,7 @@ Un [jumeau numérique (digital twin en anglais)](https://fr.wikipedia.org/wiki/J
 
 Dans le contexte d’un campus universitaire, un jumeau numérique est une réplique virtuelle dynamique du campus physique intégrant bâtiments, infrastructures (voirie, transports en commun, parking ...), équipements (sportifs), activités et usagers.
 
-Dans ce DM, vous vous intéresserez uniquement au jumeau numérique simple des campus universitaires de l'Université Grenoble Alpes, CampusTwin, qui se focalise à la GTC simple des bâtiments. C'est à la mesure de la temperature, l'humidité, la qualité de l'air dans les salles. Des sources externes de données comme la météo peuvent être ajoutées dans le système d'information.
+Dans ce DM, vous vous intéresserez uniquement au jumeau numérique simple des campus universitaires de l'Université Grenoble Alpes, CampusTwin, qui se focalise à la GTC simple des bâtiments. C'est à la mesure de la temperature, l'humidité, la qualité de l'air dans les salles. Des sources externes de données comme la météo peuvent être ajoutées dans le système d'information. Une liste non exhaustive des mesures produites par des capteurs IoT est donnée [ici](https://github.com/meshtastic/protobufs/blob/master/meshtastic/telemetry.proto).
 
 On supposera que les bâtiments sont construits sur plusieurs niveaux. Le dernier niveau correspond au toit qui peut recevoir des équipements (climatiseur, récupérateur d'eau, station méteo, antenne de communication, panneau photovoltaïque, ruche, serre ...). Chaque niveau contient des salles, des couloirs et des passages (escalier, ascenseur, monte charge, escalator, sas ...). Pour chaque espace, on connait ses dimensions, sa surface, ses vitres interieurs/exterieures, ses ouvrants, ses coordonnées relatives en mêtre au point (latitude et longitude du batiment ...). On attribue une fonction aux salles : bureau, kfet, salle de détente, entrepot, labo, salle de réunion, bibliothéque, toilette, douche, cuisine, bar, salle de TD, salle de TP, amphi, garage (vélo, voiture ...), patio (outdoor sur le plan de masse ci-dessous) ... Une salle a une capacité (nombre de personnes, de vélo, de voiture ...) et d'autres attributs comme par exemple accès PMR, vidioprojecteur, système de visioconférence ...
 
@@ -55,6 +55,10 @@ Vous pouvez contruire des tableaux de bord pour les capteurs et pour les salles 
 ![Grafana](https://raw.githubusercontent.com/CampusIoT/datasets/refs/heads/main/TourPerret/media/elsys-ems-perret-grafana-02.jpg)
 
 Vous pouvez aussi construire des tableaux de bord au moyen d'un [conteneur Thingsboard](https://hub.docker.com/r/thingsboard/tb/).
+
+## Exercice 6 (Bonus++)
+
+Utilisez [Apache Camel](../../apache_camel) pour peupler en continue la base InfluxDB des données de capteurs (aka Telemetry au format Protobuf ou JSON) depuis un broker MQTT.
 
 ## Rendu
 `dm2-2526-nombinome1-nombinome2.zip` regroupant
