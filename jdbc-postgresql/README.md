@@ -1,4 +1,4 @@
-# Manipulation d'une base PostgreSQL via JBDC 
+# Manipulation d'une base PostgreSQL via JBDC (avec [Apache Maven](https://maven.apache.org/))
 
 This tutorial is based on https://mkyong.com/jdbc/how-do-connect-to-postgresql-with-jdbc-driver-java/
 
@@ -10,15 +10,18 @@ javac --version
 
 Install [Maven](https://maven.apache.org/install.html) for compiling the classes
 ```bash
+MVN_VERSION=3.9.9
 mkdir -p ~/devtools/apache
 cd ~/devtools/apache
-wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
-tar xvf apache-maven-3.9.9-bin.tar.gz
+wget https://dlcdn.apache.org/maven/maven-3/$MVN_VERSION/binaries/apache-maven-$MVN_VERSION-bin.tar.gz
+tar xvf apache-maven-$MVN_VERSION-bin.tar.gz
 ```
+
+> NB: you can check the [last (stable) version of Maven](https://dlcdn.apache.org/maven/) and the [last version of the JDBC driver for Postgres](https://mvnrepository.com/artifact/org.postgresql/postgresql)
 
 Set `mvn` into your `$PATH` 
 ```bash
-export PATH=$PATH:~/devtools/apache/apache-maven-3.9.9/bin
+export PATH=$PATH:~/devtools/apache/apache-maven-$MVN_VERSION/bin
 mvn -v
 ```
 
