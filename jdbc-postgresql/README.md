@@ -19,6 +19,8 @@ tar xvf apache-maven-$MVN_VERSION-bin.tar.gz
 
 > NB: you can check the [last (stable) version of Maven](https://dlcdn.apache.org/maven/) and the [last version of the JDBC driver for Postgres](https://mvnrepository.com/artifact/org.postgresql/postgresql)
 
+> NB: an awesome way to install Maven is [Maven Wrapper](https://www.baeldung.com/maven-wrapper)
+
 Set `mvn` into your `$PATH` 
 ```bash
 export PATH=$PATH:~/devtools/apache/apache-maven-$MVN_VERSION/bin
