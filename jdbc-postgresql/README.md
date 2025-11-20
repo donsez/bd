@@ -27,7 +27,7 @@ export PATH=$PATH:~/devtools/apache/apache-maven-$MVN_VERSION/bin
 mvn -v
 ```
 
-Start the PostgreSQL server using the instructions [here](../postgres/README.md).
+Start the PostgreSQL server using the instructions [here](../postgres/README.md) (from another terminal).
 
 Create and populate the `test` database using the [following example](../postgres/work/employee/employee.sql). Remenber : the password is `changeme` .
 
