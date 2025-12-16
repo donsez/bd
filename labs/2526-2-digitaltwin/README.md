@@ -44,9 +44,9 @@ Donnez les requêtes de création et de peuplage des series temporelles de la ba
 
 ## Exercice 4:
 
-Donnez 5 requètes sur la base PostGIS.
+Donnez 5 requêtes sur la base PostGIS.
 
-Donnez 5 requètes (aggrégats temporelles) sur la base InfluxDB.
+Donnez 5 requêtes (aggrégats temporelles) sur la base InfluxDB.
 
 ## Exercice 5 (Bonus)
 
