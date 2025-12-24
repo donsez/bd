@@ -4,3 +4,10 @@
 * https://spinframework.dev/v3/rdbms-storage
 * https://github.com/spinframework/spin-rust-sdk/tree/main/examples/postgres
 
+## Install Spin
+
+### MacOS
+
+```bash
+brew tap spinframework/tap && brew install spinframework/tap/spin
+```
