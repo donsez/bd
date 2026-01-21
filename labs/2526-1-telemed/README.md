@@ -66,12 +66,18 @@ Requêtes: Répondez à 10 questions parmi les questions suivantes au moyen de r
 * [ ] Q9: Question dont vous proposerez l'énoncé (avec des valeurs absentes)
 * [ ] Q10: Question dont vous proposerez l'énoncé (avec une opération ensembliste (union, intersection, différence))
 
+Copiez le résultat des requêtes dans un fichier CSV `result.q1.csv` ... au moyen de la commande [COPY](https://www.postgresql.org/docs/current/sql-copy.html)
+
+```sql
+COPY (SELECT * FROM Borne) TO '/tmp/query.csv' (format csv, delimiter ';')
+```
+
 ### Rendu
 
 Vous devez rendre deux fichiers SQL [`populate.sql`](populate.sql) et [`queries.sql`](queries.sql) qui contiennent :
 * 1. en en-tête commenté : les noms prénoms composant le binôme
 * 2. la partie création de tables (`DROP TABLE`, `CREATE TABLE`, `INSERT`) ; vous devez ajouter les lignes (ie peupler la base) nécessaires pour afficher les réponses aux requêtes ci-dessus (et compter le nombre de lignes)
-* 3. pour chaque requête, le SQL correspondant et, en commentaire, l’explication de la requête et la sortie de cette requête sur votre base exemple.
+* 3. pour chaque requête, le SQL correspondant et, en commentaire, l’explication de la requête et la sortie CSV de cette requête (result.qXX.csv) sur votre base exemple.
 
 > Astuce pour les requêtes de type `TOP10`, `TOP100`, "les plus ...", "hall of fame", "King of the Mountain (KOM)" ... : https://www.postgresql.org/docs/current/queries-limit.html
 
