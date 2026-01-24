@@ -30,9 +30,11 @@ Le plan de masse du premier niveau de ce bâtiment sur trois niveaux (dont le to
 
 ![Plan de masse annoté](https://raw.githubusercontent.com/CampusIoT/datasets/refs/heads/main/BuildPred/ground_plan_sensors.jpg)
 
+> Les deux services PostGIS et InfluxDB sont regroupés dans une composition `docker-compose.yml`.
+
 ## Exercice 1:
 
-Modélisez le SI de ce juneau numérique CampusTwin au moyen d'un diagramme de classe UML (rendu au format plantuml)
+Modélisez le SI de ce juneau numérique CampusTwin au moyen d'un diagramme de classe UML ([rendu au format plantuml](../../plantuml)
 
 ## Exercice 2:
 
@@ -46,25 +48,36 @@ Donnez les requêtes de création et de peuplage des series temporelles de la ba
 
 Donnez 5 requêtes sur la base PostGIS.
 
-Donnez 5 requêtes (aggrégats temporelles) sur la base InfluxDB.
+Donnez 5 requêtes (aggrégats temporels) sur la base InfluxDB.
 
-## Exercice 5 (Bonus)
+## Exercice 5 (Bonus) :
 
 Vous pouvez contruire des tableaux de bord pour les capteurs et pour les salles au moyen d'un [serveur Grafana](../../influxdb) qui interroge la base InfluxDB.
 
 ![Grafana](https://raw.githubusercontent.com/CampusIoT/datasets/refs/heads/main/TourPerret/media/elsys-ems-perret-grafana-02.jpg)
 
-Vous pouvez aussi construire des tableaux de bord au moyen d'un [conteneur Thingsboard](https://hub.docker.com/r/thingsboard/tb/).
+## Exercice 6 (Bonus+) :
 
-## Exercice 6 (Bonus++)
+A la place de Grafana, vous pouvez choisir de construire des tableaux de bord au moyen de [Thingsboard](https://thingsboard.io/) en ajoutant un [conteneur Thingsboard](https://hub.docker.com/r/thingsboard/tb/) à la composition `docker-compose.yml`.
+
+## Exercice 7 (Bonus++) :
 
 Utilisez [Apache Camel](../../apache_camel) pour peupler en continue la base InfluxDB des données de capteurs (aka Telemetry au format Protobuf ou JSON) depuis un broker MQTT.
 
+## Exercice 8 (Bonus++) :
+
+Exportez les données des deux bases au format GeoJSON pour visualiser le jumeau (plans et mesures courantes de capteurs via les popups) via une simple page [Leaflet.js](https://leafletjs.com/examples/geojson/).
+
+## Exercice 9 (Bonus++) :
+
+Exportez les données des deux bases au [format CZML](https://github.com/AnalyticalGraphicsInc/czml-writer/wiki/CZML-Guide) pour visualiser le jumeau (plans et mesures min/avg/max de capteurs sur des plages d'une heure sur la dernière semaine) via une simple page [Cesium](https://sandcastle.cesium.com/?id=czml-polygon).
+
 ## Rendu
-`dm2-2526-nombinome1-nombinome2.zip` regroupant
+`2526-info4-bd-dm2-nombinome1-nombinome2.zip` regroupant
 * 1 fichier README.md (avec les noms et les prénoms des binomes)
-* 1 fichier plantuml + 1 fichier SVG
+* 1 fichier plantuml + 1 fichier SVG correspond au diagramme de classe.
 * 1 fichier `create.sql` + 1 fichier `populate.sql` pour PostGIS
 * 1 fichier `create.txt` + 1 fichier `populate.txt` pour InfluxBD
-* 1 fichier `query.sql`
-* 1 fichier `query.txt`
+* 1 fichier `query.sql` pour les requêtes PostGIS
+* 1 fichier `query.txt` pour les requêtes InfluxBD
+* 1 fichier `docker-compose.yml`
