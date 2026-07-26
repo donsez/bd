@@ -52,3 +52,16 @@ curl -X 'GET' \
   -H "apikey: $API_KEY" \
 | jq . > liste-infrahoraire-$STATION_ID-$NOW.json
 ```
+
+Quelques stations particulières
+
+| Id | Nom|
+| - | - |
+| 74056006 | AIGUILLE DU MIDI |
+| 74143003 | HOUCHES (LES) |
+| 5079402 | GALIBIER-NIVOSE |
+| 38472403 | COL DE PORTE-NIVOSE |
+| 30339001 | MONT AIGOUAL |
+| 98404003 | DUMONT D'URVILLE |
+| 98404001 | KERGUELEN |
+| 97502001 | ST-PIERRE (Saint Pierre et Miquelon) |
