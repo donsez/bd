@@ -50,5 +50,5 @@ curl -X 'GET' \
   "https://public-api.meteofrance.fr/public/DPObs/v2/station/infrahoraire-6m?id_station=$STATION_ID&format=json" \
   -H 'accept: */*' \
   -H "apikey: $API_KEY" \
-> liste-infrahoraire-$STATION_ID-$NOW.json
+| jq . > liste-infrahoraire-$STATION_ID-$NOW.json
 ```
