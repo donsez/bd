@@ -1,0 +1,460 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DonneesPubliquesObservation",
+    "version": "1"
+  },
+  "servers": [
+    {
+      "url": "https://public-api.meteofrance.fr/public/DPObs/v2"
+    }
+  ],
+  "security": [
+    {
+      "default": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Produits Obs",
+      "description": "Services de téléchargement des données d'observation à la date demandée."
+    },
+    {
+      "name": "Produits Synop",
+      "description": "Services de téléchargement des messages internationaux d’observation en surface, SYNOP, à la date demandée."
+    },
+    {
+      "name": "Produits Bouees",
+      "description": "ProduitBouees - Service de téléchargement des données d'observations météorologiques effectuées par les bouées Météo-France, à la date demandée"
+    }
+  ],
+  "paths": {
+    "/station/infrahoraire-6m": {
+      "get": {
+        "tags": [
+          "Produits Obs"
+        ],
+        "summary": "Télécharger le fichier TEXTE (CSV ou JSON ou GEOJSON) des données d'observation pour tous les paramètres disponibles, à la fréquence 6 minutes, pour une station, à la date la plus proche de la date demandée.",
+        "description": "Renvoie tous les paramètres disponibles pour la station demandée et pour  :\n- la date/heure la plus proche de la date demandée selon les données disponibles.",
+        "parameters": [
+          {
+            "name": "id_station",
+            "in": "query",
+            "description": "Identifiant de la station (nomenclature : 8 chiffres selon DDCCCNNN = insee de la commune (DD département, CCC n° de la commune dans le département et NNN n° de la station dans la commune)",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date demandée (au format ISO 8601 avec TZ UTC : AAAA-MM-JJThh:mm:ssZ).\n\nPar défaut = date courante",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Format de retour des données (JSON ou CSV ou GEOJSON)",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "geojson"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Si une liste vide est renvoyée : station absente ou inexistante\n \nSinon : OK"
+          },
+          "400": {
+            "description": "Contrôle de paramètres en erreur"
+          },
+          "404": {
+            "description": "Jeu de données inexistant"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/station/horaire": {
+      "get": {
+        "tags": [
+          "Produits Obs"
+        ],
+        "summary": "Télécharger le fichier TEXTE (CSV ou JSON ou GEOJSON) des données d’observation pour tous les paramètres disponibles, à la fréquence horaire, pour une station, à la date la plus proche de la date demandée.",
+        "description": "Renvoie tous les paramètres disponibles pour la station demandée et pour  :\n- la date/heure la plus proche de la date demandée selon les données disponibles.",
+        "parameters": [
+          {
+            "name": "id_station",
+            "in": "query",
+            "description": "Identifiant de la station (nomenclature : 8 chiffres selon DDCCCNNN = insee de la commune (DD département, CCC n° de la commune dans le département et NNN n° de la station dans la commune)",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date demandée (au format ISO 8601 avec TZ UTC : AAAA-MM-JJThh:mm:ssZ).\n\nPar défaut = date courante",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Format de retour des données (JSON ou CSV ou GEOJSON)",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "geojson"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Si une liste vide est renvoyée : station absente ou inexistante\n \nSinon : OK"
+          },
+          "400": {
+            "description": "Contrôle de paramètres en erreur"
+          },
+          "404": {
+            "description": "Jeu de données inexistant"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/liste-stations": {
+      "get": {
+        "tags": [
+          "Produits Obs"
+        ],
+        "summary": "Télécharger le fichier TEXTE (CSV) de la liste des stations d'observation.",
+        "description": "Renvoie la liste des stations.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "La liste est indisponible"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/liste-stations-synop": {
+      "get": {
+        "tags": [
+          "Produits Synop"
+        ],
+        "summary": "Télécharger le fichier TEXTE de la liste des stations d'observation.",
+        "description": "Renvoie la liste des stations.",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Format de retour des données (JSON ou CSV ou GEOJSON)",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "geojson"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "La liste est indisponible"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/synop": {
+      "get": {
+        "tags": [
+          "Produits Synop"
+        ],
+        "summary": "Télécharger le fichier TEXTE (CSV ou JSON ou GEOJSON) des données SYNOP pour une station, à la date demandée.",
+        "description": "Renvoie tous les paramètres disponibles pour la station et pour la date/heure demandées.",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Format de retour des données (JSON ou CSV ou GEOJSON)",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "geojson"
+              ]
+            }
+          },
+          {
+            "name": "id_station",
+            "in": "query",
+            "description": "Identifiant(s) de la station (séparés par des , par exemple id_station=07002,07003)",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_debut",
+            "in": "query",
+            "description": "Date de début d'observation au format AAAA-MM-JJTHH:mm:00Z.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_fin",
+            "in": "query",
+            "description": "Date de fin d'observation au format AAAA-MM-JJTHH:mm:00Z.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK (liste vide si pas de donnée correspondant à la requête)"
+          },
+          "400": {
+            "description": "Contrôle de paramètres en erreur"
+          },
+          "401": {
+            "description": "Non autorisé - informations d'identification non valides"
+          },
+          "403": {
+            "description": "Accès interdit"
+          },
+          "404": {
+            "description": "Jeu de données inexistant et/ou jeu de données indisponible"
+          },
+          "500": {
+            "description": "Erreur interne au serveur"
+          },
+          "502": {
+            "description": "Erreur de passerelle"
+          },
+          "503": {
+            "description": "Service indisponible"
+          },
+          "504": {
+            "description": "Temps trop long"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/liste-bouees": {
+      "get": {
+        "tags": [
+          "Produits Bouees"
+        ],
+        "summary": "Télécharger le fichier TEXTE de la liste des stations d'observation.",
+        "description": "Renvoie la liste des stations et bouées.",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "geojson"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "La liste est indisponible"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/bouees": {
+      "get": {
+        "tags": [
+          "Produits Bouees"
+        ],
+        "summary": "Télécharger le fichier TEXTE (CSV ou JSON ou GEOJSON) des données d'observations pour une station, à la date demandée.",
+        "description": "Renvoie tous les paramètres disponibles pour la station à la date heure demandée.",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Format de retour des données (JSON ou CSV ou GEOJSON)",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "geojson"
+              ]
+            }
+          },
+          {
+            "name": "date_debut",
+            "in": "query",
+            "description": "Date de début d'observation au format AAAA-MM-JJTHH:mm:00Z",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_fin",
+            "in": "query",
+            "description": "Date de fin d'observation au format AAAA-MM-JJTHH:mm:00Z",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id_bouees",
+            "in": "query",
+            "description": "Identifiant(s) de la station (séparés par des ,  par exemple id_station=6100001,6100002)",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok (liste vide si aucune donnée ne correspondent à la requête)"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "default": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://public-api.meteofrance.fr/authorize",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}
