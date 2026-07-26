@@ -1,0 +1,511 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "DonneesPubliquesVigilance",
+    "description": "This is the Generic Datapoint Storage Service",
+    "contact": {
+      "name": "Support API Données Publiques",
+      "url": "https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=305&id_rubrique=50",
+      "email": "vd@meteo.fr"
+    },
+    "version": "1.2.3"
+  },
+  "servers": [
+    {
+      "url": "https://public-api.meteofrance.fr/public/DPVigilance/v1"
+    }
+  ],
+  "security": [
+    {
+      "default": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Produits Vigilance",
+      "description": "Services de téléchargement du flux de la Vigilance constitué de 2 fichiers d’information sur l’état en cours et de 3 cartes de synthèse nationale à J, J+1.\n\nLes fichiers obtenus sont ceux de la diffusion de la Vigilance la plus récente (en cours).\n"
+    },
+    {
+      "name": "Produits Vigilance Polynésie",
+      "description": "Services de téléchargement du flux de la Vigilance Polynésie Française  constitué de 2 fichiers d’information sur l’état en cours, d'une carte de synthèse du jour J et du bulletin détaillé des phénomènes.\n\n  Les fichiers obtenus sont ceux de la diffusion de la Vigilance la plus \n  récente (en cours).\n"
+    },
+    {
+      "name": "Produits Vigilance Nouvelle-Calédonie",
+      "description": "Services de téléchargement du flux de la Vigilance Nouvelle-Calédonie constitué de 2 fichiers d’information sur l’état en cours, d'une carte de synthèse du jour J et du bulletin détaillé des phénomènes.\nLes fichiers obtenus sont ceux de la diffusion de la Vigilance la plus récente (en cours)         \n"
+    },
+    {
+      "name": "Produits Vigilance Autres OM",
+      "description": "Services de téléchargement du flux de la Vigilance des autres DROM  (départements et régions d'outre-mer) constitué de 2 fichiers \n"
+    }
+  ],
+  "paths": {
+    "/textesvigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance"
+        ],
+        "summary": "Télécharger le fichier JSON \"bulletin\" de Vigilance, de niveau national, zonal et départemental",
+        "description": "Télécharger le fichier JSON bulletin de Vigilance, de niveau national, zonal et départemental",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "404": {
+            "description": "fichier non disponible étant donné la situation de Vigilance"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/cartevigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance"
+        ],
+        "summary": "Télécharger le fichier JSON \"carte\" de Vigilance, contenant les prévisions de risque, dont la chronologie des phénomènes, de niveau national et départemental",
+        "description": "Télécharger le fichier JSON \"carte\" de Vigilance, contenant les prévisions de risque, dont la chronologie des phénomènes, de niveau national et départemental",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/cartenationale/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance"
+        ],
+        "summary": "Télécharger le fichier au format PDF de la carte nationale de Vigilance des jours J et J+1 avec la carte et la chronologie par phénomènes.",
+        "description": "Télécharger le fichier au format PDF de la carte nationale de Vigilance des jours J et J+1 avec la carte et la chronologie par phénomènes.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/vignettenationale-J/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance"
+        ],
+        "summary": "Télécharger la vignette PNG de la carte nationale de Vigilance du jour J à haute définition",
+        "description": "Télécharger la vignette PNG de la carte nationale de Vigilance du jour J à haute définition",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/vignettenationale-J1/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance"
+        ],
+        "summary": "Télécharger la vignette PNG de la carte nationale de Vigilance du jour J+1 à haute définition",
+        "description": "Télécharger la vignette PNG de la carte nationale de Vigilance du jour J+1 à haute définition",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/vignettenationale-J-et-J1/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance"
+        ],
+        "summary": "Télécharger la vignette PNG de la carte nationale de Vigilance des jours J et J+1 à haute définition",
+        "description": "Télécharger la vignette PNG de la carte nationale de Vigilance des jours J et J+1 à haute définition",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/polynesie/cartevigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Polynésie"
+        ],
+        "summary": "Télécharger le fichier JSON \"carte\" de Vigilance, contenant les prévisions  de risque, dont la chronologie des phénomènes, sur la Polynésie Française et par zones.",
+        "description": "Télécharger le fichier JSON \"carte\" de Vigilance, contenant les prévisions  de risque, dont la chronologie des phénomènes, sur la Polynésie Française et par zones.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/polynesie/textesvigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Polynésie"
+        ],
+        "summary": "Télécharger le fichier JSON bulletin de suivi de Vigilance, sur la Polynésie  Française et par zones.",
+        "description": "Télécharger le fichier JSON bulletin de suivi de Vigilance, sur la Polynésie  Française et par zones.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/polynesie/vignettevigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Polynésie"
+        ],
+        "summary": "Télécharger la vignette PNG de la carte de Vigilance Polynésie Française du jour J à haute définition.",
+        "description": "Télécharger la vignette PNG de la carte de Vigilance Polynésie Française du jour J à haute définition.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/polynesie/bulletinvigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Polynésie"
+        ],
+        "summary": "Télécharger le bulletin de Vigilance Polynésie Française au format PDF,  détaillé par phénomènes.",
+        "description": "Télécharger le bulletin de Vigilance Polynésie Française au format PDF,  détaillé par phénomènes.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/ncaledonie/cartevigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Nouvelle-Calédonie"
+        ],
+        "summary": "Télécharger le fichier JSON \"carte\" de Vigilance, contenant les prévisions de risque, dont la chronologie des phénomènes, sur la Nouvelle-Calédonie et par zones.",
+        "description": "Télécharger le fichier JSON \"carte\" de Vigilance, contenant les prévisions de risque, dont la chronologie des phénomènes, sur la Nouvelle-Calédonie et par zones.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/ncaledonie/textesvigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Nouvelle-Calédonie"
+        ],
+        "summary": "Télécharger le fichier JSON bulletin de suivi de Vigilance, sur la Nouvelle-Calédonie et par zones.",
+        "description": "Télécharger le fichier JSON bulletin de suivi de Vigilance, sur la Nouvelle-Calédonie et par zones.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/ncaledonie/vignettevigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Nouvelle-Calédonie"
+        ],
+        "summary": "Télécharger la vignette PNG de la carte de Vigilance de la Nouvelle-Calédonie du jour J à haute définition. ",
+        "description": "Télécharger la vignette PNG de la carte de Vigilance de la Nouvelle-Calédonie du jour J à haute définition. ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/ncaledonie/bulletinvigilance/encours": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Nouvelle-Calédonie"
+        ],
+        "summary": "Télécharger le bulletin de Vigilance de la Nouvelle-Calédonie au format PDF, détaillé par phénomènes. ",
+        "description": "Télécharger le bulletin de Vigilance de la Nouvelle-Calédonie au format PDF, détaillé par phénomènes. ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/vigilanceom/flux/dernier": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Autres OM"
+        ],
+        "summary": "Télécharger le fichier ZIP contenant le flux de la Vigilance outre-mer",
+        "description": "Télécharger le fichier ZIP contenant le flux de la Vigilance outre-mer",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/vigilanceom/controle/dernier": {
+      "get": {
+        "tags": [
+          "Produits Vigilance Autres OM"
+        ],
+        "summary": "Télécharger le fichier TXT de contrôle du flux de la Vigilance outre-mer",
+        "description": "Télécharger le fichier TXT de contrôle du flux de la Vigilance outre-mer",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "PydanticProperty": {
+        "title": "Property",
+        "required": [
+          "abstract",
+          "filter",
+          "kind_of_quantity",
+          "name",
+          "title",
+          "type",
+          "uom"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "description": "The name of the property in output or you can use as filter"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string",
+            "description": "Type of the property: INTEGER, REAL, TEXT OR JSON_STRUCT"
+          },
+          "uom": {
+            "title": "Uom",
+            "type": "string",
+            "description": "Unit Of Measurement of the propery (UCUM value)"
+          },
+          "kind_of_quantity": {
+            "title": "Kind Of Quantity",
+            "type": "string",
+            "description": "Kind of quantity (UCUM value)"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string",
+            "description": "Title of the property"
+          },
+          "abstract": {
+            "title": "Abstract",
+            "type": "string",
+            "description": "Abstract of the property"
+          },
+          "filter": {
+            "title": "Filter",
+            "type": "boolean",
+            "description": "If this property can be used as a filter"
+          }
+        },
+        "example": {
+          "name": "lon",
+          "type": "REAL",
+          "uom": "deg",
+          "kind_of_quantity": "plane_angle",
+          "title": "Longitude",
+          "abstract": "longitude in degrees",
+          "filter": true
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "default": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://public-api.meteofrance.fr/authorize",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}
