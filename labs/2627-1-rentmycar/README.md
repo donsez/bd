@@ -6,7 +6,8 @@ Rédacteur(s): Didier DONSEZ
 
 > La date et heure limite du rendu du DM est sur Moodle.
 
-## RentMyCar 
+## RentMyCar
+
 «RentMyCar» est un service de location de voiture entre particuliers (propriétaire et locataire). Il permet à un particulier de louer ses véhicules légers ou utilitaires à d’autres particuliers pour 1 heure, 1 jour, 1 semaine, 1 mois.
 
 Propriétaires et locataires décrivent leurs profils (bon père de famille avec 2 enfants, étudiant fêtard, …) ainsi que la copie scannée du permis du ou des conducteurs, de la carte grise, de l'attestation, l'assurance, son bonus/malus, carnet d'entretien (roues, vidange, ...) des véhicules mis en location …
@@ -19,7 +20,7 @@ Un locataire recherche pour une plage temporelle et une zone donnée (cercle cen
 
 Une fois, le contrat de location établis, le locataire récupère les clés auprès du propriétaire ainsi qu'une copie des papiers et du contrat. La place de parking du véhicule est géolocalisée lors de la remise de celui-ci. La place de parking du véhicule est géolocalisée lors de la restitution de celui-ci. Le kilométrage au compteur est renseigné à la récupération et à la restitution.
 
-L'application développée permet de prévenir le propriétaire en cas de retard ou d’incident. En cas de incident au cours de la location, le locataire doit déclarer immédiatement avec son application mobile l’incident (bris de glace, carrosserie, moteur …). L’incident est documenté avec un texte décrivant les circonstances, un memo vocal, le kilométrage au compteur, une position GPS ainsi qu’une série de photos.
+L'application développée permet de prévenir le propriétaire en cas de retard ou d’incident. En cas de incident au cours de la location, le locataire doit déclarer immédiatement avec son application mobile l’incident (bris de glace, carrosserie, moteur …). L’incident est documenté avec un texte décrivant les circonstances, un memo vocal, le kilométrage au compteur, une position GPS ainsi qu’une série de photos/video.
 
 Propriétaire loueurs et locataires s'annotent mutuellement à l'issue de la contrat.
 
@@ -33,14 +34,16 @@ le schéma de la base est le suivant:
 * PhotoVehicule(Login, Immatriculation, Date, TypeMIME, Contenu, Commentaire)
 * ModeleVehicule(Marque, Modele, Millesime, TypeCarroserie, NbPlacesMin, NbPlacesMax, VolumeCoffreMin, VolumeCoffreMax ...)
 * Offre(Immatriculation, DateDebut, DateFin, AdresseParking, VilleParking, PositionParking ...)
-* Contrat(LoginLoueur, LoginProp, Immatriculation, Statut, PositionRetour, DateDebut, DateFin, NoteProp, NoteLoc, CommentaireProp, CommentaireLoc ...)
-* PhotoContrat(LoginLoueur, LoginProp, Immatriculation, DateDebut, LoginPhotographe, Commentaire)
+* Contrat(LoginLoueur, LoginProp, Immatriculation, Statut, PositionRetour, DateDebut, DateFin, EtatLieuDebut, EtatLieuFin, NoteProp, NoteLoc, CommentaireProp, CommentaireLoc ...)
+* MediaContrat(LoginLoueur, LoginProp, Immatriculation, DatePhoto, LoginPhotographe, Commentaire)
 
-Le schéma ne modèlise pas les incidents qui peuvent survenir pendant le contrat (vol, accident, bris de glace, infraction au code de la route ...), ni les conducteurs secondaires
+Le schéma ne modèlise pas la déclaration des incidents qui peuvent survenir pendant le contrat (vol, accident, bris de glace, infraction au code de la route ...) et ni les conducteurs secondaires.
 
 ### Ex1 Création de la base
 
 Donnez les ordres de création des tables (en précisant bien les clés primaires et les clés étrangères) et les ordres de peuplage des tables pour une base d'exemples.
+
+Vous pouvez ajouter des colonnes manquantes qui sont décrites dans le cahier des charges.
 
 ### Ex2 Requêtage
 
@@ -67,7 +70,7 @@ Q10: Donnez une question et sa requête qui requiert une opération ensembliste 
 
 ### Ex3 Vue
 
-Donnez l'ordre de création d'une vue matérialisée utilisant une agrégation
+Donnez l'ordre de création d'une vue matérialisée utilisant une agrégation.
 
 ### Ex4 Déclencheur
 
