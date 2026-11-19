@@ -50,6 +50,7 @@ Vous pouvez ajouter des colonnes manquantes qui sont décrites dans le cahier de
 Répondez aux questions suivantes par des requêtes SQL. Donnez également l’expression algébrique relationnelle pour les 2 premières questions (vous pouvez utiliser la représentation en arbre)
 
 Q1: Donnez la liste des véhicules légers de plus de 4 places dans un rayon de 5 kms autour du domicile de l’utilisateur « Lewis Hamilton ». Vous utilisez le dernier emplacement de parking des véhicules. RentMyCar localise l’utilisateur. Utilisez la fonction `boolean ST_Point_Inside_Circle(geometry a_point, float center_x, float center_y, float radius)`.
+
 Q2: Donnez le jour de la semaine qui fait l’objet du plus de transactions (The day of the week (0 - 6; Sunday is 0) `SELECT EXTRACT(DOW FROM TIMESTAMP '2025-02-16 20:38:40')`).
 
 Q3: Donnez le type des véhicules les plus demandés (nombre de contrat de location établis)?
@@ -67,6 +68,8 @@ Q8: Donnez une question et sa requête qui requiert une double agrégation
 Q9: Donnez une question et sa requête avec des valeurs absentes
 
 Q10: Donnez une question et sa requête qui requiert une opération ensembliste (union, intersection, différence)
+
+Q11: Donnez une question et sa requête qui requiert une opération CUBE ou ROLLUP.
 
 ### Ex3 Vue
 
@@ -93,7 +96,7 @@ Vous devez rendre deux fichiers SQL [`populate.sql`](populate.sql) et [`queries.
  
 Vous devez rendre ce fichier via Moodle, à l’exclusion de tout autre moyen, par un seul membre du binôme.
 
-## Partie 2: Estimation de la base d’utilisateurs de Telemed
+## Partie 2: Estimation de la base d’utilisateurs de RentMyCar
 
 L’estimation de la base d’utilisateurs de RentMyCar est de 1.5 million d'utilisateurs.
 
