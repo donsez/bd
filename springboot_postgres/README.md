@@ -14,6 +14,19 @@ From https://dzone.com/articles/bounty-spring-boot-and-postgresql-database
 (cd ../postgres; docker compose up -d; ; docker compose ps)
 ```
 
+## Modify the log level for Hibernate
+
+Read https://www.baeldung.com/sql-logging-spring-boot
+
+Add the two lines in the application properties file (`src/main/resources/application.properties`)
+
+```properties
+...
+logging.level.org.springframework.jdbc.core.JdbcTemplate=DEBUG
+logging.level.org.springframework.jdbc.core.StatementCreatorUtils=DEBUG
+...
+```
+
 ## Launch Spring Boot server
 
 ```bash
