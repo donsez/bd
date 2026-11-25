@@ -16,7 +16,7 @@ Technologies used:
 ## How to run it
 ```
 
-$ git clone [https://github.com/mkyong/spring-boot.git](https://github.com/mkyong/spring-boot.git)
+$ git clone https://github.com/mkyong/spring-boot.git
 
 $ cd spring-data-jpa-postgresql
 
