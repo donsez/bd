@@ -10,7 +10,7 @@ javac --version
 
 Install [Maven](https://maven.apache.org/install.html) for compiling the classes
 ```bash
-MVN_VERSION=3.9.9
+MVN_VERSION=3.10.2
 mkdir -p ~/devtools/apache
 cd ~/devtools/apache
 wget https://dlcdn.apache.org/maven/maven-3/$MVN_VERSION/binaries/apache-maven-$MVN_VERSION-bin.tar.gz
@@ -27,15 +27,22 @@ export PATH=$PATH:~/devtools/apache/apache-maven-$MVN_VERSION/bin
 mvn -v
 ```
 
+> You can also install Maven with your package manager (`apt`, `dnf`, `brew` ...).
+
 Start the PostgreSQL server using the instructions [here](../postgres/README.md) (from another terminal).
 
 Create and populate the `test` database using the [following example](../postgres/work/employee/employee.sql). Remenber : the password is `changeme` .
 
 
+Explore the source files of the program
+```bash
+cd ~/github/donsez/bd/jdbc-postgresql
+tree src/
+```
+
 Build the classes of the program
 
 ```bash
-cd ~/github/donsez/bd/jdbc-postgresql
 mvn compile
 tree target/classes
 ```
