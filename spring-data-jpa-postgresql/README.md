@@ -87,13 +87,6 @@ curl -X GET http://localhost:8080/books/1
 curl -X GET http://localhost:8080/books/1 | jq .
 ```
 
-## Get book #1
-
-```bash
-curl -X GET http://localhost:8080/books/title/
-curl -X GET http://localhost:8080/books/1 | jq .
-```
-
 ## Create a new book
 
 ```bash
